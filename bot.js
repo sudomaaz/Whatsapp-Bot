@@ -36,9 +36,8 @@ async function connectToWhatsApp() {
         if (!isGroupID(mmid)) {
           const sentMsg = await conn.sendMessage(
             mmid,
-            "Hello, Thanks for your message 😊 However , i only respond to messages in a group.Thanks.",
-            MessageType.text,
-            options
+            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.Thanks.\n\nOur Official Group: *https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd*",
+            MessageType.text
           );
           return;
         }
@@ -56,12 +55,21 @@ async function connectToWhatsApp() {
       }
     });
 
-    conn.on("group-participants-update", async (person) => {
-      if (person.action === "remove") return;
-      const groupMetaData = await conn.groupMetadata(person.jid);
+    conn.on("group-participants-update", async (group) => {
+      if (group.action === "remove") return;
+      const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;
-      const name = person.participants[0].split("@")[0];
+      if (gusers < 6) {
+        const sentMsg = await conn.sendMessage(
+          group.jid,
+          "Sorry! I only stay in a group with atleast 5 members 👋",
+          MessageType.text
+        );
+        await conn.groupLeave(group.jid);
+        return;
+      }
+      const name = group.participants[0].split("@")[0];
       const uname = name === self.split("@")[0] ? "Everyone" : "@" + name;
       const replaceT = {
         gname: gname,
@@ -76,11 +84,11 @@ async function connectToWhatsApp() {
         quoted: welcomeJson,
         contextInfo: {
           participant: "0@s.whatsapp.net",
-          mentionedJid: [person.participants[0]],
+          mentionedJid: [group.participants[0]],
         },
       };
       const sentMsg = await conn.sendMessage(
-        person.jid,
+        group.jid,
         addText,
         MessageType.extendedText,
         options

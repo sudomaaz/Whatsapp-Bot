@@ -55,7 +55,7 @@ Hello *uname*
 ┃─────〘 UTILS 〙─────
 ┃━━━━━━━━━━━━━━━━━━━━
 ┠⊷️ Find [video]
-┃ fetches the specified video from youtube
+┃ fetches specified video from youtube
 ┃   _ex: find modi best speech_
 ┃
 ┠⊷️ Joke
