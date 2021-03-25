@@ -30,6 +30,29 @@ async function connectToWhatsApp() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
+        const fromMe = message.key.fromMe;
+        const mmid = message.key.remoteJid;
+        if (fromMe) return;
+        if (!isGroupID(mmid)) {
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            "Hello, Thanks for your message 😊 However , i only respond to messages in a group.Thanks.",
+            MessageType.text,
+            options
+          );
+          return;
+        }
+        if (
+          message.message.extendedTextMessage === null ||
+          message.message.extendedTextMessage === undefined
+        )
+          return;
+        if (
+          message.message.extendedTextMessage.contextInfo.mentionedJid[0] &&
+          message.message.extendedTextMessage.contextInfo.mentionedJid[0] !==
+            self
+        )
+          return;
       }
     });
 
