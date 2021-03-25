@@ -1,306 +1,117 @@
 export const botText = `────✪@Created by M-A-A-Z ✪────
 ────────────────
-Hello {uname} 
-────────────────͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
+Hello *uname*
 ────────────────
-〘 BOT 〙
-‣ Start: @mentionMe in chat 「 @👽BOT 」
-‣ Name: Chotu Bot v3.0
-‣ Created: March 2021
-‣ Group:  {gname}
-‣ Group users : {gusers} Users
-‣ Official Group : https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd 
-────────────────
-┏━━━━━━━━━━━━━━━━━━━━
-┃─────〘 I'm Chotu Bot 〙────
-┃━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Simi (Text)
-┃ Chat with bot
-┠⊷️ .Info
-┃ Info about bot
-┠⊷️ .Owner
-┃ Info about Bot owner
-┠⊷️ .Donation
-┃ To Make any donation
-┠⊷️ .Ping
-┃ To know the response speed
-┗━━━━━━━━━━━━━━━━━━━━
-┏━━━━━━━━━━━━━━━━━━━━
-┃─────〘  List menu 〙─────
-┗━━━━━━━━━━━━━━━━━━━━
-〘 GROUP 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Listadmin
-┃ To see the admin list
-┠⊷️ .Listonline
-┃ To see list online list
-┠⊷️ .Closegc
-┃ To close group
-┠⊷️ .Opengc
-┃ To open group
-┠⊷️ .Promote
-┃ To make someone an admin
-┠⊷️ .Demote
-┃ To remove someone as admin
-┠⊷️ .Setname
-┃ To change group's name
-┠⊷️ .Setdesc
-┃ To change group description
-┠⊷️ .Add
-┃ To add a member
-┠⊷️ .Kick
-┃ To remove a member
-┠⊷️ .Tagall
-┃ Tag All members
-┠⊷️ .Linkgc
-┃ To get group link
-┠⊷️ .Notif
-┃ Send notification to  all members
-┠⊷️ .Welcome
-┃ Turn On/off welcome feature, add 1 to activate or 0 to deactivate it
-┠⊷️ .Delete (Reply message)
-┃ Delete bot message
-┗━━━━━━━━━━━━━━━━━━━━
-〘 FUN 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Alay (Text)
-┃ Font Alay
-┠⊷️ .Alay2 (Text)
-┃ Font Alay
-┠⊷️ .Reverse (Text)
-┃ To reverse your text
-┠⊷️ .Vowel (Text)
-┃ Change vowels  text
-┠⊷️ .Namej (Text)
-┃ See your ninja name
-┠⊷️ .Poem
-┃ Random poem_
-┠⊷️ .Chatprank (Text 1/Text 2)
-┃ Ex : .Chatprank hello bang/sat
-┠⊷️ .Itsme
-┃ See your profile
-┠⊷️ .Fml
-┃ Fuck My Life Qoutes
-┠⊷️ .Intake
-┃ Video timeline refreshner
-┠⊷️ .Tagme
-┃ Auto tag
-┠⊷️ .Fake (Tag target|text 1|teks 2)
-┃ Fake reply chat bot
-┗━━━━━━━━━━━━━━━━━━━━
-〘 MEDIA 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .listvn
-┃ To see voicenote lists of bot
-┠⊷️ .listimg
-┃ To see image list of bot
-┠⊷️ .liststik
-┃ To see sticker list of bot
-┠⊷️ .listvid
-┃ To see video list of bot
-┠⊷️ .Chipmunk (Reply audio)
-┃ Make your voice sound like a  chipmunk
-┠⊷️ .Slow (Reply audio)
-┃ Make your voice slow
-┠⊷️ .Fast (Reply audio)
-┃ Make your voice fast
-┠⊷️ .Bass (Reply audio)
-┃ Make a  bass audio
-┗━━━━━━━━━━━━━━━━━━━━
-〘 EDITING 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Gtav (photo)
-┃ To make a GTAV banner of photo
-┠⊷️ .Wanted (photo)
-┃ To make a WANTED poster of photo
-┠⊷️ .Drawing (photo)
-┃ To get a sketch filter of photo
-┗━━━━━━━━━━━━━━━━━━━━
-〘 ANIME 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Kusonime (Query)
-┃ Searching info anime on kusonime
-┠⊷️ .Neonime (Query)
-┃ Searching info anime on neonime
-┠⊷️ .Charnime (Query)
-┃ Searching info about an anime character
-┠⊷️ .Wait
-┃ Detect info about an anime image
-┠⊷️ .Anime
-┃ Search for a random anime image
-┠⊷️ .Loli
-┃ Search for a random anime picture of loli
-┠⊷️ .Neko
-┃ Searching for a random anime picture of neko
-┗━━━━━━━━━━━━━━━━━━━━
-〘 GAME 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Tebakgambar
-┃ Random image guess
-┠⊷️ .Caklontong
-┃ Random cak lontong quiz
-┗━━━━━━━━━━━━━━━━━━━━
-〘 TRUTH OR DARE 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷ .Truth
-┠⊷ .Dare
-You can issue it to the bot if one fails to comply, penalty: Will be removed until admins adds back.
-┗━━━━━━━━━━━━━━━━━━━━
-〘 JARVIS MAGIC SHELLS 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷ .Que (Question)
-Ask Jarvis a Yes/No Question
-┠⊷ .Rate (Text)
-Rate something
-┠⊷ .Handsome (Text)
-Handsomeness check
-┠⊷ .Pretty (Text)
-Beauty check
-┗━━━━━━━━━━━━━━━━━━━━
-〘 TOOLS 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Stiker
-┃ Make a sticker of an image/video
-┠⊷️ .Triggered
-┃ Make a triggered sticker
-┠⊷️ .Wasted
-┃ Make a wasted sticker
-┠⊷️ .Ttp (Text)
-┃ Make stickers out of text
-┠⊷️ .Toimg
-┃ Change a sticker to image
-┠⊷️ .Tomp3
-┃ Change a  video to audio
-┠⊷️ .Play (song info)
-┃ Play song
-┠⊷️ .Tts (language code and Text)
-┃ Texts to sound
-┠⊷️ .Igstalk (username)
-┃ Stalking Instagram
-┠⊷️ .Timer (time)
-┃ Stopwatch
-┠⊷️ .Wame
-┃ Create a wa.me link
-┠⊷️ .Nulis (Text)
-┃ Write in books 
-┠⊷️ .Ocr
-┃ Copy text from an image
-┠⊷️ .Wait
-┃ Info anime of a picture
-┗━━━━━━━━━━━━━━━━━━━━
-〘 TEXT 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Throne (Text)
-┃ Ex : .Throne Jarvis
-┗━━━━━━━━━━━━━━━━━━━━
-〘 TEXT2 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Ephoto list
-┃ Display the ephoto text code
-┠⊷️ .Ephoto (Code + Text)
-┃ Ex : .Ephoto 25 Jarvis
-┠⊷️ .Textpro list
-┃ Display textpro list
-┠⊷️ .Textpro (code + Texts)
-┃ Ex : .Textpro 55 Jarvis
-┗━━━━━━━━━━━━━━━━━━━━-
-〘 PICTURE 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Emblem
-┃ Random photo emblem
-┠⊷️ .Cecan
-┃ Random photo cecan
-┠⊷️ .Meme
-┃ Random meme
-┠⊷️ .Twit
-┃ Random foto status Twitter
-┠⊷️ .Quotes
-┃ Random foto quotes
-┠⊷️ .Wp
-┃ Random wallpaper
-┠⊷️ .Cyberpunk
-┃ Random foto cyberpunk
-┠⊷️ .Img (Query)
-┃ Look for images according to request
-┠⊷️ .Google (Query)
-Search for images according to request
-┗━━━━━━━━━━━━━━━━━━━━
-〘 EDUCATION 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Brainly (Question)
-┃ To look for brainly answers
-┠⊷️ .Wiki (Query)
-┃ Search on wiki
-┠⊷️ .Tl (text/language code)
-┃ Translate all languages
-┠⊷️ .Fact
-┃ Ramdom fact
-┠⊷️ .Langcode
-┃ Show a language code
-┠⊷️ .Countrycode
-┃ Displays the country code of a country
-┗━━━━━━━━━━━━━━━━━━━━
-〘 OTHER 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Lyrics (Title tag)
-┃ Get lyrics of song
-┠⊷️ .Chord (Title tag)
-┃ Get chord of a song
-┠⊷️ .Jadwaltvn
-┃ Tvnchildren's TV Planned
-┠⊷️ .Map (location)
-┃ Displays a  mini map
-┠⊷️ .Trendtwit
-┃ Show the Twitter trend
-┠⊷️ .Beritahoax
-┃ Show fake news info
-┠⊷️ .Gplaystore
-┃ Search up an app on playstore
-┗━━━━━━━━━━━━━━━━━━━━
-〘 PRIMBON 〙
-┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Naming (Name)
-┃ The meaning of a name
-┠⊷️ .Couple (Name & Name)
-┃ Match couples by name
 
-〘 WEATHER 〙
+〘 I'm Chotu Bot 〙
+‣ Start: @mentionMe in chat 「 @👽BOT 」
+‣ Version: *v3.0*
+‣ Created: *25th March 2021*
+‣ Group: *gname*
+‣ Group users: *gusers Users*
+‣ Official Group: *https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd*
+────────────────
 ┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Weather (place or area)
-┃ Info of weather
-┠⊷️ .Infoearth
-┃ Info about earthquake records
+┃─────〘 Bot 〙────
 ┃━━━━━━━━━━━━━━━━━━━━
+┠⊷️ Info
+┃ Info about bot
+┠⊷️ Owner
+┃ Info about Bot owner
+┠⊷️ Donation
+┃ To Make any donation
+┠⊷️ Help
+┃ To show this message again
 ┗━━━━━━━━━━━━━━━━━━━━
-〘 download 〙
 ┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Ytmp3 (Link)
-┃ Download audio youtube
-┠⊷️ .Ytmp4 (Link)
-┃ Download video youtube
-┠⊷️ .Fb (Link)
-┃ Download video Facebook
-┠⊷️ .Ig (Link)
-┃ Download video Instagram
-┠⊷️ .Scdl (Link)
-┃ Download lagu SoundCloud
-┠⊷️ .Tik (Link)
-┃ Download video Tiktok
-┠⊷️ .Pin (Link)
-┃ Download video Pinterest
-┠⊷️ .Joox (Judul lagu)
-┃ Download song from joox
+┃─────〘 GROUP 〙─────
+┃━━━━━━━━━━━━━━━━━━━━
+┠⊷️ Listadmin
+┃ To see the admin list
+┠⊷️ Closegc
+┃ To close group
+┠⊷️ Opengc
+┃ To open group
+┠⊷️ Promote
+┃ To make someone an admin
+┠⊷️ Demote
+┃ To remove someone as admin
+┠⊷️ Setname
+┃ To change group's name
+┠⊷️ Setdesc
+┃ To change group description
+┠⊷️ Add
+┃ To add a member
+┠⊷️ Kick
+┃ To remove a member
+┠⊷️ Linkgc
+┃ To get group link
+┠⊷️ Notif
+┃ Send notification to  all members
+┠⊷️ Recover
+┃ recover a deleted message
 ┗━━━━━━━━━━━━━━━━━━━━
-〘 OWNER 〙
 ┏━━━━━━━━━━━━━━━━━━━━
-┠⊷️ .Clone
-┃ Clone the profile of target
-┠⊷️ .Block
-┃ Block a target number
-┠⊷️ .Unblock
-┃ UnBlock a target number
-┠⊷️ .Bc
-┃ Broadcast a message
-┠⊷️ .Blocklist
-┃ List of users blocked
+┃─────〘 UTILS 〙─────
+┃━━━━━━━━━━━━━━━━━━━━
+┠⊷️ Find [video]
+┃ fetches the specified video from youtube
+┃   _ex: find modi best speech_
+┃
+┠⊷️ Joke
+┃ cracks a joke as specified
+┃   _ex: joke random_
+┃   _ex: joke programming_
+┃   _ex: joke insult_
+┃
+┠⊷️ Advice
+┃ gives you a random life advice
+┃
+┠⊷️ Memes
+┃ lists a meme template or make a meme
+┃   _ex: memes list_
+┃   _ex: memes make two buttons_
+┃
+┠⊷️ Contest
+┃ displays upcoming or ongoing contest
+┃   _ex: contest codechef upcoming_
+┃   _ex: contest leetcode ongoing_
+┃
+┃⊷️ Search
+┃ does a web search for given query
+┃   _ex: search narendra modi_
 ┗━━━━━━━━━━━━━━━━━━━━`;
+
+export const welcomeJson = {
+  key: {
+    remoteJid: "0@s.whatsapp.net",
+    fromMe: false,
+    id: "235B55610A925C31B445DBE5937AF0B8",
+  },
+  message: {
+    imageMessage: {
+      url:
+        "https://mmg.whatsapp.net/d/f/AsgYqE7YqU-5Rb2-4I5Kf-JbfG_XN5JRLDi4o5VJ6rvO.enc",
+      mimetype: "image/jpeg",
+      caption: "We welcome you to this group ❤️",
+      fileSha256: "NhayotlR0ywv8b3SWma3iUUWOslbJY7SVo3EfPZkwcc=",
+      fileLength: "156186",
+      height: 1280,
+      width: 1111,
+      mediaKey: "LRaY2WWUsWSRtL7gbk1L+SWUH8tnxSD4jRgvGGFDb7M=",
+      fileEncSha256: "2GDBIwk2xZs98QW6DVuGMlTU4vuMFNNZoPVhLqGEO8k=",
+      directPath:
+        "/v/t62.7118-24/32812215_305200664356129_6646127091079671295_n.enc?oh=ac384188274a84ae822792020d749611&oe=608496BA",
+      mediaKeyTimestamp: "1616668729",
+      jpegThumbnail:
+        "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsbGxscGx4hIR4qLSgtKj04MzM4PV1CR0JHQl2NWGdYWGdYjX2Xe3N7l33gsJycsOD/2c7Z//////////////8BGxsbGxwbHiEhHiotKC0qPTgzMzg9XUJHQkdCXY1YZ1hYZ1iNfZd7c3uXfeCwnJyw4P/Zztn////////////////CABEIAEgAPgMBIgACEQEDEQH/xAAwAAADAQEBAAAAAAAAAAAAAAAAAgMEAQUBAAMBAQEAAAAAAAAAAAAAAAABAgQDBf/aAAwDAQACEAMQAAAAVZdzLQ8uOtHo+L6lpS3L5eA1RS794LJ6uN2bJZkoKiGa5HtqpEE0iCe+Svj9E4ZO+bYuTlHJUSdHpOHBwzBaWwWXA7n/xAAlEAACAgIBBAICAwAAAAAAAAABAgARAxIhEBMxQQRRFCJScYH/2gAIAQEAAT8AVUA2AufrlF+/QmPMMa61zMjuyEsRX1PiFFYze528mNtwLgXORSzGzX5oQC2HNRxicE8lpjQOugJmpxMvMU1U3MR6vpxWxPMxKb80IcoQMMYqo+ZncbRDYWM1CdzX1FFj9oFEGJyAwhwN9eZ+Mf4QLkA4hdj5Ma299ExM4sQJmHAPiBcx9ys1izNMoNAw4n5PTIE8gwMwE7j/AHBlcHzDkY1zO4/3Gz1wWhz/AEIMasaU0RGajoT4gGvkS0rxN8fHEZ8YB4jnY2Og7hBHlh7i42IDAczI4UVZuN/fQ3/nRqiswJUCYmcjUTOAp+4SSYTzMaF21m/xsRrXadnD8jnGdTP/xAAfEQACAgEEAwAAAAAAAAAAAAAAAQIREgMTMUEQISL/2gAIAQIBAT8Ap2ZOkRfoSFCTNt1ybdVRTITUop+bQlXYtR9ozLG/kjwJW0Yqj//EACMRAAIBAgUFAQAAAAAAAAAAAAECAAMRBBASFCEgMVFSYjL/2gAIAQMBAT8Alz2yNFY1dF47zc2HCGbgejQYlD5j0yrm4uJqX6mpfqCmzflTkcP4M249oBpAHT//2Q==",
+      scansSidecar: "Vs6ZCt2N9ZPOfkLqkodIuxGdJEEt3EB3pCBe6xjVRd7UzIaHMe/LrA==",
+      scanLengths: [17838, 62502, 29939, 45907],
+      midQualityFileSha256: "vTHSgZugTzkbl/+Wq5uxs/DpIVpq+9I+UQwEaqqIAuA=",
+      midQualityFileEncSha256: "K2gyOWbMn0bY0VMQin6bI0eyNZ+cLdQp4ywRHJKG/8I=",
+    },
+  },
+  messageTimestamp: "1616669732",
+  status: "ERROR",
+  ephemeralOutOfSync: false,
+};
