@@ -1,0 +1,31 @@
+{
+  "name": "whatsapp-bot",
+  "version": "1.0.0",
+  "description": "building whatsapp bot using baileys",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "@adiwajshing/baileys": "github:adiwajshing/baileys"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudomaaz/Whatsapp-Bot.git"
+  },
+  "keywords": [
+    "bot",
+    "whatsapp",
+    "web",
+    "node",
+    "websockets"
+  ],
+  "author": "maazm0649@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sudomaaz/Whatsapp-Bot/issues"
+  },
+  "homepage": "https://github.com/sudomaaz/Whatsapp-Bot#readme"
+}
