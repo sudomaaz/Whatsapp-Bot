@@ -1,37 +1,45 @@
 import pkg from "@adiwajshing/baileys";
 import fs from "fs";
-import { botText, welcomeJson } from "./exports.js";
+import { botText, welcomeJson, self } from "./exports.js";
 
-const { WAConnection, MessageType, MessageOptions, Mimetype, isGroupID } = pkg;
+const {
+  WAConnection,
+  MessageType,
+  MessageOptions,
+  Mimetype,
+  isGroupID,
+  ReconnectMode,
+} = pkg;
 
 let conn;
 
-const self = "917457963544@s.whatsapp.net";
-
-async function connectToWhatsApp() {
+async function connectAndRunBot() {
   try {
     conn = new WAConnection(); // create a baileys connection object
-    // this will be called as soon as the credentials are updated
-    conn.on("open", () => {
-      // save credentials whenever updated
-      console.log(`credentials updated!`);
-      const authInfo = conn.base64EncodedAuthInfo(); // get all the auth info we need to restore this session
-      fs.writeFileSync(
-        "./auth_info.json",
-        JSON.stringify(authInfo, null, "\t")
-      ); // save this info to a file
-    });
 
-    conn.loadAuthInfo("./auth_info.json"); // will load JSON credentials from file
+    conn.autoReconnect = ReconnectMode.onConnectionLost; // only automatically reconnect when the connection breaks
 
+    // attempt to reconnect at most 10 times in a row
+    conn.connectOptions.maxRetries = 10;
+
+    // will load JSON credentials from file and try to connect
+    fs.existsSync("./auth_info.json") && conn.loadAuthInfo("./auth_info.json");
     // connect to whatsapp web
     await conn.connect();
 
+    // this will be called as soon as the credentials are updated
+    const authInfo = conn.base64EncodedAuthInfo(); // get all the auth info we need to restore this session
+
+    fs.writeFileSync("./auth_info.json", JSON.stringify(authInfo, null, "\t")); // save this info to a file
+
+    // this will be called on every chat update event
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
+        // console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
+        await conn.chatRead(mmid);
         if (fromMe) return;
         if (!isGroupID(mmid)) {
           const sentMsg = await conn.sendMessage(
@@ -55,15 +63,21 @@ async function connectToWhatsApp() {
       }
     });
 
+    //called when some group join/remove action occurs
     conn.on("group-participants-update", async (group) => {
       if (group.action === "remove") return;
       const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;
-      if (gusers < 6) {
+      if (
+        group.jid !== "918840081034-1616171637@g.us" &&
+        group.jid !== "917985376479-1484319380@g.us"
+      ) {
+        // const text = "Sorry! I only stay in a group with atleast 5 members 👋";
+        const text = "I am under construction. Will be updated once active 👋";
         const sentMsg = await conn.sendMessage(
           group.jid,
-          "Sorry! I only stay in a group with atleast 5 members 👋",
+          text,
           MessageType.text
         );
         await conn.groupLeave(group.jid);
@@ -95,8 +109,8 @@ async function connectToWhatsApp() {
       );
     });
   } catch (err) {
-    console.log(err);
+    return new Promise((resolve, reject) => reject(err));
   }
 }
 // run in main file
-connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+connectAndRunBot().catch((err) => console.log("unexpected error: " + err)); // catch any errors

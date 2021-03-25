@@ -1,11 +1,11 @@
-export const botText = `────✪@Created by M-A-A-Z ✪────
+export const botText = `────✪ Created by M-A-A-Z ✪────
 ────────────────
 Hello *uname*
 ────────────────
 
-〘 I'm Chotu Bot 〙
-‣ Start: @mentionMe in chat 「 @👽BOT 」
-‣ Version: *v3.0*
+〘 *I'm Chotu Bot* 〙
+‣ Start: @mentionMe in chat 「 *@👽BOT* 」
+‣ Version: *3.0*
 ‣ Created: *25th March 2021*
 ‣ Group: *gname*
 ‣ Group users: *gusers Users*
@@ -26,7 +26,7 @@ Hello *uname*
 ┏━━━━━━━━━━━━━━━━━━━━
 ┃─────〘 GROUP 〙─────
 ┃━━━━━━━━━━━━━━━━━━━━
-┠⊷️ Listadmin
+┠⊷️ Admins
 ┃ To see the admin list
 ┠⊷️ Closegc
 ┃ To close group
@@ -54,7 +54,7 @@ Hello *uname*
 ┏━━━━━━━━━━━━━━━━━━━━
 ┃─────〘 UTILS 〙─────
 ┃━━━━━━━━━━━━━━━━━━━━
-┠⊷️ Find [video]
+┠⊷️ Find
 ┃ fetches specified video from youtube
 ┃   _ex: find modi best speech_
 ┃
@@ -86,32 +86,34 @@ export const welcomeJson = {
   key: {
     remoteJid: "0@s.whatsapp.net",
     fromMe: false,
-    id: "235B55610A925C31B445DBE5937AF0B8",
+    id: "F3AA1A0319601E852208CB0B276750BE",
   },
   message: {
     imageMessage: {
       url:
-        "https://mmg.whatsapp.net/d/f/AsgYqE7YqU-5Rb2-4I5Kf-JbfG_XN5JRLDi4o5VJ6rvO.enc",
+        "https://mmg.whatsapp.net/d/f/AtD4rYpQ_x6gqBHINwRWEZwRf45mRQnTyBg4Lz28hWex.enc",
       mimetype: "image/jpeg",
-      caption: "We welcome you to this group ❤️",
-      fileSha256: "NhayotlR0ywv8b3SWma3iUUWOslbJY7SVo3EfPZkwcc=",
-      fileLength: "156186",
-      height: 1280,
-      width: 1111,
-      mediaKey: "LRaY2WWUsWSRtL7gbk1L+SWUH8tnxSD4jRgvGGFDb7M=",
-      fileEncSha256: "2GDBIwk2xZs98QW6DVuGMlTU4vuMFNNZoPVhLqGEO8k=",
+      caption: "Welcome to our group ❤️",
+      fileSha256: "iolVrrLZJHyLR31VpYC2bfoJpsJspIpzaXuvzDS0o1g=",
+      fileLength: "26291",
+      height: 280,
+      width: 571,
+      mediaKey: "ZGRtHP5nG7Pf8+jJl0KuM3DaIqI94DPytknBlexsLbw=",
+      fileEncSha256: "36hWUxwoH8+Utm6GVo65XMg3aHZQ8CG2/u+KNWm0kLE=",
       directPath:
-        "/v/t62.7118-24/32812215_305200664356129_6646127091079671295_n.enc?oh=ac384188274a84ae822792020d749611&oe=608496BA",
-      mediaKeyTimestamp: "1616668729",
+        "/v/t62.7118-24/31808196_2920937008229691_5546806418519679391_n.enc?oh=73c9e2614d9215c6288d63f52fb33535&oe=60863E5F",
+      mediaKeyTimestamp: "1616691633",
       jpegThumbnail:
-        "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsbGxscGx4hIR4qLSgtKj04MzM4PV1CR0JHQl2NWGdYWGdYjX2Xe3N7l33gsJycsOD/2c7Z//////////////8BGxsbGxwbHiEhHiotKC0qPTgzMzg9XUJHQkdCXY1YZ1hYZ1iNfZd7c3uXfeCwnJyw4P/Zztn////////////////CABEIAEgAPgMBIgACEQEDEQH/xAAwAAADAQEBAAAAAAAAAAAAAAAAAgMEAQUBAAMBAQEAAAAAAAAAAAAAAAABAgQDBf/aAAwDAQACEAMQAAAAVZdzLQ8uOtHo+L6lpS3L5eA1RS794LJ6uN2bJZkoKiGa5HtqpEE0iCe+Svj9E4ZO+bYuTlHJUSdHpOHBwzBaWwWXA7n/xAAlEAACAgIBBAICAwAAAAAAAAABAgARAxIhEBMxQQRRFCJScYH/2gAIAQEAAT8AVUA2AufrlF+/QmPMMa61zMjuyEsRX1PiFFYze528mNtwLgXORSzGzX5oQC2HNRxicE8lpjQOugJmpxMvMU1U3MR6vpxWxPMxKb80IcoQMMYqo+ZncbRDYWM1CdzX1FFj9oFEGJyAwhwN9eZ+Mf4QLkA4hdj5Ma299ExM4sQJmHAPiBcx9ys1izNMoNAw4n5PTIE8gwMwE7j/AHBlcHzDkY1zO4/3Gz1wWhz/AEIMasaU0RGajoT4gGvkS0rxN8fHEZ8YB4jnY2Og7hBHlh7i42IDAczI4UVZuN/fQ3/nRqiswJUCYmcjUTOAp+4SSYTzMaF21m/xsRrXadnD8jnGdTP/xAAfEQACAgEEAwAAAAAAAAAAAAAAAQIREgMTMUEQISL/2gAIAQIBAT8Ap2ZOkRfoSFCTNt1ybdVRTITUop+bQlXYtR9ozLG/kjwJW0Yqj//EACMRAAIBAgUFAQAAAAAAAAAAAAECAAMRBBASFCEgMVFSYjL/2gAIAQMBAT8Alz2yNFY1dF47zc2HCGbgejQYlD5j0yrm4uJqX6mpfqCmzflTkcP4M249oBpAHT//2Q==",
-      scansSidecar: "Vs6ZCt2N9ZPOfkLqkodIuxGdJEEt3EB3pCBe6xjVRd7UzIaHMe/LrA==",
-      scanLengths: [17838, 62502, 29939, 45907],
-      midQualityFileSha256: "vTHSgZugTzkbl/+Wq5uxs/DpIVpq+9I+UQwEaqqIAuA=",
-      midQualityFileEncSha256: "K2gyOWbMn0bY0VMQin6bI0eyNZ+cLdQp4ywRHJKG/8I=",
+        "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsbGxscGx4hIR4qLSgtKj04MzM4PV1CR0JHQl2NWGdYWGdYjX2Xe3N7l33gsJycsOD/2c7Z//////////////8BGxsbGxwbHiEhHiotKC0qPTgzMzg9XUJHQkdCXY1YZ1hYZ1iNfZd7c3uXfeCwnJyw4P/Zztn////////////////CABEIACMASAMBIgACEQEDEQH/xAAwAAEAAgMBAAAAAAAAAAAAAAAAAwUBAgQGAQEBAQEBAAAAAAAAAAAAAAAAAwIBBP/aAAwDAQACEAMQAAAA9LX8PJX0dse8O5WnV56eFL/NTPHHeibxmkv9d08vLfUl2IrhHlZ3WEuJatjodIAZCYAH/8QAJBAAAgICAQQDAAMAAAAAAAAAAQIAAwQRMQUSIUEQFCAVIoL/2gAIAQEAAT8AuvroXbGHq678JMjrNm9VrMXqlvfq2fylKmLlV2gEMIrqffz1K1nv7dcSih72I41LsFAGK/5iYTIlmwCfRi4hJJNi6HM+u6gFLF7TwZjpajf2YEj0JZk3JrwNGY972HRmTSgVnC7aOXxgbAPJ8RMy8Ki9uwpgzHO+xNAwWqm2VAu+QfcfJL6HoHwBEvsDsyL5aV12WkEroCIgUcfGRireupXiVV1nS+pjYr3XPsEIDPoVkHcq6elfMWmteFH6bwx1NnR8xOfx/8QAHxEAAgICAQUAAAAAAAAAAAAAAQIAESExAxIgIiNB/9oACAECAQE/AECVbT09M5MDwFmB2CkutRHDixF3nUQcTByfkaid0I6hsZAgAHd//8QAHhEBAAIDAAIDAAAAAAAAAAAAAQACAxExEiAiMkH/2gAIAQMBAT8AcQYiz1lgQ12GKn7kI4zy1WwxEdMpcPjbkvbHpa1nnUr9VtDZ19//2Q==",
+      scansSidecar: "zq8mnsuhueiSGwH3gGCtLxesglqRHh7mZfzJfhS6toj+NbysoygbQg==",
+      scanLengths: [2211, 13521, 4589, 5970],
+      midQualityFileSha256: "NUQMoKcNrz27xv4MZ99/E9JPokTCMp0g22HhsfOLKuE=",
+      midQualityFileEncSha256: "6ybKCfyvEK53UPAFhqphA0sVzZ8tq+VvYIVSFcMk2UQ=",
     },
   },
-  messageTimestamp: "1616669732",
+  messageTimestamp: "1616691826",
   status: "ERROR",
   ephemeralOutOfSync: false,
 };
+
+export const self = "917457963544@s.whatsapp.net";
