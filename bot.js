@@ -1,6 +1,6 @@
 import pkg from "@adiwajshing/baileys";
 import fs from "fs";
-import { botText, welcomeJson, self, isStory } from "./exports.js";
+import { botText, welcomeJson, self, isStory, getAdmins } from "./exports.js";
 
 const {
   WAConnection,
@@ -59,7 +59,8 @@ async function connectAndRunBot() {
         )
           return;
         const fetchMsg = message.message.extendedTextMessage.text.split(" ");
-        if (fetchMsg[1].toLowerCase() === "help") {
+        const mc = fetchMsg[1].toLowerCase();
+        if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const gname = groupMetaData.subject;
           const gusers = groupMetaData.participants.length;
@@ -85,7 +86,7 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             options
           );
-        } else if (fetchMsg[1].toLowerCase() === "donation") {
+        } else if (mc === "donation") {
           const text =
             "Thank you for showing interest 😊 If you like me and want to see me grow kindly contact my owner Maaz for donation queries.\n\nIf you use UPI you can also send payments to *memset@icici* . Thank you.";
           const options = {
@@ -111,13 +112,51 @@ async function connectAndRunBot() {
             { displayname: "Maaz: Bot Owner", vcard: vcard },
             MessageType.contact
           );
+        } else if (mc === "admins") {
+          const command = fetchMsg.splice(0, 2);
+          command.push(fetchMsg.join(" "));
+          let token = command[2];
+          if (!token || !token.trim().length) {
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              "*Please specify some text to tag admins*\n\n_ex: admins hello_",
+              MessageType.text,
+              options
+            );
+            return;
+          }
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const admins = getAdmins(groupMetaData.participants);
+          let text = "";
+          const mentioned = [];
+          admins.forEach((adm) => {
+            const contact = adm.split("@")[0];
+            text += `@${contact}\n`;
+            mentioned.push(adm);
+          });
+          text = text.trim();
+          const options = {
+            quoted: message,
+            contextInfo: {
+              mentionedJid: mentioned,
+            },
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
         }
       } //end message process
     });
 
     //called when some group join/remove action occurs
     conn.on("group-participants-update", async (group) => {
-      if (group.action === "remove") return;
+      if (group.action !== "add") return;
       const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;

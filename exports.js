@@ -25,27 +25,39 @@ Hello *uname*
 ┃─────〘 GROUP 〙─────
 ┃━━━━━━━━━━━━━━━━━━━━
 ┠⊷️ Admins
-┃ To see the admin list
+┃ To tag all admins
+┃   _ex: admins hello
+┃
 ┠⊷️ Closegc
 ┃ To close group
+┃
 ┠⊷️ Opengc
 ┃ To open group
+┃
 ┠⊷️ Promote
 ┃ To make someone an admin
+┃
 ┠⊷️ Demote
 ┃ To remove someone as admin
+┃
 ┠⊷️ Setname
 ┃ To change group's name
+┃
 ┠⊷️ Setdesc
 ┃ To change group description
+┃
 ┠⊷️ Add
 ┃ To add a member
+┃
 ┠⊷️ Kick
 ┃ To remove a member
+┃
 ┠⊷️ Linkgc
 ┃ To get group link
+┃
 ┠⊷️ Notif
 ┃ Send notification to  all members
+┃
 ┠⊷️ Star
 ┃ save an important message
 ┗━━━━━━━━━━━━━━━━━━━━
@@ -114,4 +126,16 @@ export const self = "917457963544@s.whatsapp.net";
 
 export function isStory(jid) {
   return jid === "status@broadcast";
+}
+
+export function getAdmins(gdata) {
+  const admins = [];
+  let si;
+  gdata.forEach((a, i) => {
+    if (a.jid === self) return;
+    if (a.isAdmin) admins.push(a.jid);
+    if (a.isSuperAdmin) si = i;
+  });
+  admins.unshift(admins.splice(si, 1)[0]);
+  return admins;
 }
