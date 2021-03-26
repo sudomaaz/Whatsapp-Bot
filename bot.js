@@ -43,7 +43,7 @@ async function connectAndRunBot() {
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         await conn.chatRead(mmid);
-        if (fromMe || isStory(mmid)) return;
+        if (!mmid || fromMe || isStory(mmid)) return;
         if (!isGroupID(mmid)) {
           const sentMsg = await conn.sendMessage(
             mmid,
