@@ -36,7 +36,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        // console.log(JSON.stringify(message, null, 5));
+        //console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         await conn.chatRead(mmid);
@@ -44,7 +44,7 @@ async function connectAndRunBot() {
         if (!isGroupID(mmid)) {
           const sentMsg = await conn.sendMessage(
             mmid,
-            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.Thanks.\n\nOur Official Group: *https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd*",
+            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd*",
             MessageType.text
           );
           return;
@@ -60,7 +60,35 @@ async function connectAndRunBot() {
             self
         )
           return;
-      }
+        const fetchMsg = message.message.extendedTextMessage.text.split(" ");
+        if (fetchMsg[1].toLowerCase() === "help") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const gname = groupMetaData.subject;
+          const gusers = groupMetaData.participants.length;
+          const uname = "@" + message.participant.split("@")[0];
+          const replaceT = {
+            gname: gname,
+            gusers: gusers,
+            uname: uname,
+          };
+          const text = botText.replace(
+            /gname|gusers|uname/gi,
+            (matched) => replaceT[matched]
+          );
+          const options = {
+            quoted: message,
+            contextInfo: {
+              mentionedJid: [message.participant],
+            },
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+        }
+      } //end message process
     });
 
     //called when some group join/remove action occurs
