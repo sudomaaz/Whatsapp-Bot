@@ -9,7 +9,10 @@ const {
   Mimetype,
   isGroupID,
   ReconnectMode,
+  proto,
 } = pkg;
+
+const { RequestPaymentMessage } = proto;
 
 let conn;
 
@@ -31,6 +34,10 @@ async function connectAndRunBot() {
     const authInfo = conn.base64EncodedAuthInfo(); // get all the auth info we need to restore this session
 
     fs.writeFileSync("./auth_info.json", JSON.stringify(authInfo, null, "\t")); // save this info to a file
+
+    const payment = new RequestPaymentMessage(RequestPaymentMessage.amount1000);
+
+    console.log(payment);
 
     // this will be called on every chat update event
     conn.on("chat-update", async (chatUpdate) => {
@@ -86,6 +93,32 @@ async function connectAndRunBot() {
             text,
             MessageType.extendedText,
             options
+          );
+        } else if (fetchMsg[1].toLowerCase() === "donation") {
+          const text =
+            "Thank you for showing interest 😊 If you like this service and want it to keep running kindly contact my owner Maaz for donation queries.\n\nIf you use BHIM UPI you can also send payments to *memset@icici* . Thank you.";
+          const options = {
+            quoted: message,
+            contextInfo: {
+              mentionedJid: [message.participant],
+            },
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+          const vcard =
+            "BEGIN:VCARD\n" + // metadata of the contact card
+            "VERSION:3.0\n" +
+            "FN:Maaz\n" + // full name
+            "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
+            "END:VCARD";
+          const sentMsg1 = await conn.sendMessage(
+            mmid,
+            { displayname: "Maaz", vcard: vcard },
+            MessageType.contact
           );
         }
       } //end message process
