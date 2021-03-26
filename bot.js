@@ -1,6 +1,6 @@
 import pkg from "@adiwajshing/baileys";
 import fs from "fs";
-import { botText, welcomeJson, self } from "./exports.js";
+import { botText, welcomeJson, self, isStory } from "./exports.js";
 
 const {
   WAConnection,
@@ -35,19 +35,15 @@ async function connectAndRunBot() {
 
     fs.writeFileSync("./auth_info.json", JSON.stringify(authInfo, null, "\t")); // save this info to a file
 
-    const payment = new RequestPaymentMessage(RequestPaymentMessage.amount1000);
-
-    console.log(payment);
-
     // this will be called on every chat update event
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        //console.log(JSON.stringify(message, null, 5));
+        console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         await conn.chatRead(mmid);
-        if (fromMe) return;
+        if (fromMe || isStory(mmid)) return;
         if (!isGroupID(mmid)) {
           const sentMsg = await conn.sendMessage(
             mmid,

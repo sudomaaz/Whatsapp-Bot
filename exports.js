@@ -111,3 +111,7 @@ export const welcomeJson = {
 };
 
 export const self = "917457963544@s.whatsapp.net";
+
+export function isStory(jid) {
+  return jid === "status@broadcast";
+}
