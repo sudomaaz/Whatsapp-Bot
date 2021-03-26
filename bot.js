@@ -108,7 +108,7 @@ async function connectAndRunBot() {
           const vcard =
             "BEGIN:VCARD\n" + // metadata of the contact card
             "VERSION:3.0\n" +
-            "FN:Maaz:Bot Owner\n" + // full name
+            "FN:Maaz: Bot Owner\n" + // full name
             "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
             "END:VCARD";
           const sentMsg1 = await conn.sendMessage(
