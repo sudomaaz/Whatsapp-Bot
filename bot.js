@@ -170,7 +170,7 @@ async function connectAndRunBot() {
       );
     });
   } catch (err) {
-    return new Promise((resolve, reject) => reject(err));
+    console.log(err);
   }
 }
 
