@@ -9,16 +9,11 @@ const {
   Mimetype,
   isGroupID,
   ReconnectMode,
-  proto,
 } = pkg;
-
-const { RequestPaymentMessage } = proto;
-
-let conn;
 
 async function connectAndRunBot() {
   try {
-    conn = new WAConnection(); // create a baileys connection object
+    const conn = new WAConnection(); // create a baileys connection object
 
     conn.autoReconnect = ReconnectMode.onConnectionLost; // only automatically reconnect when the connection breaks
 
