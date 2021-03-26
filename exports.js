@@ -5,7 +5,8 @@ Hello *uname*
 ────────────────
 
 〘 *I'm Chotu Bot* 〙
-‣ Start: @mentionMe in chat 「 *@👽BOT* 」
+‣ Start: @mentionMe in chat
+   「 *@👽Chotu* 」
 ‣ Version: *3.0*
 ‣ Created: *25th March 2021*
 ‣ Group: *gname*
@@ -45,15 +46,15 @@ Hello *uname*
 ┃ To get group link
 ┠⊷️ Notif
 ┃ Send notification to  all members
-┠⊷️ Recover
-┃ recover a deleted message
+┠⊷️ Star
+┃ save an important message
 ┗━━━━━━━━━━━━━━━━━━━━
 ┏━━━━━━━━━━━━━━━━━━━━
 ┃─────〘 UTILS 〙─────
 ┃━━━━━━━━━━━━━━━━━━━━
 ┠⊷️ Find
 ┃ fetches specified video from youtube
-┃   _ex: find modi best speech_
+┃   _ex: find avengers end game_
 ┃
 ┠⊷️ Joke
 ┃ cracks a joke as specified
@@ -71,7 +72,7 @@ Hello *uname*
 ┃
 ┠⊷️ Contest
 ┃ displays upcoming or ongoing contest
-┃   _ex: contest codechef upcoming_
+┃   _ex: contest leetcode upcoming_
 ┃   _ex: contest leetcode ongoing_
 ┃
 ┃⊷️ Search

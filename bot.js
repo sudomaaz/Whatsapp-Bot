@@ -96,7 +96,7 @@ async function connectAndRunBot() {
           );
         } else if (fetchMsg[1].toLowerCase() === "donation") {
           const text =
-            "Thank you for showing interest 😊 If you like this service and want it to keep running kindly contact my owner Maaz for donation queries.\n\nIf you use BHIM UPI you can also send payments to *memset@icici* . Thank you.";
+            "Thank you for showing interest 😊 If you like me and want to see me grow kindly contact my owner Maaz for donation queries.\n\nIf you use BHIM UPI you can also send payments to *memset@icici* . Thank you.";
           const options = {
             quoted: message,
             contextInfo: {
