@@ -16,7 +16,7 @@ const { RequestPaymentMessage } = proto;
 
 let conn;
 
-async function connectAndRunBot() {
+export async function connectAndRunBot() {
   try {
     conn = new WAConnection(); // create a baileys connection object
 
@@ -173,5 +173,3 @@ async function connectAndRunBot() {
     return new Promise((resolve, reject) => reject(err));
   }
 }
-// run in main file
-connectAndRunBot().catch((err) => console.log("unexpected error: " + err)); // catch any errors

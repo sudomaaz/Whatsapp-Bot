@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
-    "@adiwajshing/baileys": "github:adiwajshing/baileys"
+    "@adiwajshing/baileys": "github:adiwajshing/baileys",
+    "express": "^4.17.1"
   },
   "devDependencies": {},
   "scripts": {
