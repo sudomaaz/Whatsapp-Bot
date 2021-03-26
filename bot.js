@@ -39,7 +39,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        console.log(JSON.stringify(message, null, 5));
+        //console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         await conn.chatRead(mmid);
@@ -92,7 +92,7 @@ async function connectAndRunBot() {
           );
         } else if (fetchMsg[1].toLowerCase() === "donation") {
           const text =
-            "Thank you for showing interest 😊 If you like me and want to see me grow kindly contact my owner Maaz for donation queries.\n\nIf you use BHIM UPI you can also send payments to *memset@icici* . Thank you.";
+            "Thank you for showing interest 😊 If you like me and want to see me grow kindly contact my owner Maaz for donation queries.\n\nIf you use UPI you can also send payments to *memset@icici* . Thank you.";
           const options = {
             quoted: message,
             contextInfo: {
@@ -108,12 +108,12 @@ async function connectAndRunBot() {
           const vcard =
             "BEGIN:VCARD\n" + // metadata of the contact card
             "VERSION:3.0\n" +
-            "FN:Maaz\n" + // full name
+            "FN:Maaz:Bot Owner\n" + // full name
             "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
             "END:VCARD";
           const sentMsg1 = await conn.sendMessage(
             mmid,
-            { displayname: "Maaz", vcard: vcard },
+            { displayname: "Maaz: Bot Owner", vcard: vcard },
             MessageType.contact
           );
         }
