@@ -937,13 +937,10 @@ export function isStory(jid) {
 
 export async function getAdmins(gdata) {
   const admins = [];
-  let si;
   gdata.forEach((a, i) => {
     if (a.jid === self) return;
     if (a.isAdmin) admins.push(a.jid);
-    if (a.isSuperAdmin) si = i;
   });
-  admins.unshift(admins.splice(si, 1)[0]);
   return admins;
 }
 

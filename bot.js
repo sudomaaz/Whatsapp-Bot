@@ -36,7 +36,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        //console.log(JSON.stringify(message, null, 5));
+        console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -943,15 +943,7 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
-        } else {
-         /* const text =
-            "*Sorry i did not understand*\n_use help command for listners_";
-          const extra = {
-            quoted: message,
-          };
-          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
-          */
-        }
+        } else return;
       } //end message process
     });
 
