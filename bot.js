@@ -161,7 +161,7 @@ async function connectAndRunBot() {
             return;
           }
           const groupMetaData = await conn.groupMetadata(mmid);
-          const admins = fnc.getAdmins(groupMetaData.participants);
+          const admins = await fnc.getAdmins(groupMetaData.participants);
           let text = "";
           const mentioned = [];
           admins.forEach((adm) => {
