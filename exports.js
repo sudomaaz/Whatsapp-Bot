@@ -935,7 +935,7 @@ export function isStory(jid) {
   return jid === "status@broadcast";
 }
 
-export function getAdmins(gdata) {
+export async function getAdmins(gdata) {
   const admins = [];
   let si;
   gdata.forEach((a, i) => {
