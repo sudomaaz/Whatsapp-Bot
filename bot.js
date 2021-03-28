@@ -53,12 +53,6 @@ async function connectAndRunBot() {
         )
           return;
         if (
-          message.message.extendedTextMessage.contextInfo.mentionedJid[0] &&
-          message.message.extendedTextMessage.contextInfo.mentionedJid[0] !==
-            fnc.self
-        )
-          return;
-        if (
           message.message.extendedTextMessage.contextInfo.participant ===
           fnc.self
         ) {
@@ -88,6 +82,11 @@ async function connectAndRunBot() {
           }
           return;
         }
+        if (
+          message.message.extendedTextMessage.contextInfo.mentionedJid[0] !==
+          fnc.self
+        )
+          return;
         const fetchMsg = message.message.extendedTextMessage.text.split(" ");
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
@@ -896,19 +895,19 @@ async function connectAndRunBot() {
           if (!yt || !yt.length) return;
           let finalMsg,
             text = "";
-          yt.forEach(async (e) => {
-            text = `${e.url}`;
-            finalMsg = await conn.generateLinkPreview(text);
-            const extra = {
-              quoted: message,
-            };
-            await conn.sendMessage(
-              mmid,
-              finalMsg,
-              MessageType.extendedText,
-              extra
-            );
+          yt.forEach((e, i) => {
+            text += `*Link ${i + 1}*\n${e.url}\n\n`;
           });
+          finalMsg = await conn.generateLinkPreview(text);
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
         } else if (mc === "search") {
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
@@ -930,20 +929,32 @@ async function connectAndRunBot() {
           if (!bs || !bs.length) return;
           let finalMsg,
             text = "";
-          bs.forEach(async (e) => {
-            text = `${e.url}`;
-            finalMsg = await conn.generateLinkPreview(text);
+          bs.forEach((e, i) => {
+            text += `*Link ${i + 1}*\n${e.url}\n\n`;
+          });
+          finalMsg = await conn.generateLinkPreview(text);
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
+        } else {
+          if (
+            message.message.extendedTextMessage.contextInfo.mentionedJid[0] ===
+            fnc.self
+          ) {
+            const text =
+              "Sorry i did not understand your query. Please issue a help command to get lists of commands i listen to.";
             const extra = {
               quoted: message,
             };
-            await conn.sendMessage(
-              mmid,
-              finalMsg,
-              MessageType.extendedText,
-              extra
-            );
-          });
-        } else return;
+            await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          }
+        }
       } //end message process
     });
 

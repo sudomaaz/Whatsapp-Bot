@@ -1112,7 +1112,7 @@ export async function clist(opt, resource) {
 export async function searchYt(yt) {
   const r = await yts(yt).catch((err) => console.log(err));
 
-  const videos = r.videos.slice(0, 3);
+  const videos = r.videos.slice(0, 5);
   return videos;
 }
 
