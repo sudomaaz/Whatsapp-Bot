@@ -58,6 +58,36 @@ async function connectAndRunBot() {
             fnc.self
         )
           return;
+        if (
+          message.message.extendedTextMessage.contextInfo.participant ===
+          fnc.self
+        ) {
+          if (
+            message.message.extendedTextMessage.contextInfo.quotedMessage
+              .extendedTextMessage &&
+            message.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.text.includes(
+              "create a meme"
+            )
+          ) {
+            const memeid = message.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid[0].split(
+              "@"
+            )[0];
+            const result = await fnc.memes(
+              memeid,
+              message.message.extendedTextMessage.text
+            );
+            if (!result) return;
+            //let finalMsg = `*Your meme is ready download* d\n\n${result}`;
+            let finalMsg = { url: result };
+            const extra = {
+              quoted: message,
+              thumbnail: null,
+              mimetype: Mimetype.jpeg,
+            };
+            await conn.sendMessage(mmid, finalMsg, MessageType.image, extra);
+          }
+          return;
+        }
         const fetchMsg = message.message.extendedTextMessage.text.split(" ");
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
@@ -278,7 +308,7 @@ async function connectAndRunBot() {
             message.message.extendedTextMessage.contextInfo.mentionedJid
               .length - 1
           );
-          if (!candidates) {
+          if (!candidates.length) {
             const options = {
               quoted: message,
             };
@@ -341,7 +371,7 @@ async function connectAndRunBot() {
             message.message.extendedTextMessage.contextInfo.mentionedJid
               .length - 1
           );
-          if (!candidates) {
+          if (!candidates.length) {
             const options = {
               quoted: message,
             };
@@ -462,7 +492,7 @@ async function connectAndRunBot() {
               quoted: message,
             };
             const text =
-              "*Please provide some group description text.*\n\n_ex: setdesc My Awesome Group_";
+              "*Please provide valid group description text.*\n\n_ex: setdesc My Awesome Group_";
             const sentMsg = await conn.sendMessage(
               mmid,
               text,
@@ -510,7 +540,7 @@ async function connectAndRunBot() {
             message.message.extendedTextMessage.contextInfo.mentionedJid
               .length - 1
           );
-          if (!candidates) {
+          if (!candidates.length) {
             const options = {
               quoted: message,
             };
@@ -574,6 +604,319 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             options
           );
+        } else if (mc === "joke") {
+          let token = fetchMsg[2];
+          const arr = ["random", "programming", "insult"];
+          if (
+            !token ||
+            !token.trim().length ||
+            !arr.includes(token.toLowerCase())
+          ) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please specify the type of joke.*\n\n_ex: joke random_\n_joke programming_\n_joke insult_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let result;
+          token = token.toLowerCase();
+          if (token === "random") {
+            result = await fnc.jokes("random");
+          } else if (token === "programming") {
+            result = await fnc.jokes("programming");
+          } else if (token === "insult") {
+            result = await fnc.insult();
+          } else return;
+          if (!result) return;
+          let finalMsg = `${result}\n😛😛`;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
+        } else if (mc === "advice") {
+          const advice = await fnc.advice();
+          if (!advice) return;
+          let finalMsg = { url: advice.image };
+          const extra = {
+            quoted: message,
+            caption: `${advice.advice}\n😊😊`,
+            mimetype: Mimetype.png,
+          };
+          await conn.sendMessage(mmid, finalMsg, MessageType.image, extra);
+        } else if (mc === "memes") {
+          let token = fetchMsg[2];
+          if (!token || !token.trim().length) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please specify the type of action.*\n\n_ex: memes list: list meme templates_\n\n_memes make two buttons: make a meme from one of templates_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let meme = {};
+          token = token.toLowerCase();
+          if (token === "list") {
+            const finalMsg = `Below is the default meme template.\n\nhttps://imgflip.com/memetemplates \n\nUse as below command\n\n*memes make two buttons*`;
+            const extra = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              finalMsg,
+              MessageType.extendedText,
+              extra
+            );
+          } else if (token === "make") {
+            const result = fetchMsg.splice(0, 3);
+            result.push(fetchMsg.join(" "));
+            let token1 = result[3];
+            if (!token1) return;
+            let exist = false;
+            for (let m of fnc.memeJson.memes) {
+              if (m.name.toLowerCase() === token1.trim().toLowerCase()) {
+                exist = true;
+                meme.boxes = m.box_count;
+                meme.id = m.id;
+              }
+            }
+            if (!exist) {
+              const finalMsg =
+                "Sorry we yet dont support this meme 😔\n\nCheck meme spelling or try a different one.";
+              const extra = {
+                quoted: message,
+              };
+              const sentMsg = await conn.sendMessage(
+                mmid,
+                finalMsg,
+                MessageType.extendedText,
+                extra
+              );
+            } else {
+              const finalMsg = `We can create a meme out of it 😊\n\nIt has got ${meme.boxes} boxes. Provide text for each box in a new line by replying to this message`;
+              const extra = {
+                quoted: message,
+                contextInfo: { mentionedJid: [meme.id + "@s.whatsapp.net"] },
+              };
+              const sentMsg = await conn.sendMessage(
+                mmid,
+                finalMsg,
+                MessageType.extendedText,
+                extra
+              );
+            }
+          }
+        } else if (mc === "codeforces") {
+          let token = fetchMsg[2];
+          let arr = ["upcoming", "ongoing"];
+          if (
+            !token ||
+            !token.trim().length ||
+            !arr.includes(token.toLowerCase())
+          ) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the type of action.*\n\n_ex: ${mc} upcoming: gets upcoming contests in 15days_\n\n_${mc} ongoing: gets ongoing contests in 15days_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let result;
+          const type = fetchMsg[2].toLowerCase();
+          if (type === "ongoing") result = await fnc.clist(1, 1);
+          else if (type === "upcoming") result = await fnc.clist(0, 1);
+          if (!result) return;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, result, MessageType.extendedText, extra);
+        } else if (mc === "codechef") {
+          let token = fetchMsg[2];
+          let arr = ["upcoming", "ongoing"];
+          if (
+            !token ||
+            !token.trim().length ||
+            !arr.includes(token.toLowerCase())
+          ) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the type of action.*\n\n_ex: ${mc} upcoming: gets upcoming contests in 15days_\n\n_${mc} ongoing: gets ongoing contests in 15days_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let result;
+          const type = fetchMsg[2].toLowerCase();
+          if (type === "ongoing") result = await fnc.clist(1, 2);
+          else if (type === "upcoming") result = await fnc.clist(0, 2);
+          if (!result) return;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, result, MessageType.extendedText, extra);
+        } else if (mc === "leetcode") {
+          let token = fetchMsg[2];
+          let arr = ["upcoming", "ongoing"];
+          if (
+            !token ||
+            !token.trim().length ||
+            !arr.includes(token.toLowerCase())
+          ) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the type of action.*\n\n_ex: ${mc} upcoming: gets upcoming contests in 15days_\n\n_${mc} ongoing: gets ongoing contests in 15days_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let result;
+          const type = fetchMsg[2].toLowerCase();
+          if (type === "ongoing") result = await fnc.clist(1, 102);
+          else if (type === "upcoming") result = await fnc.clist(0, 102);
+          if (!result) return;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, result, MessageType.extendedText, extra);
+        } else if (mc === "bsio") {
+          let token = fetchMsg[2];
+          let arr = ["upcoming", "ongoing"];
+          if (
+            !token ||
+            !token.trim().length ||
+            !arr.includes(token.toLowerCase())
+          ) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the type of action.*\n\n_ex: ${mc} upcoming: gets upcoming contests in 15days_\n\n_${mc} ongoing: gets ongoing contests in 15days_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let result;
+          const type = fetchMsg[2].toLowerCase();
+          if (type === "ongoing") result = await fnc.clist(1, 117);
+          else if (type === "upcoming") result = await fnc.clist(0, 117);
+          if (!result) return;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, result, MessageType.extendedText, extra);
+        } else if (mc === "hackerearth") {
+          let token = fetchMsg[2];
+          let arr = ["upcoming", "ongoing"];
+          if (
+            !token ||
+            !token.trim().length ||
+            !arr.includes(token.toLowerCase())
+          ) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the type of action.*\n\n_ex: ${mc} upcoming: gets upcoming contests in 15days_\n\n_${mc} ongoing: gets ongoing contests in 15days_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let result;
+          const type = fetchMsg[2].toLowerCase();
+          if (type === "ongoing") result = await fnc.clist(1, 73);
+          else if (type === "upcoming") result = await fnc.clist(0, 73);
+          if (!result) return;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, result, MessageType.extendedText, extra);
+        } else if (mc === "contest") {
+          const text =
+            "*I listen to codeforces | codechef | leetcode | bsio | hackerearth*\n\n_ex: leetcode upcoming_";
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+        } else if (mc === "find") {
+          const result = fetchMsg.splice(0, 2);
+          result.push(fetchMsg.join(" "));
+          let token = result[2];
+          if (!token) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the video title,keyword to search.*\n\n_ex: find avengers endgame_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const yt = await fnc.searchYt(token);
+          if (!yt || !yt.length) return;
+          console.log(yt);
+          let finalMsg,
+            text = "";
+          yt.forEach((e) => {
+            text += `${e.url}\n\n`;
+          });
+          finalMsg = await conn.generateLinkPreview(text);
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
+        } else {
+          const text =
+            "*Sorry i did not understand*\n_use help command for listners_";
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
         }
       } //end message process
     });
