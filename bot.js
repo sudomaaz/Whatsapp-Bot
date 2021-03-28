@@ -894,10 +894,43 @@ async function connectAndRunBot() {
           }
           const yt = await fnc.searchYt(token);
           if (!yt || !yt.length) return;
-          console.log(yt);
           let finalMsg,
             text = "";
           yt.forEach((e) => {
+            text += `${e.url}\n\n`;
+          });
+          finalMsg = await conn.generateLinkPreview(text);
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
+        } else if (mc === "search") {
+          const result = fetchMsg.splice(0, 2);
+          result.push(fetchMsg.join(" "));
+          let token = result[2];
+          if (!token) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the query to do a web search.*\n\n_ex: search narendra modi_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const bs = await fnc.search(token);
+          if (!bs || !bs.length) return;
+          let finalMsg,
+            text = "";
+          bs.forEach((e) => {
             text += `${e.url}\n\n`;
           });
           finalMsg = await conn.generateLinkPreview(text);

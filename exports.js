@@ -1,6 +1,7 @@
 import axios from "axios";
 import pkg from "luxon";
 import yts from "yt-search";
+import https from "https";
 const { DateTime } = pkg;
 
 export const botText = `────✪ Created by M-A-A-Z ✪────
@@ -10,9 +11,9 @@ Hello *uname*
 ────────────────
 
 〘 *I'm Chotu Bot* 〙
-‣ Start: Turn off disappearing message
-   and @mentionMe in chat
+‣ Start: @mentionMe in chat
    「 *@Chotu 👽* 」
+‣ Disappearing Message: *Turn Off*
 ‣ Version: *3.0*
 ‣ Created: *25th March 2021*
 ‣ Group: *gname*
@@ -1116,4 +1117,28 @@ export async function searchYt(yt) {
 
   const videos = r.videos.slice(0, 3);
   return videos;
+}
+
+export async function search(query) {
+  const SUBSCRIPTION_KEY = "73351a628fe744db8d64c41506130d12";
+
+  const options = {
+    method: "GET",
+    url: "https://api.bing.microsoft.com/v7.0/search/",
+    params: {
+      count: 5,
+      offset: 3,
+      q: encodeURIComponent(query),
+    },
+    headers: {
+      "Ocp-Apim-Subscription-Key": SUBSCRIPTION_KEY,
+    },
+  };
+
+  try {
+    const res = await axios.request(options);
+    return res.data.webPages.value;
+  } catch (err) {
+    return "";
+  }
 }
