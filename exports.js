@@ -25,9 +25,8 @@ Hello *uname*
 ┃─────〘 GROUP 〙─────
 ┃━━━━━━━━━━━━━━━━━━━━
 ┠⊷️ Admins
-┃ To tag all admins
-┃   _ex: admins hello
-┃
+┃ Send notification to admins
+┃ 
 ┠⊷️ Closegc
 ┃ To close group
 ┃
@@ -46,20 +45,14 @@ Hello *uname*
 ┠⊷️ Setdesc
 ┃ To change group description
 ┃
-┠⊷️ Add
-┃ To add a member
-┃
 ┠⊷️ Kick
 ┃ To remove a member
 ┃
 ┠⊷️ Linkgc
-┃ To get group link
+┃ To get group invite link
 ┃
-┠⊷️ Notif
-┃ Send notification to  all members
-┃
-┠⊷️ Star
-┃ save an important message
+┠⊷️ Notify
+┃ Send notification to members
 ┗━━━━━━━━━━━━━━━━━━━━
 ┏━━━━━━━━━━━━━━━━━━━━
 ┃─────〘 UTILS 〙─────
@@ -138,4 +131,13 @@ export function getAdmins(gdata) {
   });
   admins.unshift(admins.splice(si, 1)[0]);
   return admins;
+}
+
+export function isAdmin(gdata, ptc) {
+  const admin = [false, false];
+  for (let el of gdata) {
+    if (el.jid === self) admin[0] = el.isAdmin;
+    if (el.jid === ptc) admin[1] = el.isAdmin;
+  }
+  return admin;
 }

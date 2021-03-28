@@ -1,6 +1,7 @@
 import pkg from "@adiwajshing/baileys";
+import e from "express";
 import fs from "fs";
-import { botText, welcomeJson, self, isStory, getAdmins } from "./exports.js";
+import * as fnc from "./exports.js";
 
 const {
   WAConnection,
@@ -9,6 +10,7 @@ const {
   Mimetype,
   isGroupID,
   ReconnectMode,
+  GroupSettingChange,
 } = pkg;
 
 async function connectAndRunBot() {
@@ -37,14 +39,12 @@ async function connectAndRunBot() {
         //console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
+        if (!mmid || fromMe || fnc.isStory(mmid)) return;
         await conn.chatRead(mmid);
-        if (!mmid || fromMe || isStory(mmid)) return;
         if (!isGroupID(mmid)) {
-          const sentMsg = await conn.sendMessage(
-            mmid,
-            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd*",
-            MessageType.text
-          );
+          const text =
+            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/BxiQo8aeYXVAvenCRa5tbd*";
+          const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
         if (
@@ -55,7 +55,7 @@ async function connectAndRunBot() {
         if (
           message.message.extendedTextMessage.contextInfo.mentionedJid[0] &&
           message.message.extendedTextMessage.contextInfo.mentionedJid[0] !==
-            self
+            fnc.self
         )
           return;
         const fetchMsg = message.message.extendedTextMessage.text.split(" ");
@@ -70,7 +70,7 @@ async function connectAndRunBot() {
             gusers: gusers,
             uname: uname,
           };
-          const text = botText.replace(
+          const text = fnc.botText.replace(
             /gname|gusers|uname/gi,
             (matched) => replaceT[matched]
           );
@@ -95,7 +95,7 @@ async function connectAndRunBot() {
               mentionedJid: [message.participant],
             },
           };
-          const sentMsg = await conn.sendMessage(
+          let sentMsg = await conn.sendMessage(
             mmid,
             text,
             MessageType.extendedText,
@@ -107,7 +107,7 @@ async function connectAndRunBot() {
             "FN:Maaz: Bot Owner\n" + // full name
             "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
             "END:VCARD";
-          const sentMsg1 = await conn.sendMessage(
+          sentMsg = await conn.sendMessage(
             mmid,
             { displayname: "Maaz: Bot Owner", vcard: vcard },
             MessageType.contact
@@ -120,22 +120,446 @@ async function connectAndRunBot() {
             const options = {
               quoted: message,
             };
+            const text =
+              "*Please specify some text to tag admins*\n\n_ex: admins hello_";
             const sentMsg = await conn.sendMessage(
               mmid,
-              "*Please specify some text to tag admins*\n\n_ex: admins hello_",
-              MessageType.text,
+              text,
+              MessageType.extendedText,
               options
             );
             return;
           }
           const groupMetaData = await conn.groupMetadata(mmid);
-          const admins = getAdmins(groupMetaData.participants);
+          const admins = fnc.getAdmins(groupMetaData.participants);
           let text = "";
           const mentioned = [];
           admins.forEach((adm) => {
             const contact = adm.split("@")[0];
-            text += `@${contact}\n`;
+            text += `@${contact}  `;
             mentioned.push(adm);
+          });
+          text = text.trim();
+          const options = {
+            quoted: message,
+            contextInfo: {
+              mentionedJid: mentioned,
+            },
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+        } else if (mc === "closegc") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
+            const text =
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const s1 = await conn.groupSettingChange(
+            mmid,
+            GroupSettingChange.messageSend,
+            true
+          );
+
+          const s2 = await conn.groupSettingChange(
+            mmid,
+            GroupSettingChange.settingsChange,
+            true
+          );
+        } else if (mc === "opengc") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
+            const text =
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const s1 = await conn.groupSettingChange(
+            mmid,
+            GroupSettingChange.messageSend,
+            false
+          );
+
+          const s2 = await conn.groupSettingChange(
+            mmid,
+            GroupSettingChange.settingsChange,
+            false
+          );
+        } else if (mc === "promote") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
+            const text =
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const candidates = message.message.extendedTextMessage.contextInfo.mentionedJid.splice(
+            1,
+            message.message.extendedTextMessage.contextInfo.mentionedJid
+              .length - 1
+          );
+          if (!candidates) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please mention members to be added as admins.*\n\n_ex: promote @member1 @member2_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          await conn.groupMakeAdmin(mmid, candidates);
+          const text = `Congratulations 🎉 valid candidates have been added as admins.`;
+          const options = {
+            quoted: message,
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+        } else if (mc === "demote") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
+            const text =
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const candidates = message.message.extendedTextMessage.contextInfo.mentionedJid.splice(
+            1,
+            message.message.extendedTextMessage.contextInfo.mentionedJid
+              .length - 1
+          );
+          if (!candidates) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please mention members to be removed as admins.*\n\n_ex: demote @member1 @member2_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          await conn.groupDemoteAdmin(mmid, candidates);
+          const text = `Valid candidates have been removed as admins.`;
+          const options = {
+            quoted: message,
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+        } else if (mc === "setname") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          if (groupMetaData.restrict === true) {
+            const isAdm = fnc.isAdmin(
+              groupMetaData.participants,
+              message.participant
+            );
+            if (!isAdm[1]) {
+              const text = "*❌ Only group admins can issue this command.*";
+              const options = {
+                quoted: message,
+              };
+              const sentMsg = await conn.sendMessage(
+                mmid,
+                text,
+                MessageType.extendedText,
+                options
+              );
+              return;
+            }
+            if (!isAdm[0]) {
+              const text =
+                "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+              const options = {
+                quoted: message,
+              };
+              const sentMsg = await conn.sendMessage(
+                mmid,
+                text,
+                MessageType.extendedText,
+                options
+              );
+              return;
+            }
+          }
+          const cmd = fetchMsg.splice(0, 2);
+          cmd.push(fetchMsg.join(" "));
+          const gname = cmd[2];
+          if (!gname || !gname.trim().length) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please provide valid group name.*\n\n_ex: setname My Group_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          await conn.groupUpdateSubject(mmid, gname);
+        } else if (mc === "setdesc") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          if (groupMetaData.restrict === true) {
+            const isAdm = fnc.isAdmin(
+              groupMetaData.participants,
+              message.participant
+            );
+            if (!isAdm[1]) {
+              const text = "*❌ Only group admins can issue this command.*";
+              const options = {
+                quoted: message,
+              };
+              const sentMsg = await conn.sendMessage(
+                mmid,
+                text,
+                MessageType.extendedText,
+                options
+              );
+              return;
+            }
+            if (!isAdm[0]) {
+              const text =
+                "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+              const options = {
+                quoted: message,
+              };
+              const sentMsg = await conn.sendMessage(
+                mmid,
+                text,
+                MessageType.extendedText,
+                options
+              );
+              return;
+            }
+          }
+          const cmd = fetchMsg.splice(0, 2);
+          cmd.push(fetchMsg.join(" "));
+          const gdesc = cmd[2];
+          if (!gdesc || !gdesc.trim().length) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please provide some group description text.*\n\n_ex: setdesc My Awesome Group_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          await conn.groupUpdateDescription(mmid, gdesc);
+        } else if (mc === "kick") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
+            const text =
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const candidates = message.message.extendedTextMessage.contextInfo.mentionedJid.splice(
+            1,
+            message.message.extendedTextMessage.contextInfo.mentionedJid
+              .length - 1
+          );
+          if (!candidates) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please mention members to be removed from group.*\n\n_ex: kick @member1 @member2_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          await conn.groupRemove(mmid, candidates);
+        } else if (mc === "linkgc") {
+          const code = await conn.groupInviteCode(mmid);
+          const invite = "https://chat.whatsapp.com/" + code;
+          const text = await conn.generateLinkPreview(invite);
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText
+          );
+        } else if (mc === "notify") {
+          const command = fetchMsg.splice(0, 2);
+          command.push(fetchMsg.join(" "));
+          let token = command[2];
+          if (!token || !token.trim().length) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please specify some text to tag members*\n\n_ex: notify hello_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const groupMetaData = await conn.groupMetadata(mmid);
+          let text = "";
+          const mentioned = [];
+          groupMetaData.participants.forEach((mem) => {
+            if (mem.jid === fnc.self) return;
+            const contact = mem.jid.split("@")[0];
+            text += `@${contact}  `;
+            mentioned.push(mem.jid);
           });
           text = text.trim();
           const options = {
@@ -175,18 +599,18 @@ async function connectAndRunBot() {
         return;
       }
       const name = group.participants[0].split("@")[0];
-      const uname = name === self.split("@")[0] ? "Everyone" : "@" + name;
+      const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;
       const replaceT = {
         gname: gname,
         gusers: gusers,
         uname: uname,
       };
-      const addText = botText.replace(
+      const text = fnc.botText.replace(
         /gname|gusers|uname/gi,
         (matched) => replaceT[matched]
       );
       const options = {
-        quoted: welcomeJson,
+        quoted: fnc.welcomeJson,
         contextInfo: {
           participant: "0@s.whatsapp.net",
           mentionedJid: [group.participants[0]],
@@ -194,7 +618,7 @@ async function connectAndRunBot() {
       };
       const sentMsg = await conn.sendMessage(
         group.jid,
-        addText,
+        text,
         MessageType.extendedText,
         options
       );
