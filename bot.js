@@ -960,12 +960,9 @@ async function connectAndRunBot() {
       const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;
-      if (
-        group.jid !== "918840081034-1616171637@g.us" &&
-        group.jid !== "917985376479-1484319380@g.us"
-      ) {
-        // const text = "Sorry! I only stay in a group with atleast 5 members 👋";
-        const text = "I am under construction. Will be updated once active 👋";
+      if (gusers < 6) {
+        const text = "Sorry! I only stay in a group with atleast 5 members 👋";
+        // const text = "I am under construction. Will be updated once active 👋";
         const sentMsg = await conn.sendMessage(
           group.jid,
           text,
