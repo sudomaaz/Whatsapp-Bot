@@ -944,12 +944,13 @@ async function connectAndRunBot() {
             extra
           );
         } else {
-          const text =
+         /* const text =
             "*Sorry i did not understand*\n_use help command for listners_";
           const extra = {
             quoted: message,
           };
           await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          */
         }
       } //end message process
     });
