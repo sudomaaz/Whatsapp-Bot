@@ -12,7 +12,7 @@ Hello *uname*
 
 〘 *I'm Chotu Bot* 〙
 ‣ Start: @mentionMe in chat
-   「 *@Chotu 👽* 」
+   「 *@Chotu* 」
 ‣ Disappearing Message: *dmsg*
 ‣ Version: *3.0*
 ‣ Created: *25th March 2021*
@@ -1121,14 +1121,15 @@ export async function searchYt(yt) {
 
 export async function search(query) {
   const SUBSCRIPTION_KEY = "73351a628fe744db8d64c41506130d12";
-
   const options = {
     method: "GET",
     url: "https://api.bing.microsoft.com/v7.0/search/",
     params: {
       count: 5,
-      offset: 3,
-      q: encodeURIComponent(query),
+      offset: 0,
+      q: query,
+      mkt: "en-IN",
+      responseFilter: "Webpages,SpellSuggestions",
     },
     headers: {
       "Ocp-Apim-Subscription-Key": SUBSCRIPTION_KEY,
@@ -1137,6 +1138,9 @@ export async function search(query) {
 
   try {
     const res = await axios.request(options);
+    if (res.data.spellSuggestions) {
+      return await search(res.data.spellSuggestions.value[0].text);
+    }
     return res.data.webPages.value;
   } catch (err) {
     return "";
@@ -1168,4 +1172,8 @@ export async function allMembers(jid) {
     if (!e.isSuperAdmin) result.push(e.jid);
   });
   return result;
+}
+
+export function detailLog(value) {
+  console.log(JSON.stringify(value, null, 5));
 }

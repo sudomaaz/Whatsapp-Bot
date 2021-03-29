@@ -37,7 +37,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        // console.log(JSON.stringify(message, null, 5));
+        // fnc.detailLog(message);
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -912,7 +912,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const bs = await fnc.search(token);
+          const bs = await fnc.search(encodeURIComponent(token));
           if (!bs || !bs.length) return;
           let finalMsg,
             text = "";
