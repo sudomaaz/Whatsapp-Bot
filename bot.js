@@ -538,7 +538,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          await conn.groupRemove(mmid, candidates);
+          candidates.forEach(async (e) => await conn.groupRemove(mmid, e));
         } else if (mc === "linkgc") {
           const code = await conn.groupInviteCode(mmid);
           const invite = "https://chat.whatsapp.com/" + code;
