@@ -966,9 +966,11 @@ async function connectAndRunBot() {
             return;
           }
           let toggle = groupMetaData.ephemeralDuration;
-          if (toggle === undefined) toggle = WA_DEFAULT_EPHEMERAL;
+          if (toggle === undefined || toggle === 0)
+            toggle = WA_DEFAULT_EPHEMERAL;
           else toggle = 0;
           await conn.toggleDisappearingMessages(mmid, toggle);
+          groupMetaData.ephemeralDuration = toggle;
         } else {
           if (extended.contextInfo.mentionedJid[0] === fnc.self) {
             const text =
