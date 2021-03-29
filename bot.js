@@ -538,7 +538,9 @@ async function connectAndRunBot() {
             );
             return;
           }
-          candidates.forEach(async (e) => await conn.groupRemove(mmid, e));
+          for (let i of candidates) {
+            await conn.groupRemove(mmid, [i]);
+          }
         } else if (mc === "linkgc") {
           const code = await conn.groupInviteCode(mmid);
           const invite = "https://chat.whatsapp.com/" + code;
@@ -987,7 +989,7 @@ async function connectAndRunBot() {
       const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;
-      if (gusers < 6 && gname !== "Testing Bot321") {
+      if (gusers < 6 && gname !== "Testing Bot312") {
         const text = "Sorry! I only stay in a group with atleast 5 members 👋";
         // const text = "I am under construction. Will be updated once active 👋";
         const sentMsg = await conn.sendMessage(

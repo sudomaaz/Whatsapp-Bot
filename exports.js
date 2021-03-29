@@ -932,7 +932,7 @@ export const memeJson = {
   ],
 };
 
-export const self = "16193170575@s.whatsapp.net";
+export const self = "16192681595@s.whatsapp.net";
 
 export function isStory(jid) {
   return jid === "status@broadcast";
