@@ -104,7 +104,7 @@ Hello *uname*
 ┃
 ┃⊷️ Unsplash
 ┃ does a image search on unsplash
-┃   _ex: search cute puppies_
+┃   _ex: unsplash cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
