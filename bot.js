@@ -11,6 +11,7 @@ const {
   isGroupID,
   ReconnectMode,
   GroupSettingChange,
+  WA_DEFAULT_EPHEMERAL,
 } = pkg;
 
 async function connectAndRunBot() {
@@ -36,7 +37,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        //  console.log(JSON.stringify(message, null, 5));
+        // console.log(JSON.stringify(message, null, 5));
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -47,29 +48,23 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        if (
-          message.message.extendedTextMessage === null ||
-          message.message.extendedTextMessage === undefined
-        )
-          return;
-        if (
-          message.message.extendedTextMessage.contextInfo.participant ===
-          fnc.self
-        ) {
+        let extended;
+        if (message.message.ephemeralMessage)
+          extended =
+            message.message.ephemeralMessage.message.extendedTextMessage;
+        else extended = message.message.extendedTextMessage;
+        if (extended === null || extended === undefined) return;
+        if (extended.contextInfo.participant === fnc.self) {
           if (
-            message.message.extendedTextMessage.contextInfo.quotedMessage
-              .extendedTextMessage &&
-            message.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.text.includes(
+            extended.contextInfo.quotedMessage.extendedTextMessage &&
+            extended.contextInfo.quotedMessage.extendedTextMessage.text.includes(
               "create a meme"
             )
           ) {
-            const memeid = message.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid[0].split(
+            const memeid = extended.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid[0].split(
               "@"
             )[0];
-            const result = await fnc.memes(
-              memeid,
-              message.message.extendedTextMessage.text
-            );
+            const result = await fnc.memes(memeid, extended.text);
             if (!result) return;
             //let finalMsg = `*Your meme is ready download* d\n\n${result}`;
             let finalMsg = { url: result };
@@ -82,25 +77,23 @@ async function connectAndRunBot() {
           }
           return;
         }
-        if (
-          message.message.extendedTextMessage.contextInfo.mentionedJid[0] !==
-          fnc.self
-        )
-          return;
-        const fetchMsg = message.message.extendedTextMessage.text.split(" ");
+        if (extended.contextInfo.mentionedJid[0] !== fnc.self) return;
+        const fetchMsg = extended.text.split(" ");
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const gname = groupMetaData.subject;
           const gusers = groupMetaData.participants.length;
           const uname = "@" + message.participant.split("@")[0];
+          const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
           const replaceT = {
             gname: gname,
             gusers: gusers,
             uname: uname,
+            dmsg: dmsg,
           };
           const text = fnc.botText.replace(
-            /gname|gusers|uname/gi,
+            /gname|gusers|uname|dmsg/gi,
             (matched) => replaceT[matched]
           );
           const options = {
@@ -302,10 +295,9 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = message.message.extendedTextMessage.contextInfo.mentionedJid.splice(
+          const candidates = extended.contextInfo.mentionedJid.splice(
             1,
-            message.message.extendedTextMessage.contextInfo.mentionedJid
-              .length - 1
+            extended.contextInfo.mentionedJid.length - 1
           );
           if (!candidates.length) {
             const options = {
@@ -365,10 +357,9 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = message.message.extendedTextMessage.contextInfo.mentionedJid.splice(
+          const candidates = extended.contextInfo.mentionedJid.splice(
             1,
-            message.message.extendedTextMessage.contextInfo.mentionedJid
-              .length - 1
+            extended.contextInfo.mentionedJid.length - 1
           );
           if (!candidates.length) {
             const options = {
@@ -534,10 +525,9 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = message.message.extendedTextMessage.contextInfo.mentionedJid.splice(
+          const candidates = extended.contextInfo.mentionedJid.splice(
             1,
-            message.message.extendedTextMessage.contextInfo.mentionedJid
-              .length - 1
+            extended.contextInfo.mentionedJid.length - 1
           );
           if (!candidates.length) {
             const options = {
@@ -942,13 +932,47 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
-        } else {
-          if (
-            message.message.extendedTextMessage.contextInfo.mentionedJid[0] ===
-            fnc.self
-          ) {
+        } else if (mc === "toggle") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
             const text =
-              "Sorry i did not understand your query. Please issue a help command to get lists of commands i listen to.";
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          let toggle = groupMetaData.ephemeralDuration;
+          if (toggle === undefined) toggle = WA_DEFAULT_EPHEMERAL;
+          else toggle = 0;
+          await conn.toggleDisappearingMessages(mmid, toggle);
+        } else {
+          if (extended.contextInfo.mentionedJid[0] === fnc.self) {
+            const text =
+              "Sorry i did not understand. Please check for extra space or issue a *help* command to get lists of commands i follow.";
             const extra = {
               quoted: message,
             };
@@ -964,7 +988,7 @@ async function connectAndRunBot() {
       const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;
-      if (gusers < 6) {
+      if (gusers < 6 && gname !== "Testing Bot321") {
         const text = "Sorry! I only stay in a group with atleast 5 members 👋";
         // const text = "I am under construction. Will be updated once active 👋";
         const sentMsg = await conn.sendMessage(
@@ -977,13 +1001,15 @@ async function connectAndRunBot() {
       }
       const name = group.participants[0].split("@")[0];
       const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;
+      const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
       const replaceT = {
         gname: gname,
         gusers: gusers,
         uname: uname,
+        dmsg: dmsg,
       };
       const text = fnc.botText.replace(
-        /gname|gusers|uname/gi,
+        /gname|gusers|uname|dmsg/gi,
         (matched) => replaceT[matched]
       );
       const options = {

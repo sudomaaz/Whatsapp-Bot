@@ -13,7 +13,7 @@ Hello *uname*
 〘 *I'm Chotu Bot* 〙
 ‣ Start: @mentionMe in chat
    「 *@Chotu 👽* 」
-‣ Disappearing Message: *Turn Off*
+‣ Disappearing Message: *dmsg*
 ‣ Version: *3.0*
 ‣ Created: *25th March 2021*
 ‣ Group: *gname*
@@ -54,6 +54,9 @@ Hello *uname*
 ┃
 ┠⊷️ Kick
 ┃ To remove a member
+┃
+┠⊷️ Toggle
+┃ Toggle disappearing message
 ┃
 ┠⊷️ Linkgc
 ┃ To get group invite link
