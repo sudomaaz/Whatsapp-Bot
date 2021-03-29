@@ -213,12 +213,6 @@ async function connectAndRunBot() {
             GroupSettingChange.messageSend,
             true
           );
-
-          const s2 = await conn.groupSettingChange(
-            mmid,
-            GroupSettingChange.settingsChange,
-            true
-          );
         } else if (mc === "opengc") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const isAdm = fnc.isAdmin(
@@ -255,12 +249,6 @@ async function connectAndRunBot() {
           const s1 = await conn.groupSettingChange(
             mmid,
             GroupSettingChange.messageSend,
-            false
-          );
-
-          const s2 = await conn.groupSettingChange(
-            mmid,
-            GroupSettingChange.settingsChange,
             false
           );
         } else if (mc === "promote") {
