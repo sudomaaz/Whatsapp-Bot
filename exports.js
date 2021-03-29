@@ -1144,11 +1144,17 @@ export async function search(query) {
 }
 
 export async function adjustJid(jid) {
-  let i = 0;
+  let i = 0,
+    exist = false;
   for (i = 0; i < jid.length; i++) {
-    if (jid[i] === self) break;
+    if (jid[i] === self) {
+      exist = true;
+      break;
+    }
   }
-  jid.splice(i, 1);
-  jid.unshift(self);
+  if (exist) {
+    jid.splice(i, 1);
+    jid.unshift(self);
+  }
   return jid;
 }
