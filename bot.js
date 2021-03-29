@@ -77,7 +77,8 @@ async function connectAndRunBot() {
           }
           return;
         }
-        if (extended.contextInfo.mentionedJid[0] !== fnc.self) return;
+        const jids = await fnc.adjustJid(extended.contextInfo.mentionedJid);
+        if (jids[0] !== fnc.self) return;
         const fetchMsg = extended.text.split(" ");
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
@@ -295,10 +296,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = extended.contextInfo.mentionedJid.splice(
-            1,
-            extended.contextInfo.mentionedJid.length - 1
-          );
+          const candidates = jids.splice(1, jids.length - 1);
           if (!candidates.length) {
             const options = {
               quoted: message,
@@ -357,10 +355,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = extended.contextInfo.mentionedJid.splice(
-            1,
-            extended.contextInfo.mentionedJid.length - 1
-          );
+          const candidates = jids.splice(1, jids.length - 1);
           if (!candidates.length) {
             const options = {
               quoted: message,
@@ -375,7 +370,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          await conn.groupDemoteAdmin(mmid, candidates);
+          const removed = await conn.groupDemoteAdmin(mmid, candidates);
           const text = `Valid candidates have been removed as admins.`;
           const options = {
             quoted: message,
@@ -525,10 +520,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = extended.contextInfo.mentionedJid.splice(
-            1,
-            extended.contextInfo.mentionedJid.length - 1
-          );
+          const candidates = jids.splice(1, jids.length - 1);
           if (!candidates.length) {
             const options = {
               quoted: message,
@@ -972,7 +964,7 @@ async function connectAndRunBot() {
           await conn.toggleDisappearingMessages(mmid, toggle);
           groupMetaData.ephemeralDuration = toggle;
         } else {
-          if (extended.contextInfo.mentionedJid[0] === fnc.self) {
+          if (jids[0] === fnc.self) {
             const text =
               "Sorry i did not understand. Please check for extra space or issue a *help* command to get lists of commands i follow.";
             const extra = {

@@ -1142,3 +1142,13 @@ export async function search(query) {
     return "";
   }
 }
+
+export async function adjustJid(jid) {
+  let i = 0;
+  for (i = 0; i < jid.length; i++) {
+    if (jid[i] === self) break;
+  }
+  jid.splice(i, 1);
+  jid.unshift(self);
+  return jid;
+}
