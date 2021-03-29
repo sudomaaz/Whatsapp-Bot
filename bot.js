@@ -919,7 +919,7 @@ async function connectAndRunBot() {
           bs.forEach((e, i) => {
             text += `*Link ${i + 1}*\n${e.url}\n\n`;
           });
-          finalMsg = await conn.generateLinkPreview(text);
+          finalMsg = text;
           const extra = {
             quoted: message,
           };
