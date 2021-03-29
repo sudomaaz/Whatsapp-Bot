@@ -9,6 +9,8 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "luxon": "^1.26.0",
+    "node-fetch": "^2.6.1",
+    "unsplash-js": "^7.0.8",
     "yt-search": "^2.7.5"
   },
   "devDependencies": {},

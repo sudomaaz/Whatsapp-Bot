@@ -1,8 +1,14 @@
 import axios from "axios";
 import pkg from "luxon";
 import yts from "yt-search";
-import https from "https";
+import pkg1 from "unsplash-js";
+const { createApi } = pkg1;
 const { DateTime } = pkg;
+import fetch from "node-fetch";
+global.fetch = fetch;
+const unsplash = createApi({
+  accessKey: "MixYOVCTbCuRIUv5AXcrN_sTNOBvmibIC0Og5ybjZXk",
+});
 
 export const botText = `────✪ Created by M-A-A-Z ✪────
 
@@ -95,6 +101,10 @@ Hello *uname*
 ┃⊷️ Search
 ┃ does a web search for given query
 ┃   _ex: search narendra modi_
+┃
+┃⊷️ Unsplash
+┃ does a image search on unsplash
+┃   _ex: search cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
@@ -1177,3 +1187,16 @@ export async function allMembers(jid) {
 export function detailLog(value) {
   console.log(JSON.stringify(value, null, 5));
 }
+
+export async function image(query) {
+  const result = await unsplash.search.getPhotos({
+    query: query,
+    page: 1,
+    perPage: 5,
+  });
+  if (result.response.results && result.response.results.length) {
+    return result.response.results;
+  } else return "";
+}
+
+image("gdfhgfdj");

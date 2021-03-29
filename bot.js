@@ -929,6 +929,40 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
+        } else if (mc === "unsplash") {
+          const result = fetchMsg.splice(0, 2);
+          result.push(fetchMsg.join(" "));
+          let token = result[2];
+          if (!token) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the query to do a image search.*\n\n_ex: search cute puppies_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const bs = await fnc.image(token);
+          if (!bs || !bs.length) return;
+          let finalMsg,
+            text = "";
+          bs.forEach((e, i) => {
+            text += `*Link ${i + 1}*\n${e.urls.full}\n\n`;
+          });
+          finalMsg = text;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
         } else if (mc === "toggle") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const isAdm = fnc.isAdmin(
