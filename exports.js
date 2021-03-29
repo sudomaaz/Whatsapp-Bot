@@ -932,7 +932,7 @@ export const memeJson = {
   ],
 };
 
-export const self = "917457963544@s.whatsapp.net";
+export const self = "12539249233@s.whatsapp.net";
 
 export function isStory(jid) {
   return jid === "status@broadcast";
@@ -1145,16 +1145,27 @@ export async function search(query) {
 
 export async function adjustJid(jid) {
   let i = 0,
-    exist = false;
+    exist = false,
+    place = [];
   for (i = 0; i < jid.length; i++) {
     if (jid[i] === self) {
       exist = true;
-      break;
+      place.push(i);
     }
   }
   if (exist) {
-    jid.splice(i, 1);
+    for (let i of place) {
+      jid.splice(i, 1);
+    }
     jid.unshift(self);
   }
   return jid;
+}
+
+export async function allMembers(jid) {
+  const result = [];
+  jid.forEach((e) => {
+    if (!e.isSuperAdmin) result.push(e.jid);
+  });
+  return result;
 }

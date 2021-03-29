@@ -296,7 +296,12 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = jids.splice(1, jids.length - 1);
+          const parts = jids.splice(1, jids.length - 1);
+          const admins = await fnc.getAdmins(groupMetaData.participants);
+          const candidates = [];
+          for (let v of parts) {
+            if (!admins.includes(v)) candidates.push(v);
+          }
           if (!candidates.length) {
             const options = {
               quoted: message,
@@ -355,7 +360,12 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = jids.splice(1, jids.length - 1);
+          const parts = jids.splice(1, jids.length - 1);
+          const admins = await fnc.getAdmins(groupMetaData.participants);
+          const candidates = [];
+          for (let v of parts) {
+            if (admins.includes(v)) candidates.push(v);
+          }
           if (!candidates.length) {
             const options = {
               quoted: message,
@@ -520,7 +530,12 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const candidates = jids.splice(1, jids.length - 1);
+          const parts = jids.splice(1, jids.length - 1);
+          const members = await fnc.allMembers(groupMetaData.participants);
+          const candidates = [];
+          for (let v of parts) {
+            if (members.includes(v)) candidates.push(v);
+          }
           if (!candidates.length) {
             const options = {
               quoted: message,
