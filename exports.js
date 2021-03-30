@@ -1205,5 +1205,3 @@ export async function image(query) {
     return result.response.results;
   } else return "";
 }
-
-image("gdfhgfdj");
