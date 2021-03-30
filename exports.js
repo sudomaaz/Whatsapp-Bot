@@ -966,6 +966,14 @@ export function isAdmin(gdata, ptc) {
   return admin;
 }
 
+export function getSuperAdmin(gdata) {
+  const jid;
+  for (let el of gdata) {
+    if (el.isSuperAdmin) return el.jid;
+  }
+  return jid;
+}
+
 export async function insult() {
   const options = {
     method: "GET",
@@ -1179,7 +1187,7 @@ export async function adjustJid(jid) {
 export async function allMembers(jid) {
   const result = [];
   jid.forEach((e) => {
-    if (!e.isSuperAdmin) result.push(e.jid);
+    result.push(e.jid);
   });
   return result;
 }

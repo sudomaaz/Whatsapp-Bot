@@ -519,10 +519,11 @@ async function connectAndRunBot() {
             return;
           }
           const parts = jids.splice(1, jids.length - 1);
+          const superAdm = fnc.getSuperAdmin(groupMetaData.participants);
           const members = await fnc.allMembers(groupMetaData.participants);
           const candidates = [];
           for (let v of parts) {
-            if (members.includes(v)) candidates.push(v);
+            if (members.includes(v) && v !== superAdm) candidates.push(v);
           }
           if (!candidates.length) {
             const options = {
