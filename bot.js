@@ -884,7 +884,7 @@ async function connectAndRunBot() {
           let finalMsg,
             text = "";
           yt.forEach((e, i) => {
-            text += `*Link ${i + 1}*\n${e.url}\n\n`;
+            text += `*Video ${i + 1}*\n_${e.description}_\n${e.url}\n\n`;
           });
           finalMsg = await conn.generateLinkPreview(text);
           const extra = {
@@ -918,7 +918,7 @@ async function connectAndRunBot() {
           let finalMsg,
             text = "";
           bs.forEach((e, i) => {
-            text += `*Link ${i + 1}*\n${e.url}\n\n`;
+            text += `*Web Search ${i + 1}*\n_${e.snippet}_\n${e.url}\n\n`;
           });
           finalMsg = text;
           const extra = {
@@ -952,7 +952,9 @@ async function connectAndRunBot() {
           let finalMsg,
             text = "";
           bs.forEach((e, i) => {
-            text += `*Link ${i + 1}*\n${e.urls.full}\n\n`;
+            text += `*Image Link ${i + 1}*\n_${e.alt_description}_\n${
+              e.urls.full
+            }\n\n`;
           });
           finalMsg = text;
           const extra = {
