@@ -48,6 +48,22 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
+        /*if (message["messageStubType"] === "REVOKE") {
+          console.log("hjhajdfhadjfhfh");
+          if (fnc.deleted.length === 100) fnc.store.deleted.shift();
+          fnc.deleted.push(...message);
+          return;
+        }
+        if (fnc.store[mmid]) {
+          if (fnc.store[mmid].chat.length === 100) fnc.store[mmid].chat.shift();
+        } else {
+          fnc.store[mmid] = {};
+          fnc.store[mmid].chat = [];
+        }
+        fnc.store[mmid].chat.push(message);
+        fnc.detailLog(fnc.deleted);
+        fnc.detailLog(fnc.store);
+        */
         let extended;
         if (message.message.ephemeralMessage)
           extended =
@@ -1026,7 +1042,7 @@ async function connectAndRunBot() {
       const groupMetaData = await conn.groupMetadata(group.jid);
       const gname = groupMetaData.subject;
       const gusers = groupMetaData.participants.length;
-      if (gusers < 6 && gname !== "Testing Bot312") {
+      if (gusers < 6 && mmid.split("-")[0] !== "918840081034") {
         const text = "Sorry! I only stay in a group with atleast 5 members 👋";
         // const text = "I am under construction. Will be updated once active 👋";
         const sentMsg = await conn.sendMessage(

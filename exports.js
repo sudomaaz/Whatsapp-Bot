@@ -107,6 +107,9 @@ Hello *uname*
 ┃   _ex: unsplash cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
+export const store = {};
+export const deleted = [];
+
 export const welcomeJson = {
   key: {
     remoteJid: "0@s.whatsapp.net",
