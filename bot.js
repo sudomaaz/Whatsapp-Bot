@@ -886,7 +886,7 @@ async function connectAndRunBot() {
           yt.forEach((e, i) => {
             text += `*Video ${i + 1}*\n_${e.description}_\n${e.url}\n\n`;
           });
-          finalMsg = await conn.generateLinkPreview(text);
+          finalMsg = text;
           const extra = {
             quoted: message,
           };
