@@ -177,7 +177,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "closegc") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const isAdm = fnc.isAdmin(
+          const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
             message.participant
           );
@@ -215,7 +215,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "opengc") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const isAdm = fnc.isAdmin(
+          const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
             message.participant
           );
@@ -253,7 +253,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "promote") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const isAdm = fnc.isAdmin(
+          const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
             message.participant
           );
@@ -317,7 +317,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "demote") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const isAdm = fnc.isAdmin(
+          const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
             message.participant
           );
@@ -382,7 +382,7 @@ async function connectAndRunBot() {
         } else if (mc === "setname") {
           const groupMetaData = await conn.groupMetadata(mmid);
           if (groupMetaData.restrict === true) {
-            const isAdm = fnc.isAdmin(
+            const isAdm = await fnc.isAdmin(
               groupMetaData.participants,
               message.participant
             );
@@ -435,7 +435,7 @@ async function connectAndRunBot() {
         } else if (mc === "setdesc") {
           const groupMetaData = await conn.groupMetadata(mmid);
           if (groupMetaData.restrict === true) {
-            const isAdm = fnc.isAdmin(
+            const isAdm = await fnc.isAdmin(
               groupMetaData.participants,
               message.participant
             );
@@ -487,7 +487,7 @@ async function connectAndRunBot() {
           await conn.groupUpdateDescription(mmid, gdesc);
         } else if (mc === "kick") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const isAdm = fnc.isAdmin(
+          const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
             message.participant
           );
@@ -519,7 +519,7 @@ async function connectAndRunBot() {
             return;
           }
           const parts = jids.splice(1, jids.length - 1);
-          const superAdm = fnc.getSuperAdmin(groupMetaData.participants);
+          const superAdm = await fnc.getSuperAdmin(groupMetaData.participants);
           const members = await fnc.allMembers(groupMetaData.participants);
           const candidates = [];
           for (let v of parts) {
@@ -966,7 +966,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "toggle") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const isAdm = fnc.isAdmin(
+          const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
             message.participant
           );

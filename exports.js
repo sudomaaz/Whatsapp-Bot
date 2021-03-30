@@ -957,7 +957,7 @@ export async function getAdmins(gdata) {
   return admins;
 }
 
-export function isAdmin(gdata, ptc) {
+export async function isAdmin(gdata, ptc) {
   const admin = [false, false];
   for (let el of gdata) {
     if (el.jid === self) admin[0] = el.isAdmin;
@@ -966,7 +966,7 @@ export function isAdmin(gdata, ptc) {
   return admin;
 }
 
-export function getSuperAdmin(gdata) {
+export async function getSuperAdmin(gdata) {
   for (let el of gdata) {
     if (el.isSuperAdmin) return el.jid;
   }
