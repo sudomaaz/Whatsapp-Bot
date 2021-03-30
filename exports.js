@@ -967,11 +967,10 @@ export function isAdmin(gdata, ptc) {
 }
 
 export function getSuperAdmin(gdata) {
-  const jid;
   for (let el of gdata) {
     if (el.isSuperAdmin) return el.jid;
   }
-  return jid;
+  return null;
 }
 
 export async function insult() {
