@@ -96,7 +96,15 @@ async function connectAndRunBot() {
         const jids = await fnc.adjustJid(extended.contextInfo.mentionedJid);
         if (jids[0] !== fnc.self) return;
         const fetchMsg = extended.text.split(" ");
-        if (fetchMsg[0] !== "@" + fnc.self.split("@")[0]) return;
+        if (fetchMsg[0] !== "@" + fnc.self.split("@")[0]) {
+          const text =
+            "Sorry i did not understand. Please check for extra space or issue a *help* command to get lists of commands i follow.";
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          return;
+        }
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
