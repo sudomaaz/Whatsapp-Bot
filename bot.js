@@ -938,7 +938,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const bs = await fnc.search(encodeURIComponent(token));
+          const bs = await fnc.search(token);
           if (!bs || !bs.length) return;
           let finalMsg,
             text = "";
