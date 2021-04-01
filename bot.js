@@ -48,47 +48,36 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        if (fnc.store.length === 10) {
+        if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
+          fnc.store[mmid] = {};
+          fnc.store[mmid].chat = [];
+        }
+        if (fnc.store[mmid].chat.length === 10) {
+          const groupMetaData = await conn.groupMetadata(mmid);
           const from = message.participant;
-          if (fnc.store.every((f) => f.participant === from)) {
+          if (fnc.store[mmid].chat.every((f) => f.participant === from)) {
             const duration =
-              fnc.store[0].messageTimestamp -
-              fnc.store[fnc.store.length - 1].messageTimestamp;
+              fnc.store[mmid].chat[0].messageTimestamp -
+              fnc.store[mmid].chat[9].messageTimestamp;
             if (duration <= 15) {
-              const groupMetaData = await conn.groupMetadata(mmid);
               const isAdm = await fnc.isAdmin(
                 groupMetaData.participants,
                 message.participant
               );
-              if (isAdm[0]) {
+              if (isAdm[0] && !groupMetaData.announce) {
                 await conn.groupSettingChange(
                   mmid,
                   GroupSettingChange.messageSend,
                   true
                 );
-                const namew = from.split("@")[0];
-                const resw = await fnc.warningUpdate(namew);
-                if (!resw.warn) return;
-                const extra = {
-                  caption: `Hello @${namew} you have been warned for *flooding group*. Your total warn count is *${resw.warn}*.Three warnings result in getting blocked.`,
-                  mimetype: Mimetype.png,
-                  contextInfo: {
-                    mentionedJid: [from],
-                  },
-                };
-                await conn.sendMessage(
-                  mmid,
-                  fs.readFileSync("./assests/yc.png"),
-                  MessageType.image,
-                  extra
-                );
-                fnc.store.length = 1;
+                fnc.store[mmid].chat = [];
+                groupMetaData.announce = true;
               }
             }
           }
-          fnc.store.shift();
+          if (fnc.store[mmid].chat.length) fnc.store[mmid].chat.shift();
         }
-        fnc.store.push(message);
+        fnc.store[mmid].chat.push(message);
         let extended;
         if (message.message.ephemeralMessage)
           extended =

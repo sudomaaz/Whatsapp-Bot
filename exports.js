@@ -110,7 +110,7 @@ Hello *uname*
 ┃   _ex: unsplash cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
-export const store = [];
+export const store = {};
 
 export const welcomeJson = {
   key: {
