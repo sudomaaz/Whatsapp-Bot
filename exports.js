@@ -61,6 +61,9 @@ Hello *uname*
 ┠⊷️ Kick
 ┃ To remove a member
 ┃
+┠⊷️ Warn
+┃ To issue a warning to user
+┃
 ┠⊷️ Toggle
 ┃ Toggle disappearing message
 ┃
@@ -107,8 +110,7 @@ Hello *uname*
 ┃   _ex: unsplash cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
-export const store = {};
-export const deleted = [];
+export const store = [];
 
 export const welcomeJson = {
   key: {
@@ -1207,4 +1209,34 @@ export async function image(query) {
   if (result.response.results && result.response.results.length) {
     return result.response.results;
   } else return "";
+}
+
+export async function warningUpdate(name) {
+  const url = `https://my-bot-713ce-default-rtdb.firebaseio.com/warn/${name}.json`;
+  let res = await axios.get(url);
+  let data = res.data;
+  if (data === null || data === undefined) {
+    const firebase = {
+        warn: 1,
+        time: Date.now(),
+      },
+      res = await axios.put(url, firebase);
+    return res.data;
+  } else {
+    const firebase = {
+        warn: data.warn + 1,
+        time: Date.now(),
+      },
+      res = await axios.put(
+        `https://my-bot-713ce-default-rtdb.firebaseio.com/warn/${name}.json`,
+        firebase
+      );
+    return res.data;
+  }
+}
+
+export async function warningDelete(name) {
+  const url = `https://my-bot-713ce-default-rtdb.firebaseio.com/warn/${name}.json`;
+  let res = await axios.delete(url);
+  return res.data;
 }

@@ -37,7 +37,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        // fnc.detailLog(message);
+        //   fnc.detailLog(message);
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -48,22 +48,47 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        /*if (message["messageStubType"] === "REVOKE") {
-          console.log("hjhajdfhadjfhfh");
-          if (fnc.deleted.length === 100) fnc.store.deleted.shift();
-          fnc.deleted.push(...message);
-          return;
+        if (fnc.store.length === 10) {
+          const from = message.participant;
+          if (fnc.store.every((f) => f.participant === from)) {
+            const duration =
+              fnc.store[0].messageTimestamp -
+              fnc.store[fnc.store.length - 1].messageTimestamp;
+            if (duration <= 15) {
+              const groupMetaData = await conn.groupMetadata(mmid);
+              const isAdm = await fnc.isAdmin(
+                groupMetaData.participants,
+                message.participant
+              );
+              if (isAdm[0]) {
+                await conn.groupSettingChange(
+                  mmid,
+                  GroupSettingChange.messageSend,
+                  true
+                );
+                const namew = from.split("@")[0];
+                const resw = await fnc.warningUpdate(namew);
+                if (!resw.warn) return;
+                const extra = {
+                  caption: `Hello @${namew} you have been warned for *flooding group*. Your total warn count is *${resw.warn}*.Three warnings result in getting blocked.`,
+                  mimetype: Mimetype.png,
+                  contextInfo: {
+                    mentionedJid: [from],
+                  },
+                };
+                await conn.sendMessage(
+                  mmid,
+                  fs.readFileSync("./assests/yc.png"),
+                  MessageType.image,
+                  extra
+                );
+                if (resw.warn >= 3) await conn.groupRemove(mmid, [from]);
+              }
+            }
+          }
+          fnc.store.shift();
         }
-        if (fnc.store[mmid]) {
-          if (fnc.store[mmid].chat.length === 100) fnc.store[mmid].chat.shift();
-        } else {
-          fnc.store[mmid] = {};
-          fnc.store[mmid].chat = [];
-        }
-        fnc.store[mmid].chat.push(message);
-        fnc.detailLog(fnc.deleted);
-        fnc.detailLog(fnc.store);
-        */
+        fnc.store.push(message);
         let extended;
         if (message.message.ephemeralMessage)
           extended =
@@ -191,7 +216,7 @@ async function connectAndRunBot() {
           const options = {
             quoted: message,
             contextInfo: {
-              mentionedJid: mentioned,
+              mentionedJid: [...mentioned],
             },
           };
           const sentMsg = await conn.sendMessage(
@@ -607,7 +632,7 @@ async function connectAndRunBot() {
           const options = {
             quoted: message,
             contextInfo: {
-              mentionedJid: mentioned,
+              mentionedJid: [...mentioned],
             },
           };
           const sentMsg = await conn.sendMessage(
@@ -1032,6 +1057,93 @@ async function connectAndRunBot() {
             await conn.toggleDisappearingMessages(mmid, 0);
             delete groupMetaData.ephemeralDuration;
           }
+        } else if (mc === "warn") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = await fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          if (!isAdm[0]) {
+            const text =
+              "*❌ I dont have admin privileges to perform this action. Add me as an admin and retry.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const parts = jids.splice(1, jids.length - 1);
+          const superAdm = await fnc.getSuperAdmin(groupMetaData.participants);
+          const members = await fnc.allMembers(groupMetaData.participants);
+          const candidates = [];
+          for (let v of parts) {
+            if (members.includes(v) && v !== superAdm) candidates.push(v);
+          }
+          if (!candidates.length) {
+            const options = {
+              quoted: message,
+            };
+            const text =
+              "*Please mention member name to issue a warning.*\n\n_ex: warn @member1 reason_";
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const result = fetchMsg.splice(0, 3);
+          result.push(fetchMsg.join(" "));
+          let token = result[3];
+          if (!token) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the warning reason*`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const name = candidates[0].split("@")[0];
+          const res = await fnc.warningUpdate(name);
+          if (!res.warn) return;
+          const extra = {
+            caption: `Hello @${name} you have been warned for *${token}*. Your total warn count is *${res.warn}*.Three warnings result in getting blocked.`,
+            mimetype: Mimetype.png,
+            contextInfo: {
+              mentionedJid: [...candidates],
+            },
+          };
+          await conn.sendMessage(
+            mmid,
+            fs.readFileSync("./assests/yc.png"),
+            MessageType.image,
+            extra
+          );
+          if (res.warn >= 3) await conn.groupRemove(mmid, [candidates[0]]);
         } else {
           if (jids[0] === fnc.self) {
             const text =
@@ -1047,47 +1159,52 @@ async function connectAndRunBot() {
 
     //called when some group join/remove action occurs
     conn.on("group-participants-update", async (group) => {
-      if (group.action !== "add") return;
-      const groupMetaData = await conn.groupMetadata(group.jid);
-      const gname = groupMetaData.subject;
-      const gusers = groupMetaData.participants.length;
-      if (gusers < 6 && group.jid.split("-")[0] !== "918840081034") {
-        const text = "Sorry! I only stay in a group with atleast 5 members 👋";
-        // const text = "I am under construction. Will be updated once active 👋";
+      if (group.action === "add") {
+        const groupMetaData = await conn.groupMetadata(group.jid);
+        const gname = groupMetaData.subject;
+        const gusers = groupMetaData.participants.length;
+        if (gusers < 6 && group.jid.split("-")[0] !== "918840081034") {
+          const text =
+            "Sorry! I only stay in a group with atleast 5 members 👋";
+          // const text = "I am under construction. Will be updated once active 👋";
+          const sentMsg = await conn.sendMessage(
+            group.jid,
+            text,
+            MessageType.text
+          );
+          await conn.groupLeave(group.jid);
+          return;
+        }
+        const name = group.participants[0].split("@")[0];
+        const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;
+        const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
+        const replaceT = {
+          gname: gname,
+          gusers: gusers,
+          uname: uname,
+          dmsg: dmsg,
+        };
+        const text = fnc.botText.replace(
+          /gname|gusers|uname|dmsg/gi,
+          (matched) => replaceT[matched]
+        );
+        const options = {
+          quoted: fnc.welcomeJson,
+          contextInfo: {
+            participant: "0@s.whatsapp.net",
+            mentionedJid: [group.participants[0]],
+          },
+        };
         const sentMsg = await conn.sendMessage(
           group.jid,
           text,
-          MessageType.text
+          MessageType.extendedText,
+          options
         );
-        await conn.groupLeave(group.jid);
-        return;
-      }
-      const name = group.participants[0].split("@")[0];
-      const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;
-      const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
-      const replaceT = {
-        gname: gname,
-        gusers: gusers,
-        uname: uname,
-        dmsg: dmsg,
-      };
-      const text = fnc.botText.replace(
-        /gname|gusers|uname|dmsg/gi,
-        (matched) => replaceT[matched]
-      );
-      const options = {
-        quoted: fnc.welcomeJson,
-        contextInfo: {
-          participant: "0@s.whatsapp.net",
-          mentionedJid: [group.participants[0]],
-        },
-      };
-      const sentMsg = await conn.sendMessage(
-        group.jid,
-        text,
-        MessageType.extendedText,
-        options
-      );
+      } else if (group.action === "remove") {
+        const name = group.participants[0].split("@")[0];
+        const res = await fnc.warningDelete(name);
+      } else return;
     });
   } catch (err) {
     console.log(err);
