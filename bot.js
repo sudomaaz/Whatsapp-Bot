@@ -82,7 +82,7 @@ async function connectAndRunBot() {
                   MessageType.image,
                   extra
                 );
-                if (resw.warn >= 3) await conn.groupRemove(mmid, [from]);
+                //  if (resw.warn >= 3) await conn.groupRemove(mmid, [from]);
                 fnc.store.length = 1;
               }
             }
