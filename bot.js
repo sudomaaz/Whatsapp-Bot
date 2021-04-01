@@ -1198,6 +1198,11 @@ async function connectAndRunBot() {
       } else return;
     });
     conn.on("group-update", async (update) => {
+      if (update.announce == "false") {
+        delete fnc.store[update.jid].defaulter;
+        delete fnc.store[update.jid].admin;
+        return;
+      }
       if (
         update.announce == "true" &&
         fnc.store[update.jid].defaulter &&
