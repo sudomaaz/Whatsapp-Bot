@@ -1,4 +1,5 @@
 import pkg from "@adiwajshing/baileys";
+import { group } from "console";
 import e from "express";
 import fs from "fs";
 import * as fnc from "./exports.js";
@@ -52,7 +53,7 @@ async function connectAndRunBot() {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
         }
-        if (fnc.store[mmid].chat.length === 10) {
+        if (fnc.store[mmid].chat.length >= 10) {
           const groupMetaData = await conn.groupMetadata(mmid);
           const from = message.participant;
           if (fnc.store[mmid].chat.every((f) => f.participant === from)) {
@@ -64,14 +65,15 @@ async function connectAndRunBot() {
                 groupMetaData.participants,
                 message.participant
               );
-              if (isAdm[0] && !groupMetaData.announce) {
+              if (isAdm[0]) {
                 await conn.groupSettingChange(
                   mmid,
                   GroupSettingChange.messageSend,
                   true
                 );
+                fnc.store[mmid].defaulter = from;
+                fnc.store[mmid].admin = isAdm[0];
                 fnc.store[mmid].chat = [];
-                groupMetaData.announce = true;
               }
             }
           }
@@ -1194,6 +1196,34 @@ async function connectAndRunBot() {
         const name = group.participants[0].split("@")[0];
         const res = await fnc.warningDelete(name);
       } else return;
+    });
+    conn.on("group-update", async (update) => {
+      if (
+        update.announce == "true" &&
+        fnc.store[update.jid].defaulter &&
+        fnc.store[update.jid].admin
+      ) {
+        const name = fnc.store[update.jid].defaulter.split("@")[0];
+        const res = await fnc.warningUpdate(name);
+        if (!res.warn) return;
+        const extra = {
+          caption: `Hello @${name} you have been warned for *flooding*. Your total warn count is *${res.warn}*.Three warnings result in getting blocked.`,
+          mimetype: Mimetype.png,
+          contextInfo: {
+            mentionedJid: [fnc.store[update.jid].defaulter],
+          },
+        };
+        await conn.sendMessage(
+          update.jid,
+          fs.readFileSync("./assests/yc.png"),
+          MessageType.image,
+          extra
+        );
+        if (res.warn >= 3)
+          await conn.groupRemove(update.jid, [fnc.store[update.jid].defaulter]);
+        delete fnc.store[update.jid].defaulter;
+        delete fnc.store[update.jid].admin;
+      }
     });
   } catch (err) {
     console.log(err);
