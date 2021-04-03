@@ -124,7 +124,7 @@ async function connectAndRunBot() {
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const gname = groupMetaData.subject;
+          const gname = groupMetaData.subject.trim();
           const gusers = groupMetaData.participants.length;
           const uname = "@" + message.participant.split("@")[0];
           const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
@@ -1152,7 +1152,7 @@ async function connectAndRunBot() {
     conn.on("group-participants-update", async (group) => {
       if (group.action === "add") {
         const groupMetaData = await conn.groupMetadata(group.jid);
-        const gname = groupMetaData.subject;
+        const gname = groupMetaData.subject.trim();
         const gusers = groupMetaData.participants.length;
         if (gusers < 6 && group.jid.split("-")[0] !== "918840081034") {
           const text =
