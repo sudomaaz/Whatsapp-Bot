@@ -107,9 +107,9 @@ Hello *uname*
 ┃ does a web search for given query
 ┃   _ex: search narendra modi_
 ┃
-┃⊷️ Unsplash
+┃⊷️ Images
 ┃ does a image search on unsplash
-┃   _ex: unsplash cute puppies_
+┃   _ex: images cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const store = {};
@@ -1205,14 +1205,29 @@ export function detailLog(value) {
 }
 
 export async function image(query) {
-  const result = await unsplash.search.getPhotos({
-    query: query,
-    page: 1,
-    perPage: 5,
-  });
-  if (result.response.results && result.response.results.length) {
-    return result.response.results;
-  } else return "";
+  const SUBSCRIPTION_KEY = "73351a628fe744db8d64c41506130d12";
+  const options = {
+    method: "GET",
+    url: "https://api.bing.microsoft.com/v7.0/images/search",
+    params: {
+      count: 5,
+      offset: 0,
+      q: query,
+      mkt: "en-IN",
+    },
+    headers: {
+      "Ocp-Apim-Subscription-Key": SUBSCRIPTION_KEY,
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0",
+    },
+  };
+
+  try {
+    const res = await axios.request(options);
+    return res.data.value;
+  } catch (err) {
+    return "";
+  }
 }
 
 export async function warningUpdate(name) {

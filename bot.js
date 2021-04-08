@@ -982,7 +982,7 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
-        } else if (mc === "unsplash") {
+        } else if (mc === "images") {
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];
@@ -1004,9 +1004,7 @@ async function connectAndRunBot() {
           let finalMsg,
             text = "";
           bs.forEach((e, i) => {
-            text += `*Image Link ${i + 1}*\n_${e.alt_description}_\n${
-              e.urls.full
-            }\n\n`;
+            text += `*Image Link ${i + 1}*\n_${e.name}_\n${e.contentUrl}\n\n`;
           });
           finalMsg = text;
           const extra = {
