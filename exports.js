@@ -108,7 +108,7 @@ Hello *uname*
 ┃   _ex: search narendra modi_
 ┃
 ┃⊷️ Images
-┃ does a image search on unsplash
+┃ does a image search
 ┃   _ex: images cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
