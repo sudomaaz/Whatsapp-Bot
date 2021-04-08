@@ -634,7 +634,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "joke") {
           let token = fetchMsg[2];
-          const arr = ["random", "programming", "insult"];
+          const arr = ["random", "programming"];
           if (
             !token ||
             !token.trim().length ||
@@ -644,7 +644,7 @@ async function connectAndRunBot() {
               quoted: message,
             };
             const text =
-              "*Please specify the type of joke.*\n\n_ex: joke random_\n_joke programming_\n_joke insult_";
+              "*Please specify the type of joke.*\n\n_ex: joke random_\n_joke programming_";
             const sentMsg = await conn.sendMessage(
               mmid,
               text,
@@ -659,9 +659,20 @@ async function connectAndRunBot() {
             result = await fnc.jokes("random");
           } else if (token === "programming") {
             result = await fnc.jokes("programming");
-          } else if (token === "insult") {
-            result = await fnc.insult();
           } else return;
+          if (!result) return;
+          let finalMsg = `${result}\n😛😛`;
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            finalMsg,
+            MessageType.extendedText,
+            extra
+          );
+        } else if (mc === "roast") {
+          const result = await fnc.insult();
           if (!result) return;
           let finalMsg = `${result}\n😛😛`;
           const extra = {

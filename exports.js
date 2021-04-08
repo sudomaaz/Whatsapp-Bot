@@ -84,10 +84,12 @@ Hello *uname*
 ┃ cracks a joke as specified
 ┃   _ex: joke random_
 ┃   _ex: joke programming_
-┃   _ex: joke insult_
 ┃
 ┠⊷️ Advice
 ┃ gives you a random life advice
+┃
+┠⊷️ Roast
+┃ a short evil roast
 ┃
 ┠⊷️ Memes
 ┃ lists a meme template or make a meme
