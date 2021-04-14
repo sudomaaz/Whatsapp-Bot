@@ -2,6 +2,8 @@ import pkg from "@adiwajshing/baileys";
 import { group } from "console";
 import e from "express";
 import fs from "fs";
+import { ppid } from "process";
+import { pathToFileURL } from "url";
 import * as fnc from "./exports.js";
 
 const {
@@ -38,7 +40,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        //   fnc.detailLog(message);
+        //fnc.detailLog(message);
         const fromMe = message.key.fromMe;
         const mmid = message.key.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -1176,6 +1178,26 @@ async function connectAndRunBot() {
           return;
         }
         const name = group.participants[0].split("@")[0];
+        if (group.jid === "16192681595-1618401324@g.us") {
+          if (!fnc.ofm.includes(group.participants[0])) {
+            const text =
+              "@" + name + " Sorry! You are not an authorized member 👋";
+            // const text = "I am under construction. Will be updated once active 👋";
+            const options = {
+              contextInfo: {
+                mentionedJid: [group.participants[0]],
+              },
+            };
+            const sentMsg = await conn.sendMessage(
+              group.jid,
+              text,
+              MessageType.text,
+              options
+            );
+            await conn.groupRemove(group.jid, [group.participants[0]]);
+            return;
+          }
+        }
         const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;
         const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
         const replaceT = {
