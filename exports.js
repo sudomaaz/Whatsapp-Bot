@@ -117,6 +117,7 @@ export const store = {};
 export const ofm = ["491784089517@s.whatsapp.net"];
 
 export const paid = [
+  "8840081034@s.whatsapp.net",
   "9564538831@s.whatsapp.net",
   "8399024079@s.whatsapp.net",
   "7001501922@s.whatsapp.net",
