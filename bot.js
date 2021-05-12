@@ -51,10 +51,11 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        /*  if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
+        if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
         }
+        /*
         if (fnc.store[mmid].chat.length >= 10) {
           const groupMetaData = await conn.groupMetadata(mmid);
           const from = message.participant;
@@ -81,8 +82,8 @@ async function connectAndRunBot() {
           }
           if (fnc.store[mmid].chat.length) fnc.store[mmid].chat.shift();
         }
-        fnc.store[mmid].chat.push(message);
         */
+        fnc.store[mmid].chat.push(message);
         let extended;
         if (message.message.ephemeralMessage)
           extended =

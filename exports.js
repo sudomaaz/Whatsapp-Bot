@@ -10,6 +10,8 @@ const unsplash = createApi({
   accessKey: "MixYOVCTbCuRIUv5AXcrN_sTNOBvmibIC0Og5ybjZXk",
 });
 
+export const store = [];
+
 export const botText = `────✪ Created by M-A-A-Z ✪────
 
 ────────────────
@@ -1247,6 +1249,7 @@ export async function warningUpdate(name) {
         `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`,
         firebase
       );
+    console.log(res.data);
     return res.data;
   }
 }
