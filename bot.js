@@ -51,11 +51,11 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
+        /*if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
         }
-        /*
+        
         if (fnc.store[mmid].chat.length >= 10) {
           const groupMetaData = await conn.groupMetadata(mmid);
           const from = message.participant;
@@ -82,8 +82,8 @@ async function connectAndRunBot() {
           }
           if (fnc.store[mmid].chat.length) fnc.store[mmid].chat.shift();
         }
-        */
         fnc.store[mmid].chat.push(message);
+        */
         let extended;
         if (message.message.ephemeralMessage)
           extended =
@@ -1181,26 +1181,7 @@ async function connectAndRunBot() {
           return;
         }
         const name = group.participants[0].split("@")[0];
-        // if (group.jid === "16192681595-1618401324@g.us") {
-        //   if (!fnc.ofm.includes(group.participants[0])) {
-        //     const text =
-        //       "@" + name + " Sorry! You are not an authorized member 👋";
-        //     // const text = "I am under construction. Will be updated once active 👋";
-        //     const options = {
-        //       contextInfo: {
-        //         mentionedJid: [group.participants[0]],
-        //       },
-        //     };
-        //     const sentMsg = await conn.sendMessage(
-        //       group.jid,
-        //       text,
-        //       MessageType.text,
-        //       options
-        //     );
-        //     await conn.groupRemove(group.jid, [group.participants[0]]);
-        //     return;
-        //   }
-        // }
+
         const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;
         const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
         const replaceT = {
@@ -1231,10 +1212,10 @@ async function connectAndRunBot() {
         const res = await fnc.warningDelete(name);
       } else return;
     });
-    conn.on("group-update", async (update) => {
+    /*conn.on("group-update", async (update) => {
       if (update.announce == "false") {
-        delete fnc.store[update.jid].defaulter;
-        delete fnc.store[update.jid].admin;
+      //  delete fnc.store[update.jid].defaulter;
+      //  delete fnc.store[update.jid].admin;
         return;
       }
       if (
@@ -1263,7 +1244,7 @@ async function connectAndRunBot() {
         delete fnc.store[update.jid].defaulter;
         delete fnc.store[update.jid].admin;
       }
-    });
+    });*/
   } catch (err) {
     console.log(err);
   }
