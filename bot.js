@@ -51,7 +51,7 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
+        /*  if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
         }
@@ -82,6 +82,7 @@ async function connectAndRunBot() {
           if (fnc.store[mmid].chat.length) fnc.store[mmid].chat.shift();
         }
         fnc.store[mmid].chat.push(message);
+        */
         let extended;
         if (message.message.ephemeralMessage)
           extended =
@@ -95,9 +96,10 @@ async function connectAndRunBot() {
               "create a meme"
             )
           ) {
-            const memeid = extended.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid[0].split(
-              "@"
-            )[0];
+            const memeid =
+              extended.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid[0].split(
+                "@"
+              )[0];
             const result = await fnc.memes(memeid, extended.text);
             if (!result) return;
             //let finalMsg = `*Your meme is ready download* d\n\n${result}`;

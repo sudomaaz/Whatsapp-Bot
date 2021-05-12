@@ -112,48 +112,6 @@ Hello *uname*
 ┃   _ex: images cute puppies_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
-export const store = {};
-
-export const paid = [
-  "919870606290@s.whatsapp.net",
-  "917001501922@s.whatsapp.net",
-  "919602942684@s.whatsapp.net",
-  "918097452055@s.whatsapp.net",
-  "918826527858@s.whatsapp.net",
-  "917238097111@s.whatsapp.net",
-  "919267904315@s.whatsapp.net",
-  "918275230140@s.whatsapp.net",
-  "918929829405@s.whatsapp.net",
-  "919965482482@s.whatsapp.net",
-  "917041106066@s.whatsapp.net",
-  "918240471768@s.whatsapp.net",
-  "917896255205@s.whatsapp.net",
-  "917838559783@s.whatsapp.net",
-  "918849485326@s.whatsapp.net",
-  "918420070594@s.whatsapp.net",
-  "918017500172@s.whatsapp.net",
-  "919451400223@s.whatsapp.net",
-  "917889819084@s.whatsapp.net",
-  "918523878843@s.whatsapp.net",
-  "918903521098@s.whatsapp.net",
-  "919051444538@s.whatsapp.net",
-  "918399024079@s.whatsapp.net",
-  "918910550956@s.whatsapp.net",
-  "918135052755@s.whatsapp.net",
-  "918910284449@s.whatsapp.net",
-  "918010510319@s.whatsapp.net",
-  "917987693544@s.whatsapp.net",
-  "917903737775@s.whatsapp.net",
-  "916289792452@s.whatsapp.net",
-  "917003315700@s.whatsapp.net",
-  "919564538831@s.whatsapp.net",
-  "919674881965@s.whatsapp.net",
-  "918859956238@s.whatsapp.net",
-  "918500765185@s.whatsapp.net",
-  "918837338541@s.whatsapp.net",
-  "491784089517@s.whatsapp.net",
-];
-
 export const welcomeJson = {
   key: {
     remoteJid: "0@s.whatsapp.net",
@@ -162,8 +120,7 @@ export const welcomeJson = {
   },
   message: {
     imageMessage: {
-      url:
-        "https://mmg.whatsapp.net/d/f/AnVJ40MKhlGyDSh-849zvMb8DNhdxisWXFukiIb6y39e.enc",
+      url: "https://mmg.whatsapp.net/d/f/AnVJ40MKhlGyDSh-849zvMb8DNhdxisWXFukiIb6y39e.enc",
       mimetype: "image/jpeg",
       caption: "Welcome to our group ❤️",
       fileSha256: "viBHanPyhAZ5vF1whh3JxihjhH21pzoszdy9rDZdB9M=",
