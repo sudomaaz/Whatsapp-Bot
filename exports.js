@@ -1228,7 +1228,7 @@ export async function image(query) {
 }
 
 export async function warningUpdate(name) {
-  const url = `https://my-bot-713ce-default-rtdb.firebaseio.com/warn/${name}.json`;
+  const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
   let res = await axios.get(url);
   let data = res.data;
   if (data === null || data === undefined) {
@@ -1244,7 +1244,7 @@ export async function warningUpdate(name) {
         time: Date.now(),
       },
       res = await axios.put(
-        `https://my-bot-713ce-default-rtdb.firebaseio.com/warn/${name}.json`,
+        `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`,
         firebase
       );
     return res.data;
@@ -1252,7 +1252,7 @@ export async function warningUpdate(name) {
 }
 
 export async function warningDelete(name) {
-  const url = `https://my-bot-713ce-default-rtdb.firebaseio.com/warn/${name}.json`;
+  const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
   let res = await axios.delete(url);
   return res.data;
 }
