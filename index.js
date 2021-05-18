@@ -4,12 +4,12 @@ import bot from "./bot.js";
 const app = express();
 
 app.get("/", async (req, res) => {
-  res.send("<h1>Welcome</h1>");
+  res.status(200).send("<h1>Welcome</h1>");
 });
 
 app.get("/start", async (req, res) => {
   await bot().catch((err) => console.log(err));
-  res.send("<h1>Welcome</h1>");
+  res.status(200).send("<h1>Welcome</h1>");
 });
 
 app.listen(process.env.PORT || 3000, async () => {
