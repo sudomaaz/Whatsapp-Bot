@@ -966,7 +966,7 @@ async function connectAndRunBot() {
             "FN:Maaz: Bot Owner\n" + // full name
             "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
             "END:VCARD";
-          sentMsg = await conn.sendMessage(
+          await conn.sendMessage(
             mmid,
             { displayname: "Maaz: Bot Owner", vcard: vcard },
             MessageType.contact
@@ -1018,7 +1018,7 @@ async function connectAndRunBot() {
             "FN:Maaz: Bot Owner\n" + // full name
             "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
             "END:VCARD";
-          sentMsg = await conn.sendMessage(
+          await conn.sendMessage(
             mmid,
             { displayname: "Maaz: Bot Owner", vcard: vcard },
             MessageType.contact
