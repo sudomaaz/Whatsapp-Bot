@@ -954,12 +954,12 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "search") {
-          const text =
+          const textp =
             "This functionality is paused untill further information.Kindly contact my owner for further information.";
           const extra = {
             quoted: message,
           };
-          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          await conn.sendMessage(mmid, textp, MessageType.extendedText, extra);
           const vcard =
             "BEGIN:VCARD\n" + // metadata of the contact card
             "VERSION:3.0\n" +
@@ -1006,12 +1006,12 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "images") {
-          const text =
+          const textp =
             "This functionality is paused untill further information.Kindly contact my owner for further information.";
           const extra = {
             quoted: message,
           };
-          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          await conn.sendMessage(mmid, textp, MessageType.extendedText, extra);
           const vcard =
             "BEGIN:VCARD\n" + // metadata of the contact card
             "VERSION:3.0\n" +
