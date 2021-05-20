@@ -157,7 +157,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "donation") {
           const text =
-            "Thank you for showing interest 😊 If you like me and want to see me grow kindly contact my owner Maaz for donation queries.\n\nIf you use UPI you can also send payments to *memset@icici* . Thank you.";
+            "Thank you for showing interest 😊 If you like me and want to see me grow kindly contact my owner Maaz for donation queries.\n\nIf you use UPI you can also send payments to *memset@ibl* . Thank you.";
           const options = {
             quoted: message,
             contextInfo: {
@@ -954,6 +954,24 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "search") {
+          const text =
+            "This functionality is paused untill further information.Kindly contact my owner for further information.";
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          const vcard =
+            "BEGIN:VCARD\n" + // metadata of the contact card
+            "VERSION:3.0\n" +
+            "FN:Maaz: Bot Owner\n" + // full name
+            "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
+            "END:VCARD";
+          sentMsg = await conn.sendMessage(
+            mmid,
+            { displayname: "Maaz: Bot Owner", vcard: vcard },
+            MessageType.contact
+          );
+          return;
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];
@@ -988,6 +1006,24 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "images") {
+          const text =
+            "This functionality is paused untill further information.Kindly contact my owner for further information.";
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
+          const vcard =
+            "BEGIN:VCARD\n" + // metadata of the contact card
+            "VERSION:3.0\n" +
+            "FN:Maaz: Bot Owner\n" + // full name
+            "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
+            "END:VCARD";
+          sentMsg = await conn.sendMessage(
+            mmid,
+            { displayname: "Maaz: Bot Owner", vcard: vcard },
+            MessageType.contact
+          );
+          return;
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];
