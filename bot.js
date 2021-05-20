@@ -956,10 +956,10 @@ async function connectAndRunBot() {
         } else if (mc === "search") {
           const textp =
             "This functionality is paused untill further information.Kindly contact my owner for further information.";
-          const extra = {
+          const extrap = {
             quoted: message,
           };
-          await conn.sendMessage(mmid, textp, MessageType.extendedText, extra);
+          await conn.sendMessage(mmid, textp, MessageType.extendedText, extrap);
           const vcard =
             "BEGIN:VCARD\n" + // metadata of the contact card
             "VERSION:3.0\n" +
@@ -1008,10 +1008,10 @@ async function connectAndRunBot() {
         } else if (mc === "images") {
           const textp =
             "This functionality is paused untill further information.Kindly contact my owner for further information.";
-          const extra = {
+          const extrap = {
             quoted: message,
           };
-          await conn.sendMessage(mmid, textp, MessageType.extendedText, extra);
+          await conn.sendMessage(mmid, textp, MessageType.extendedText, extrap);
           const vcard =
             "BEGIN:VCARD\n" + // metadata of the contact card
             "VERSION:3.0\n" +
