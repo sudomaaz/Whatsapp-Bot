@@ -955,7 +955,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "search") {
           const textp =
-            "This functionality is paused untill further information.Kindly contact my owner for further information.";
+            "This functionality is paused untill further information.Kindly contact my owner.";
           const extrap = {
             quoted: message,
           };
@@ -1007,7 +1007,7 @@ async function connectAndRunBot() {
           );
         } else if (mc === "images") {
           const textp =
-            "This functionality is paused untill further information.Kindly contact my owner for further information.";
+            "This functionality is paused untill further information.Kindly contact my owner.";
           const extrap = {
             quoted: message,
           };
