@@ -15,6 +15,7 @@ const {
   ReconnectMode,
   GroupSettingChange,
   WA_DEFAULT_EPHEMERAL,
+  ChatModification,
 } = pkg;
 
 async function connectAndRunBot() {
@@ -46,6 +47,8 @@ async function connectAndRunBot() {
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
         await conn.chatRead(mmid);
         if (!isGroupID(mmid)) {
+          const res = await fnc.personalMsg(mmid.split("@")[0]);
+          if (!res) return;
           const text =
             "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/LXfNR5Tb2O2LiPfj3yj2Nx*";
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
@@ -85,7 +88,7 @@ async function connectAndRunBot() {
         fnc.store[mmid].chat.push(message);
         */
         let extended;
-        if (message.message.ephemeralMessage)
+        if (message?.message?.ephemeralMessage)
           extended =
             message.message.ephemeralMessage.message.extendedTextMessage;
         else extended = message.message.extendedTextMessage;
@@ -531,6 +534,21 @@ async function connectAndRunBot() {
             return;
           }
           await conn.groupUpdateDescription(mmid, gdesc);
+        } else if (mc === "del5") {
+          conn.chats.array.forEach(async (e) => {
+            console.log(e);
+            await conn.modifyChat(e.jid, ChatModification.delete);
+          });
+          const options = {
+            quoted: message,
+          };
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            "deleted all",
+            MessageType.extendedText,
+            options
+          );
+          return;
         } else if (mc === "kick") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const isAdm = await fnc.isAdmin(
@@ -1177,8 +1195,8 @@ async function connectAndRunBot() {
             text,
             MessageType.text
           );
+          await conn.modifyChat(group.jid, ChatModification.delete);
           await conn.groupLeave(group.jid);
-          await conn.modifyChat(group.jid, "delete");
           return;
         }
         const name = group.participants[0].split("@")[0];
@@ -1210,6 +1228,7 @@ async function connectAndRunBot() {
         );
       } else if (group.action === "remove") {
         const name = group.participants[0].split("@")[0];
+        await conn.modifyChat(group.jid, ChatModification.delete);
         const res = await fnc.warningDelete(name);
       } else return;
     });

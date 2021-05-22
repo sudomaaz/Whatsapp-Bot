@@ -1258,3 +1258,18 @@ export async function warningDelete(name) {
   let res = await axios.delete(url);
   return res.data;
 }
+
+export async function personalMsg(name) {
+  const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/dm/${name}.json`;
+  let res = await axios.get(url);
+  let data = res.data;
+  if (data === null || data === undefined) {
+    const firebase = {
+        updated: 1,
+        time: Date.now(),
+      },
+      res = await axios.put(url, firebase);
+    return true;
+  }
+  return false;
+}
