@@ -953,39 +953,7 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
-        } else if (mc === "broad4") {
-          const result = fetchMsg.splice(0, 2);
-          result.push(fetchMsg.join(" "));
-          let token = result[2];
-          const broadMsg = "*────✪ Broadcast from Owner ✪────*\n\n" + token;
-          conn.chats.array.forEach(async (chat) => {
-            if (!isGroupID(chat.jid)) return;
-            await conn.sendMessage(
-              chat.jid,
-              broadMsg,
-              MessageType.extendedText
-            );
-            return;
-          });
         } else if (mc === "search") {
-          const textp =
-            "This functionality is paused untill further information.Kindly contact my owner.";
-          const extrap = {
-            quoted: message,
-          };
-          await conn.sendMessage(mmid, textp, MessageType.extendedText, extrap);
-          const vcard =
-            "BEGIN:VCARD\n" + // metadata of the contact card
-            "VERSION:3.0\n" +
-            "FN:Maaz: Bot Owner\n" + // full name
-            "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
-            "END:VCARD";
-          await conn.sendMessage(
-            mmid,
-            { displayname: "Maaz: Bot Owner", vcard: vcard },
-            MessageType.contact
-          );
-          return;
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];
@@ -1020,24 +988,6 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "images") {
-          const textp =
-            "This functionality is paused untill further information.Kindly contact my owner.";
-          const extrap = {
-            quoted: message,
-          };
-          await conn.sendMessage(mmid, textp, MessageType.extendedText, extrap);
-          const vcard =
-            "BEGIN:VCARD\n" + // metadata of the contact card
-            "VERSION:3.0\n" +
-            "FN:Maaz: Bot Owner\n" + // full name
-            "TEL;type=CELL;type=VOICE;waid=918840081034:+918840081034\n" + // WhatsApp ID + phone number
-            "END:VCARD";
-          await conn.sendMessage(
-            mmid,
-            { displayname: "Maaz: Bot Owner", vcard: vcard },
-            MessageType.contact
-          );
-          return;
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];

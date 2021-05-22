@@ -1143,7 +1143,7 @@ export async function searchYt(yt) {
 }
 
 export async function search(query) {
-  const SUBSCRIPTION_KEY = "73351a628fe744db8d64c41506130d12";
+  const SUBSCRIPTION_KEY = "cda91b791adb4a0abd6ff8e2c3d9cccd";
   const options = {
     method: "GET",
     url: "https://api.bing.microsoft.com/v7.0/search/",
@@ -1204,7 +1204,7 @@ export function detailLog(value) {
 }
 
 export async function image(query) {
-  const SUBSCRIPTION_KEY = "73351a628fe744db8d64c41506130d12";
+  const SUBSCRIPTION_KEY = "cda91b791adb4a0abd6ff8e2c3d9cccd";
   const options = {
     method: "GET",
     url: "https://api.bing.microsoft.com/v7.0/images/search",
