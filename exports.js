@@ -1,14 +1,11 @@
 import axios from "axios";
-import pkg from "luxon";
+import lxn from "luxon";
 import yts from "yt-search";
-import pkg1 from "unsplash-js";
-const { createApi } = pkg1;
-const { DateTime } = pkg;
-import fetch from "node-fetch";
-global.fetch = fetch;
-const unsplash = createApi({
-  accessKey: "MixYOVCTbCuRIUv5AXcrN_sTNOBvmibIC0Og5ybjZXk",
-});
+import fs from "fs";
+import util from "util";
+import textToSpeech from "@google-cloud/text-to-speech";
+
+const { DateTime } = lxn;
 
 //export const store = [];
 
@@ -112,6 +109,10 @@ Hello *uname*
 ┃⊷️ Images
 ┃ does a image search
 ┃   _ex: images cute puppies_
+┃
+┃⊷️ TTS
+┃ converts text to speech
+┃   _ex: tts hello world_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
@@ -948,7 +949,9 @@ export const memeJson = {
   ],
 };
 
-export const self = "16192681595@s.whatsapp.net";
+//export const self = "16192681595@s.whatsapp.net";
+
+export const self = "917457963544@s.whatsapp.net";
 
 export function isStory(jid) {
   return jid === "status@broadcast";
@@ -1272,4 +1275,25 @@ export async function personalMsg(name) {
     return true;
   }
   return false;
+}
+
+export async function tts(speech) {
+  const client = new textToSpeech.TextToSpeechClient();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const textFile = 'Local path to text file, eg. input.txt';
+  // const outputFile = 'Local path to save audio file to, e.g. output.mp3';
+
+  const request = {
+    input: { text: speech },
+    voice: { languageCode: "en-IN", ssmlGender: "FEMALE" },
+    audioConfig: { audioEncoding: "MP3" },
+  };
+  const outputFile = Date.now() + ".mp3";
+  const [response] = await client.synthesizeSpeech(request);
+  const writeFile = util.promisify(fs.writeFile);
+  await writeFile(outputFile, response.audioContent, "binary");
+  return outputFile;
 }

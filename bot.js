@@ -1,9 +1,6 @@
 import pkg from "@adiwajshing/baileys";
-import { group } from "console";
 import e from "express";
 import fs from "fs";
-import { ppid } from "process";
-import { pathToFileURL } from "url";
 import * as fnc from "./exports.js";
 
 const {
@@ -42,11 +39,11 @@ async function connectAndRunBot() {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
         //fnc.detailLog(message);
-        const fromMe = message.key.fromMe;
-        const mmid = message.key.remoteJid;
+        const fromMe = message?.key?.fromMe;
+        const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
         await conn.chatRead(mmid);
-        if (!isGroupID(mmid)) {
+        /*if (!isGroupID(mmid)) {
           const res = await fnc.personalMsg(mmid.split("@")[0]);
           if (!res) return;
           const text =
@@ -54,7 +51,7 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        /*if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
+        if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
         }
@@ -93,7 +90,7 @@ async function connectAndRunBot() {
             message?.message?.ephemeralMessage?.message?.extendedTextMessage;
         else extended = message?.message?.extendedTextMessage;
         if (extended === null || extended === undefined) return;
-        if (extended.contextInfo.participant === fnc.self) {
+        if (extended?.contextInfo?.participant === fnc.self) {
           if (
             extended?.contextInfo?.quotedMessage?.extendedTextMessage &&
             extended?.contextInfo?.quotedMessage?.extendedTextMessage?.text.includes(
@@ -101,7 +98,7 @@ async function connectAndRunBot() {
             )
           ) {
             const memeid =
-              extended.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid[0].split(
+              extended?.contextInfo?.quotedMessage?.extendedTextMessage?.contextInfo?.mentionedJid[0].split(
                 "@"
               )[0];
             const result = await fnc.memes(memeid, extended.text);
@@ -117,9 +114,9 @@ async function connectAndRunBot() {
           }
           return;
         }
-        const jids = await fnc.adjustJid(extended.contextInfo.mentionedJid);
+        const jids = await fnc.adjustJid(extended?.contextInfo?.mentionedJid);
         if (jids[0] !== fnc.self) return;
-        const fetchMsg = extended.text.split(" ");
+        const fetchMsg = extended?.text.split(" ");
         if (fetchMsg[0] !== "@" + fnc.self.split("@")[0]) {
           const text =
             "Sorry i did not understand. Please check for extra space or issue a *help* command to get lists of commands i follow.";
@@ -132,10 +129,10 @@ async function connectAndRunBot() {
         const mc = fetchMsg[1].toLowerCase();
         if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
-          const gname = groupMetaData.subject.trim();
-          const gusers = groupMetaData.participants.length;
-          const uname = "@" + message.participant.split("@")[0];
-          const dmsg = groupMetaData.ephemeralDuration ? "ON" : "OFF";
+          const gname = groupMetaData?.subject?.trim();
+          const gusers = groupMetaData?.participants?.length;
+          const uname = "@" + message.participant?.split("@")[0];
+          const dmsg = groupMetaData?.ephemeralDuration ? "ON" : "OFF";
           const replaceT = {
             gname: gname,
             gusers: gusers,
@@ -971,6 +968,38 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
+        } else if (mc === "tts") {
+          const result = fetchMsg.splice(0, 2);
+          result.push(fetchMsg.join(" "));
+          let token = result[2];
+          if (!token) {
+            const options = {
+              quoted: message,
+            };
+            const text = `*Please specify the text for tts conversion.*\n\n_ex: tts hello world_`;
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
+          const tx = await fnc.tts(token);
+          if (!tx || !tx.length) return;
+          const extra = {
+            quoted: message,
+            mimetype: Mimetype.mp4Audio,
+            ppt: true,
+          };
+          console.log(tx);
+          await conn.sendMessage(
+            mmid,
+            fs.readFileSync(tx), // load a audio and send it
+            MessageType.audio,
+            extra
+          );
+          fs.unlinkSync(tx);
         } else if (mc === "search") {
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
