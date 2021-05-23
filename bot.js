@@ -354,7 +354,7 @@ async function connectAndRunBot() {
             return;
           }
           await conn.groupMakeAdmin(mmid, candidates);
-          const text = `Congratulations 🎉 valid candidates have been added as admins.`;
+          const text = `Congratulations 🎉 valid people have been added as admins and invalid people skipped.`;
           const options = {
             quoted: message,
           };
@@ -418,7 +418,7 @@ async function connectAndRunBot() {
             return;
           }
           const removed = await conn.groupDemoteAdmin(mmid, candidates);
-          const text = `Valid candidates have been removed as admins.`;
+          const text = `Valid people have been removed as admins and invalid people skipped.`;
           const options = {
             quoted: message,
           };
@@ -594,7 +594,7 @@ async function connectAndRunBot() {
               quoted: message,
             };
             const text =
-              "*Please mention members to be removed from group.*\n\n_ex: kick @member1 @member2_";
+              "*Please mention members to be removed from group.*\n\n_ex: kick @member1 @member2_\n\n*Note i dont remove myself or super-owner of the group*";
             const sentMsg = await conn.sendMessage(
               mmid,
               text,
@@ -1125,7 +1125,7 @@ async function connectAndRunBot() {
               quoted: message,
             };
             const text =
-              "*Please mention member name to issue a warning.*\n\n_ex: warn @member1 reason_";
+              "*Please mention member name to issue a warning.*\n\n_ex: warn @member1 reason_\n\n*Note i dont warn myself or super-owner of the group*";
             const sentMsg = await conn.sendMessage(
               mmid,
               text,
