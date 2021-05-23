@@ -1156,6 +1156,7 @@ async function connectAndRunBot() {
           const extra = {
             caption: `Hello @${name} you have been warned for *${token}*. Your total warn count is *${res.warn}*.Three warnings result in getting blocked.`,
             mimetype: Mimetype.png,
+            thumbnail: null,
             contextInfo: {
               mentionedJid: [...candidates],
             },
