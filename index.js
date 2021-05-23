@@ -18,5 +18,4 @@ app.get("/start", async (req, res) => {
 app.listen(process.env.PORT || 3000, async () => {
   await bot().catch((err) => console.log(err));
   console.log("server started");
-  console.log(process.cwd());
 });

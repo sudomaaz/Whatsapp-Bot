@@ -2,6 +2,7 @@ import pkg from "@adiwajshing/baileys";
 import e from "express";
 import fs from "fs";
 import * as fnc from "./exports.js";
+import util from "util";
 
 const {
   WAConnection,
@@ -531,21 +532,6 @@ async function connectAndRunBot() {
             return;
           }
           await conn.groupUpdateDescription(mmid, gdesc);
-        } else if (mc === "del5") {
-          conn.chats.array.forEach(async (e) => {
-            console.log(e);
-            await conn.modifyChat(e.jid, ChatModification.delete);
-          });
-          const options = {
-            quoted: message,
-          };
-          const sentMsg = await conn.sendMessage(
-            mmid,
-            "deleted all",
-            MessageType.extendedText,
-            options
-          );
-          return;
         } else if (mc === "kick") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const isAdm = await fnc.isAdmin(
@@ -992,10 +978,11 @@ async function connectAndRunBot() {
             mimetype: Mimetype.mp4Audio,
             ppt: true,
           };
-          // console.log(tx);
+          const readFile = util.promisify(fs.readFile);
+          const audioFile = await readFile(tx);
           await conn.sendMessage(
             mmid,
-            fs.readFileSync(tx), // load a audio and send it
+            audioFile, // load a audio and send it
             MessageType.audio,
             extra
           );
@@ -1190,10 +1177,9 @@ async function connectAndRunBot() {
               mentionedJid: [...candidates],
             },
           };
-          const imageUrl =
-            "https://media.istockphoto.com/photos/hand-holding-bright-yellow-card-against-white-background-picture-id157680483?k=6&m=157680483&s=612x612&w=0&h=zauJUOq9qNu7tAqu8fCVi9FW8pYdERRNfKm1aUe6_PY=";
-          const finalMsg = { url: imageUrl };
-          await conn.sendMessage(mmid, finalMsg, MessageType.image, extra);
+          const readFile = util.promisify(fs.readFile);
+          const imageFile = await readFile("yc.jpg");
+          await conn.sendMessage(mmid, imageFile, MessageType.image, extra);
           if (res.warn >= 3) await conn.groupRemove(mmid, [candidates[0]]);
         } else {
           if (jids[0] === fnc.self) {
@@ -1214,7 +1200,7 @@ async function connectAndRunBot() {
         const groupMetaData = await conn.groupMetadata(group.jid);
         const gname = groupMetaData.subject.trim();
         const gusers = groupMetaData.participants.length;
-        if (gusers < 6 && group.jid.split("-")[0] !== "918840081034") {
+        /* if (gusers < 6 && group.jid.split("-")[0] !== "918840081034") {
           const text =
             "Sorry! I only stay in a group with atleast 5 members 👋";
           // const text = "I am under construction. Will be updated once active 👋";
@@ -1223,10 +1209,11 @@ async function connectAndRunBot() {
             text,
             MessageType.text
           );
-          await conn.modifyChat(group.jid, ChatModification.delete);
+          //  await conn.modifyChat(group.jid, ChatModification.delete);
           await conn.groupLeave(group.jid);
           return;
         }
+        */
         const name = group.participants[0].split("@")[0];
 
         const uname = name === fnc.self.split("@")[0] ? "Everyone" : "@" + name;

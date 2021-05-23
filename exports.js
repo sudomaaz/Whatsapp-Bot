@@ -1233,67 +1233,87 @@ export async function image(query) {
 }
 
 export async function warningUpdate(name) {
-  const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
-  let res = await axios.get(url);
-  let data = res.data;
-  if (data === null || data === undefined) {
-    const firebase = {
-        warn: 1,
-        time: Date.now(),
-      },
-      res = await axios.put(url, firebase);
-    return res.data;
-  } else {
-    const firebase = {
-        warn: data.warn + 1,
-        time: Date.now(),
-      },
-      res = await axios.put(
-        `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`,
-        firebase
-      );
-    return res.data;
+  try {
+    const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
+    let res = await axios.get(url);
+    let data = res.data;
+    if (data === null || data === undefined) {
+      const firebase = {
+          warn: 1,
+          time: Date.now(),
+        },
+        res = await axios.put(url, firebase);
+      return res.data;
+    } else {
+      const firebase = {
+          warn: data.warn + 1,
+          time: Date.now(),
+        },
+        res = await axios.put(
+          `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`,
+          firebase
+        );
+      return res.data;
+    }
+  } catch (err) {
+    console.log(err);
+    return "";
   }
 }
 
 export async function warningDelete(name) {
-  const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
-  let res = await axios.delete(url);
-  return res.data;
+  try {
+    const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
+    let res = await axios.delete(url);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return "";
+  }
 }
 
 export async function personalMsg(name) {
-  const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/dm/${name}.json`;
-  let res = await axios.get(url);
-  let data = res.data;
-  if (data === null || data === undefined) {
-    const firebase = {
-        updated: 1,
-        time: Date.now(),
-      },
-      res = await axios.put(url, firebase);
-    return true;
+  try {
+    const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/dm/${name}.json`;
+    let res = await axios.get(url);
+    let data = res.data;
+    if (data === null || data === undefined) {
+      const firebase = {
+          updated: 1,
+          time: Date.now(),
+        },
+        res = await axios.put(url, firebase);
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.log(err);
+    return false;
   }
-  return false;
 }
 
 export async function tts(speech) {
-  const client = new textToSpeech.TextToSpeechClient();
+  try {
+    const client = new textToSpeech.TextToSpeechClient();
 
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const textFile = 'Local path to text file, eg. input.txt';
-  // const outputFile = 'Local path to save audio file to, e.g. output.mp3';
+    /**
+     * TODO(developer): Uncomment the following lines before running the sample.
+     */
+    // const textFile = 'Local path to text file, eg. input.txt';
+    // const outputFile = 'Local path to save audio file to, e.g. output.mp3';
 
-  const request = {
-    input: { text: speech },
-    voice: { languageCode: "en-IN", ssmlGender: "FEMALE" },
-    audioConfig: { audioEncoding: "MP3" },
-  };
-  const outputFile = Date.now() + ".mp3";
-  const [response] = await client.synthesizeSpeech(request);
-  const writeFile = util.promisify(fs.writeFile);
-  await writeFile(outputFile, response.audioContent, "binary");
-  return outputFile;
+    const request = {
+      input: { text: speech },
+      voice: { languageCode: "en-IN", ssmlGender: "FEMALE" },
+      audioConfig: { audioEncoding: "MP3" },
+    };
+    const outputFile = Date.now() + ".mp3";
+    const [response] = await client.synthesizeSpeech(request);
+    const writeFile = util.promisify(fs.writeFile);
+    await writeFile(outputFile, response.audioContent, "binary");
+    return outputFile;
+  } catch (err) {
+    console.log(err);
+    return;
+  }
 }
