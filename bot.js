@@ -90,13 +90,13 @@ async function connectAndRunBot() {
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
-            message.message.ephemeralMessage.message.extendedTextMessage;
-        else extended = message.message.extendedTextMessage;
+            message?.message?.ephemeralMessage?.message?.extendedTextMessage;
+        else extended = message?.message?.extendedTextMessage;
         if (extended === null || extended === undefined) return;
         if (extended.contextInfo.participant === fnc.self) {
           if (
-            extended.contextInfo.quotedMessage.extendedTextMessage &&
-            extended.contextInfo.quotedMessage.extendedTextMessage.text.includes(
+            extended?.contextInfo?.quotedMessage?.extendedTextMessage &&
+            extended?.contextInfo?.quotedMessage?.extendedTextMessage?.text.includes(
               "create a meme"
             )
           ) {
