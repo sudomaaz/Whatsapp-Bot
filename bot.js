@@ -992,7 +992,7 @@ async function connectAndRunBot() {
             mimetype: Mimetype.mp4Audio,
             ppt: true,
           };
-          console.log(tx);
+          // console.log(tx);
           await conn.sendMessage(
             mmid,
             fs.readFileSync(tx), // load a audio and send it
