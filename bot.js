@@ -1228,7 +1228,6 @@ async function connectAndRunBot() {
         );
       } else if (group.action === "remove") {
         const name = group.participants[0].split("@")[0];
-        await conn.modifyChat(group.jid, ChatModification.delete);
         const res = await fnc.warningDelete(name);
       } else return;
     });
