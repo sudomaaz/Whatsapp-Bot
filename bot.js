@@ -13,7 +13,6 @@ const {
   ReconnectMode,
   GroupSettingChange,
   WA_DEFAULT_EPHEMERAL,
-  ChatModification,
 } = pkg;
 
 async function connectAndRunBot() {
