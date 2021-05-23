@@ -1155,17 +1155,16 @@ async function connectAndRunBot() {
           if (!res.warn) return;
           const extra = {
             caption: `Hello @${name} you have been warned for *${token}*. Your total warn count is *${res.warn}*.Three warnings result in getting blocked.`,
-            mimetype: Mimetype.png,
+            thumbnail: null,
+            mimetype: Mimetype.jpeg,
             contextInfo: {
               mentionedJid: [...candidates],
             },
           };
-          await conn.sendMessage(
-            mmid,
-            fs.readFileSync("./assests/yc.png"),
-            MessageType.image,
-            extra
-          );
+          const imageUrl =
+            "https://media.istockphoto.com/photos/hand-holding-bright-yellow-card-against-white-background-picture-id157680483?k=6&m=157680483&s=612x612&w=0&h=zauJUOq9qNu7tAqu8fCVi9FW8pYdERRNfKm1aUe6_PY=";
+          const finalMsg = { url: imageUrl };
+          await conn.sendMessage(mmid, finalMsg, MessageType.image, extra);
           if (res.warn >= 3) await conn.groupRemove(mmid, [candidates[0]]);
         } else {
           if (jids[0] === fnc.self) {
