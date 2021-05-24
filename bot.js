@@ -115,7 +115,7 @@ async function connectAndRunBot() {
           return;
         }
         const jids = await fnc.adjustJid(extended?.contextInfo?.mentionedJid);
-        if (jids[0] !== fnc.self) return;
+        if (!jids || jids[0] !== fnc.self) return;
         const fetchMsg = extended?.text.split(" ");
         if (fetchMsg[0] !== "@" + fnc.self.split("@")[0]) {
           const text =
