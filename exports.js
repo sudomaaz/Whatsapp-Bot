@@ -1309,7 +1309,8 @@ export async function tts(speech) {
     const outputFile = Date.now() + ".mp3";
     const [response] = await client.synthesizeSpeech(request);
     const writeFile = util.promisify(fs.writeFile);
-    await writeFile(outputFile, response.audioContent, "binary");
+    const res = await writeFile(outputFile, response.audioContent, "binary");
+    console.log(res);
     return outputFile;
   } catch (err) {
     console.log(err);
