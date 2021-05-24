@@ -974,6 +974,7 @@ async function connectAndRunBot() {
           if (!tx || !tx.length) return;
           const extra = {
             quoted: message,
+            mimetype: Mimetype.ogg,
           };
           const readFile = util.promisify(fs.readFile);
           const audioFile = await readFile(tx);
