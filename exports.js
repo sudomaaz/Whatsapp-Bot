@@ -1306,7 +1306,7 @@ export async function tts(speech) {
       voice: { languageCode: "en-IN", ssmlGender: "MALE" },
       audioConfig: { audioEncoding: "OGG_OPUS" },
     };
-    const outputFile = Date.now();
+    const outputFile = Date.now() + ".ogg";
     const [response] = await client.synthesizeSpeech(request);
     const writeFile = util.promisify(fs.writeFile);
     const res = await writeFile(outputFile, response.audioContent, "binary");
