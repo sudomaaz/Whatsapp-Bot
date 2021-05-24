@@ -1174,6 +1174,7 @@ export async function search(query) {
 }
 
 export async function adjustJid(jid) {
+  if (!jid) return;
   let i = 0,
     exist = false,
     place = [];
@@ -1302,8 +1303,8 @@ export async function tts(speech) {
 
     const request = {
       input: { text: speech },
-      voice: { languageCode: "en-IN", ssmlGender: "FEMALE" },
-      audioConfig: { audioEncoding: "MP3" },
+      voice: { languageCode: "en-IN", ssmlGender: "MALE" },
+      audioConfig: { audioEncoding: "OPUS" },
     };
     const outputFile = Date.now() + ".mp3";
     const [response] = await client.synthesizeSpeech(request);
