@@ -974,8 +974,6 @@ async function connectAndRunBot() {
           if (!tx || !tx.length) return;
           const extra = {
             quoted: message,
-            mimetype: Mimetype.mp4Audio,
-            ppt: true,
           };
           const readFile = util.promisify(fs.readFile);
           const audioFile = await readFile(tx);
