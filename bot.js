@@ -126,7 +126,7 @@ async function connectAndRunBot() {
           await conn.sendMessage(mmid, text, MessageType.extendedText, extra);
           return;
         }
-        const mc = fetchMsg[1].toLowerCase();
+        const mc = fetchMsg[1]?.toLowerCase();
         if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const gname = groupMetaData?.subject?.trim();
