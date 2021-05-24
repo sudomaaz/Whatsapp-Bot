@@ -1304,7 +1304,7 @@ export async function tts(speech) {
     const request = {
       input: { text: speech },
       voice: { languageCode: "en-IN", ssmlGender: "MALE" },
-      audioConfig: { audioEncoding: "OPUS" },
+      audioConfig: { audioEncoding: "MP3" },
     };
     const outputFile = Date.now();
     const [response] = await client.synthesizeSpeech(request);
