@@ -983,7 +983,8 @@ async function connectAndRunBot() {
             MessageType.audio,
             extra
           );
-          fs.unlinkSync(tx);
+          const delFile = util.promisify(fs.unlink);
+          await delFile(tx);
         } else if (mc === "search") {
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
