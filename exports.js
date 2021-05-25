@@ -112,7 +112,7 @@ Hello *uname*
 ┃
 ┃⊷️ TTS
 ┃ converts text to speech
-┃   _ex: tts hello world_
+┃   _ex: tts male| female hello world_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
@@ -949,7 +949,7 @@ export const memeJson = {
   ],
 };
 
-export const self = "15872055873@s.whatsapp.net";
+export const self = "14242547804@s.whatsapp.net";
 
 export function isStory(jid) {
   return jid === "status@broadcast";
@@ -1291,7 +1291,7 @@ export async function personalMsg(name) {
   }
 }
 
-export async function tts(speech) {
+export async function tts(speech, voice) {
   try {
     const client = new textToSpeech.TextToSpeechClient();
 
@@ -1303,7 +1303,7 @@ export async function tts(speech) {
 
     const request = {
       input: { text: speech },
-      voice: { languageCode: "en-IN", ssmlGender: "MALE" },
+      voice: { languageCode: "en-IN", ssmlGender: voice },
       audioConfig: { audioEncoding: "OGG_OPUS" },
     };
     const outputFile = Date.now() + ".ogg";
@@ -1322,4 +1322,13 @@ export async function tts(speech) {
     console.log(err);
     return;
   }
+}
+
+export function isUrl(url) {
+  return url.match(
+    new RegExp(
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/,
+      "gi"
+    )
+  );
 }
