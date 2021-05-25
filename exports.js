@@ -112,9 +112,9 @@ Hello *uname*
 ┃   _ex: images cute puppies_
 ┃
 ┃⊷️ TTS
-┃ converts text2spech in male|female
-┃   _ex: ttsm _hello world_
-┃   _ex: ttsf _hello world_
+┃ converts text to speech
+┃ Male ex: ttsm _hello world_
+┃ Female _ex: ttsf _hello world_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
