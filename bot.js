@@ -954,9 +954,22 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "tts") {
-          const result = fetchMsg.splice(0, 2);
+          const voice = fetchMsg[2];
+          if (!voice || (voice !== "male" && voice !== "female")) {
+            const extra = {
+              quoted: message,
+            };
+            await conn.sendMessage(
+              mmid,
+              "Use either male or female as voice sample",
+              MessageType.text,
+              extra
+            );
+            return;
+          }
+          const result = fetchMsg.splice(0, 3);
           result.push(fetchMsg.join(" "));
-          let token = result[2];
+          let token = result[3];
           if (!token) {
             const options = {
               quoted: message,
@@ -970,7 +983,7 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const tx = await fnc.tts(token);
+          const tx = await fnc.tts(token, voice);
           if (!tx || !tx.length) return;
           const extra = {
             quoted: message,
