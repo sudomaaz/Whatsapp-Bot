@@ -953,10 +953,10 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
-        } else if (mc === "tts") {
-          const result = fetchMsg.splice(0, 3);
+        } else if (mc === "ttsm") {
+          const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
-          let token = result[3];
+          let token = result[2];
           if (!token) {
             const options = {
               quoted: message,
@@ -970,20 +970,40 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const voice = fetchMsg[2];
-          if (!voice || (voice !== "male" && voice !== "female")) {
-            const extra = {
+          const tx = await fnc.tts(token, "MALE");
+          if (!tx || !tx.length) return;
+          const extra = {
+            quoted: message,
+            mimetype: Mimetype.ogg,
+          };
+          const readFile = util.promisify(fs.readFile);
+          const audioFile = await readFile(tx);
+          await conn.sendMessage(
+            mmid,
+            audioFile, // load a audio and send it
+            MessageType.audio,
+            extra
+          );
+          const delFile = util.promisify(fs.unlink);
+          await delFile(tx);
+        } else if (mc === "ttsf") {
+          const result = fetchMsg.splice(0, 2);
+          result.push(fetchMsg.join(" "));
+          let token = result[2];
+          if (!token) {
+            const options = {
               quoted: message,
             };
-            await conn.sendMessage(
+            const text = `*Please specify the text for tts conversion.*\n\n_ex: tts hello world_`;
+            const sentMsg = await conn.sendMessage(
               mmid,
-              "Use either male or female as voice sample",
-              MessageType.text,
-              extra
+              text,
+              MessageType.extendedText,
+              options
             );
             return;
           }
-          const tx = await fnc.tts(token, voice);
+          const tx = await fnc.tts(token, "FEMALE");
           if (!tx || !tx.length) return;
           const extra = {
             quoted: message,

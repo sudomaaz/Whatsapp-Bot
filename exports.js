@@ -91,7 +91,7 @@ Hello *uname*
 ┃ a short evil roast
 ┃
 ┠⊷️ Memes
-┃ lists a meme template or make a meme
+┃ lists a meme template or make meme
 ┃   _ex: memes list_
 ┃   _ex: memes make two buttons_
 ┃
@@ -99,7 +99,8 @@ Hello *uname*
 ┃ displays upcoming or ongoing contest
 ┃   _ex: leetcode upcoming_
 ┃   _ex: leetcode ongoing_
-┃   watches: codeforces,codechef,leetcode
+┃   watches:
+┃   codeforces,codechef,leetcode
 ┃   bsio,hackerearth
 ┃
 ┃⊷️ Search
@@ -111,8 +112,9 @@ Hello *uname*
 ┃   _ex: images cute puppies_
 ┃
 ┃⊷️ TTS
-┃ converts text to speech
-┃   _ex: tts male|female hello world_
+┃ converts text2spech in male|female
+┃   _ex: ttsm _hello world_
+┃   _ex: ttsf _hello world_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
