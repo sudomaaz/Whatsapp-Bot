@@ -113,7 +113,7 @@ Hello *uname*
 ┃
 ┃⊷️ TTS
 ┃ converts text to speech
-┃ Male ex: ttsm _hello world_
+┃ Male _ex: ttsm _hello world_
 ┃ Female _ex: ttsf _hello world_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
