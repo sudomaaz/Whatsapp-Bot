@@ -113,8 +113,8 @@ Hello *uname*
 ┃
 ┃⊷️ TTS
 ┃ converts text to speech
-┃ Male _ex: ttsm _hello world_
-┃ Female _ex: ttsf _hello world_
+┃ Male _ex: ttsm hello world_
+┃ Female _ex: ttsf hello world_
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
