@@ -1204,13 +1204,13 @@ async function connectAndRunBot() {
           const extra = {
             caption: `Hello @${name} you have been warned for *${token}*. Your total warn count is *${res.warn}*.Three warnings result in getting blocked.`,
             thumbnail: null,
-            mimetype: Mimetype.jpeg,
+            mimetype: Mimetype.png,
             contextInfo: {
               mentionedJid: [...candidates],
             },
           };
           const readFile = util.promisify(fs.readFile);
-          const imageFile = await readFile("yc.jpg");
+          const imageFile = await readFile("yc.png");
           await conn.sendMessage(mmid, imageFile, MessageType.image, extra);
           if (res.warn >= 3) await conn.groupRemove(mmid, [candidates[0]]);
         } else {
