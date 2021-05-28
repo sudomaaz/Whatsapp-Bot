@@ -43,7 +43,7 @@ async function connectAndRunBot() {
         const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
         await conn.chatRead(mmid);
-        if (!isGroupID(mmid)) {
+        /*if (!isGroupID(mmid)) {
           const res = await fnc.personalMsg(mmid.split("@")[0]);
           if (!res) return;
           const text =
@@ -51,7 +51,7 @@ async function connectAndRunBot() {
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
-        /*if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
+        if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
         }
