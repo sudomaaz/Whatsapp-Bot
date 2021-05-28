@@ -1169,6 +1169,7 @@ export async function search(query) {
     if (res.data.spellSuggestions) {
       return await search(res.data.spellSuggestions.value[0].text);
     }
+    // detailLog(res.data);
     return res.data.webPages.value;
   } catch (err) {
     return "";

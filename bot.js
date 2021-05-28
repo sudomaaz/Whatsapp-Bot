@@ -42,7 +42,7 @@ async function connectAndRunBot() {
         const fromMe = message?.key?.fromMe;
         const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
-        await conn.chatRead(mmid);
+        await conn.chatRead(mmid).catch((err) => console.log(err));
         /*if (!isGroupID(mmid)) {
           const res = await fnc.personalMsg(mmid.split("@")[0]);
           if (!res) return;
