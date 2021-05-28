@@ -1172,6 +1172,7 @@ export async function search(query) {
     detailLog(res.data);
     return res.data.webPages.value;
   } catch (err) {
+    console.log(err);
     return "";
   }
 }
