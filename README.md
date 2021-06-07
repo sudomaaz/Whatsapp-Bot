@@ -2,8 +2,6 @@
 
 **Made completely out of NodeJs and Websockets. Special thanks to Baileys library to enable interaction with whatsapp web**
 
-**This bot can be added to group same way you add any group member. Save the contact and add to group.**
-
 ## Features
 
 1. Send notifications to admins/members.
