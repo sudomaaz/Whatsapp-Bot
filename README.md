@@ -23,3 +23,7 @@
 1. Save contact : +1(587) 205-5873 ( a virtual number).
 2. Add bot to your group in whatsapp.
 3. issue a help command and follow.
+
+## Demo
+
+![Alt text](bot.gif?raw=true "Whatsapp chat bot")
