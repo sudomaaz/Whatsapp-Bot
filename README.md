@@ -16,7 +16,7 @@
 10. Cracks jokes , roast a person , and give life advice quotes.
 11. Converts text to speech in both male and female samples.
 12. Displays ongoing or upcoming coding contests from leetcode, hackerearth, codechef, codeforces , binarysearch
-13. Many more features expected.....
+13. Many more features expected !!
 
 ## Usage
 
