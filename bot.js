@@ -1255,6 +1255,7 @@ async function connectAndRunBot() {
     //called when some group join/remove action occurs
     conn.on("group-participants-update", async (group) => {
       if (group.action === "add") {
+        return;
         const groupMetaData = await conn.groupMetadata(group.jid);
         const gname = groupMetaData.subject.trim();
         const gusers = groupMetaData.participants.length;
