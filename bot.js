@@ -954,6 +954,18 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "ttsm") {
+          const options = {
+            quoted: message,
+          };
+          const text = `*This feature has been suspended untill further notice as it triggered an abuse in usage*`;
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+          return;
+          /*
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];
@@ -986,7 +998,20 @@ async function connectAndRunBot() {
           );
           const delFile = util.promisify(fs.unlink);
           await delFile(tx);
+          */
         } else if (mc === "ttsf") {
+          const options = {
+            quoted: message,
+          };
+          const text = `*This feature has been suspended untill further notice as it triggered an abuse in usage*`;
+          const sentMsg = await conn.sendMessage(
+            mmid,
+            text,
+            MessageType.extendedText,
+            options
+          );
+          return;
+          /*
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));
           let token = result[2];
@@ -1019,6 +1044,7 @@ async function connectAndRunBot() {
           );
           const delFile = util.promisify(fs.unlink);
           await delFile(tx);
+          */
         } else if (mc === "search") {
           const result = fetchMsg.splice(0, 2);
           result.push(fetchMsg.join(" "));

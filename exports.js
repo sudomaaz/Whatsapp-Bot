@@ -1296,6 +1296,7 @@ export async function personalMsg(name) {
 }
 
 export async function tts(speech, voice) {
+  return;
   try {
     const client = new textToSpeech.TextToSpeechClient();
 
