@@ -43,14 +43,15 @@ async function connectAndRunBot() {
         const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
         await conn.chatRead(mmid).catch((err) => console.log(err));
-        /*if (!isGroupID(mmid)) {
+        if (!isGroupID(mmid)) {
           const res = await fnc.personalMsg(mmid.split("@")[0]);
           if (!res) return;
           const text =
-            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/LXfNR5Tb2O2LiPfj3yj2Nx*";
+            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/GAKSutkn4PGKv67ytz9t5A*";
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }
+        /*
         if (fnc.store[mmid] === null || fnc.store[mmid] === undefined) {
           fnc.store[mmid] = {};
           fnc.store[mmid].chat = [];
