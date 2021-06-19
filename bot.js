@@ -47,7 +47,7 @@ async function connectAndRunBot() {
           const res = await fnc.personalMsg(mmid.split("@")[0]);
           if (!res) return;
           const text =
-            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/GAKSutkn4PGKv67ytz9t5A*";
+            "Hello, Thanks for your message 😊 However, i only respond to messages in a group.\n\nOur Official Group: *https://chat.whatsapp.com/Btb7bxQrAWN5TaeUDE4ggG*";
           const sentMsg = await conn.sendMessage(mmid, text, MessageType.text);
           return;
         }

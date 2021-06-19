@@ -23,7 +23,7 @@ Hello *uname*
 ‣ Created: *25th March 2021*
 ‣ Group: *gname*
 ‣ Group users: *gusers Users*
-‣ Official Group: *https://chat.whatsapp.com/GAKSutkn4PGKv67ytz9t5A*
+‣ Official Group: *https://chat.whatsapp.com/Btb7bxQrAWN5TaeUDE4ggG*
 ────────────────
 ┏━━━━━━━━━━━━━━━━━━━━
 ┃─────〘 Bot 〙────
