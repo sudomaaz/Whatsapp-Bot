@@ -622,7 +622,11 @@ async function connectAndRunBot() {
               return;
             await conn.groupRemove(jjid, [e.jid]);
           } )
-          console.log( "Members removed");
+           await conn.sendMessage(
+              "918840081034@s.whatsapp.net",
+              "Members have been removed",
+              MessageType.text,
+            );
           }
         else if ( mc === "notify" )
         {
