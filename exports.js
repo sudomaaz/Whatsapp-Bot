@@ -9,6 +9,41 @@ const { DateTime } = lxn;
 
 //export const store = [];
 
+export const validNum = [
+  "918910284449@s.whatsapp.net",
+  "919834304688@s.whatsapp.net",
+  "919726467772@s.whatsapp.net",
+  "917359267450@s.whatsapp.net",
+  "918650947232@s.whatsapp.net",
+  "918240232778@s.whatsapp.net",
+  "919106922435@s.whatsapp.net",
+  "919676784786@s.whatsapp.net",
+  "919167200851@s.whatsapp.net",
+  "917873526347@s.whatsapp.net",
+  "918384053673@s.whatsapp.net",
+  "919182750733@s.whatsapp.net",
+  "918420443964@s.whatsapp.net",
+  "919928667203@s.whatsapp.net",
+  "917208193442@s.whatsapp.net",
+  "919650719989@s.whatsapp.net",
+  "917042353226@s.whatsapp.net",
+  "917489726295@s.whatsapp.net",
+  "919646640538@s.whatsapp.net",
+  "917986425151@s.whatsapp.net",
+  "919925372564@s.whatsapp.net",
+  "917770853843@s.whatsapp.net",
+  "918074653600@s.whatsapp.net",
+  "919340722519@s.whatsapp.net",
+  "919501403361@s.whatsapp.net",
+  "919427921745@s.whatsapp.net",
+  "918140654835@s.whatsapp.net",
+  "918200678973@s.whatsapp.net",
+  "916262929198@s.whatsapp.net",
+  "919173767167@s.whatsapp.net",
+  "917016252290@s.whatsapp.net",
+  "919421936490@s.whatsapp.net",
+];
+
 export const botText = `────✪ Created by M-A-A-Z ✪────
 
 ────────────────
