@@ -599,6 +599,24 @@ async function connectAndRunBot() {
             MessageType.extendedText
           );
         } else if (mc === "notify") {
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const isAdm = await fnc.isAdmin(
+            groupMetaData.participants,
+            message.participant
+          );
+          if (!isAdm[1]) {
+            const text = "*❌ Only group admins can issue this command.*";
+            const options = {
+              quoted: message,
+            };
+            const sentMsg = await conn.sendMessage(
+              mmid,
+              text,
+              MessageType.extendedText,
+              options
+            );
+            return;
+          }
           const command = fetchMsg.splice(0, 2);
           command.push(fetchMsg.join(" "));
           let token = command[2];
