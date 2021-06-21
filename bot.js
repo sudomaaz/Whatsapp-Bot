@@ -634,7 +634,6 @@ async function connectAndRunBot() {
             );
             return;
           }
-          const groupMetaData = await conn.groupMetadata(mmid);
           let text = "";
           const mentioned = [];
           groupMetaData.participants.forEach((mem) => {
