@@ -10,11 +10,9 @@ const { DateTime } = lxn;
 //export const store = [];
 
 export const botJoinMsg = `────✪ Created by M-A-A-Z ✪────
-
 ────────────────
 Hello *uname*
 ────────────────
-
 〘 *I'm Chotu Bot* 〙
 ‣ Start: @mentionMe in chat
    「 *@Chotu* 」
