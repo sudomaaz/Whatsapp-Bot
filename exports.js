@@ -18,9 +18,6 @@ Hello *uname*
 〘 *I'm Chotu Bot* 〙
 ‣ Start: @mentionMe in chat
    「 *@Chotu* 」
-‣ Disappearing Message: *dmsg*
-‣ Version: *3.0*
-‣ Created: *25th March 2021*
 ‣ Group: *gname*
 ‣ Group users: *gusers Users*
 ‣ Official Group: *https://chat.whatsapp.com/C1qr5GHOMorJDIihllwA4V*
