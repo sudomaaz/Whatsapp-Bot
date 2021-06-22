@@ -598,38 +598,7 @@ async function connectAndRunBot() {
             text,
             MessageType.extendedText
           );
-        }
-        else if ( mc === "defaulter" )
-        {
-          const jjid = "918910284449-1624008625@g.us";
-          const text = "Hello everyone, We are *removing all the defaulters* who failed to update their information. In case, you have and still got removed from group, kindly ping @918910284449 to add you back.Thanks.";
-          const options = {
-            contextInfo: {
-              mentionedJid: ["918910284449@s.whatsapp.net"],
-            },
-          };
-          const sentMsg = await conn.sendMessage(
-            jjid,
-            text,
-            MessageType.extendedText,
-            options
-          );
-          const groupMetaData = await conn.groupMetadata( jjid );
-          let i = 0;
-          groupMetaData.participants.forEach( async e =>
-          {
-            if ( e.jid===fnc.self || fnc.validNum.includes( e.jid ) )
-              return;
-            await conn.groupRemove(jjid, [e.jid]);
-          } )
-           await conn.sendMessage(
-              "918840081034@s.whatsapp.net",
-              "Members have been removed",
-              MessageType.text,
-            );
-          }
-        else if ( mc === "notify" )
-        {
+        } else if (mc === "notify") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const isAdm = await fnc.isAdmin(
             groupMetaData.participants,
@@ -1331,7 +1300,7 @@ async function connectAndRunBot() {
           uname: uname,
           dmsg: dmsg,
         };
-        const text = fnc.botText.replace(
+        const text = fnc.botJoinMsg.replace(
           /gname|gusers|uname|dmsg/gi,
           (matched) => replaceT[matched]
         );
