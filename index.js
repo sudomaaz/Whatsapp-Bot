@@ -17,7 +17,7 @@ app.get("/", async (req, res) => {
 app.post("/webhook", async (req, res) => {
   const data = req.body;
   res.status(200).send("1");
-  let message = "```A new form has been submitted```\n\n";
+  let message = "_A new form has been submitted_\n\n";
   data.form_response.definition.fields.forEach((e, i) => {
     let title = e.title;
     const key = data.form_response.answers[i].type.toString();
