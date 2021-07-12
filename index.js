@@ -34,6 +34,28 @@ app.get("/webhook", async (req, res) => {
   res.status(200).json(response);
 });
 
+app.get("/get", async (req, res) => {
+  const webhook = {
+    url: "https://wa-node.herokuapp.com/webhook",
+    enabled: true,
+  };
+  const headers = {
+    headers: {
+      Authorization: `bearer ${process.env.FORM_TOKEN}`,
+    },
+  };
+  const { data } = await axios
+    .get(
+      `https://api.typeform.com/forms/${proces.env.FORM_ID}/webhooks`,
+      headers
+    )
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Some error occured");
+    });
+  res.status(200).send(data);
+});
+
 app.get("/start", async (req, res) => {
   await bot().catch((err) => console.log(err));
   res.status(200).send("<h1>Welcome</h1>");
