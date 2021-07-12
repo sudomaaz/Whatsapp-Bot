@@ -46,7 +46,7 @@ app.get("/get", async (req, res) => {
   };
   const { data } = await axios
     .get(
-      `https://api.typeform.com/forms/${proces.env.FORM_ID}/webhooks`,
+      `https://api.typeform.com/forms/${process.env.FORM_ID}/webhooks`,
       headers
     )
     .catch((err) => {
