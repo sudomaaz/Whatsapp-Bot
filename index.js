@@ -15,7 +15,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/webhook", async (req, res) => {
-  const data = JSON.parse(req.body);
+  const data = req.body;
   console.log(data.form_response.definition.fields);
   res.status(200).send(data.form_response.answers);
 });
