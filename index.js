@@ -21,8 +21,8 @@ app.post("/webhook", async (req, res) => {
   data.form_response.definition.fields.forEach((e, i) => {
     const key = data.form_response.answers[i].type.toString();
     const ans = data.form_response.answers[i][key];
-    console.log(key, ans);
-    if (ans) message += e.title + "\n" + ans + "\n\n";
+    console.log(e);
+    if (ans) message += `*e.title* + \n + *ans* + \n\n`;
   });
   robJobs(message);
 });
