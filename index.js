@@ -17,12 +17,12 @@ app.get("/", async (req, res) => {
 app.post("/webhook", async (req, res) => {
   const data = req.body;
   res.status(200).send("1");
-  let message = "*A new form has been submitted*\n\n";
+  let message = "```A new form has been submitted```\n\n";
   data.form_response.definition.fields.forEach((e, i) => {
     const key = data.form_response.answers[i].type.toString();
     const ans = data.form_response.answers[i][key];
     console.log(e);
-    if (ans) message += `*e.title* + \n + *ans* + \n\n`;
+    if (ans) message += "```e.title``` + \n + *ans* + \n\n";
   });
   await robJobs(message);
 });
