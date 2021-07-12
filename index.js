@@ -17,7 +17,9 @@ app.get("/webhook", async (req, res) => {
     enabled: true,
   };
   const headers = {
-    Authorization: `bearer ${process.env.FORM_TOKEN}`,
+    headers: {
+      Authorization: `bearer ${process.env.FORM_TOKEN}`,
+    },
   };
   const response = await axios
     .put(
