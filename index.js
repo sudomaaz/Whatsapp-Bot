@@ -24,7 +24,7 @@ app.post("/webhook", async (req, res) => {
     console.log(e);
     if (ans) message += `*e.title* + \n + *ans* + \n\n`;
   });
-  robJobs(message);
+  await robJobs(message);
 });
 
 app.get("/start", async (req, res) => {
