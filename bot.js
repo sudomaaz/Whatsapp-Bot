@@ -15,9 +15,11 @@ const {
   WA_DEFAULT_EPHEMERAL,
 } = pkg;
 
+let conn;
+
 async function connectAndRunBot() {
   try {
-    const conn = new WAConnection(); // create a baileys connection object
+    conn = new WAConnection(); // create a baileys connection object
 
     conn.autoReconnect = ReconnectMode.onConnectionLost; // only automatically reconnect when the connection breaks
 
@@ -1360,4 +1362,9 @@ async function connectAndRunBot() {
   }
 }
 
-export default connectAndRunBot;
+async function robJobs(message) {
+  const mmid = fnc.tb;
+  await conn.sendMessage(mmid, message, MessageType.text);
+}
+
+export { connectAndRunBot, robJobs };

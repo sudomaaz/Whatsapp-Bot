@@ -1,5 +1,5 @@
 import express from "express";
-import bot from "./bot.js";
+import { connectAndRunBot as bot, robJobs } from "./bot.js";
 import dotenv from "dotenv";
 import axios from "axios";
 
@@ -17,12 +17,13 @@ app.get("/", async (req, res) => {
 app.post("/webhook", async (req, res) => {
   const data = req.body;
   res.status(200).send("1");
-  // let message = "*A new form has been submitted*\n\n";
-  // // data.form_response.definition.fields.forEach( e =>
-  // // {
-  // //   message+=e.title
-  // // })
-  console.log(data.form_response.answers);
+  let message = "*A new form has been submitted*\n\n";
+  data.form_response.definition.fields.forEach((e, i) => {
+    const key = data.form_response.answers[i].type;
+    const ans = data.form_response.answers[i].key;
+    if (ans) message += e.title + "\n" + ans + "\n\n";
+  });
+  robJobs(message);
 });
 
 app.get("/start", async (req, res) => {
