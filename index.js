@@ -19,10 +19,11 @@ app.post("/webhook", async (req, res) => {
   res.status(200).send("1");
   let message = "```A new form has been submitted```\n\n";
   data.form_response.definition.fields.forEach((e, i) => {
+    let title = e.title;
     const key = data.form_response.answers[i].type.toString();
     const ans = data.form_response.answers[i][key];
-    console.log(e);
-    if (ans) message += "```e.title``` + \n + *ans* + \n\n";
+    if (i === 1) title = "Please provide your email";
+    if (ans) message += "```" + title + "```\n*" + ans + "*\n\n";
   });
   await robJobs(message);
 });
