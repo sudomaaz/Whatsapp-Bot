@@ -1363,7 +1363,7 @@ async function connectAndRunBot() {
 }
 
 async function robJobs(message) {
-  const mmid = fnc.tb;
+  const mmid = fnc.rj;
   await conn.sendMessage(mmid, message, MessageType.text);
 }
 
