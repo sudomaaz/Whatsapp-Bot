@@ -14,14 +14,9 @@ app.get("/", async (req, res) => {
   res.status(200).send("<h1>Welcome</h1>");
 });
 
-app.get("/webhook", async (req, res) => {
-  console.log("in get request");
-  console.log(req.body);
-});
-
 app.post("/webhook", async (req, res) => {
-  console.log("in post request");
-  console.log(req.body);
+  const data = JSON.parse(req.body);
+  res.status(200).send(data.form_response.answers);
 });
 
 app.get("/start", async (req, res) => {
