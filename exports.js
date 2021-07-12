@@ -1054,8 +1054,8 @@ export async function memes(id, text) {
     url: url,
     params: {
       template_id: id,
-      username: "sudomaaz",
-      password: "ImG@14#1",
+      username: process.env.MEME_USER,
+      password: process.env.MEME_PWD,
       ...box,
     },
   };
@@ -1076,8 +1076,8 @@ export async function clist(opt, resource) {
   let end, order, filter, data;
   if (opt === 1) {
     filter = {
-      username: "sudomaaz",
-      api_key: "cce9467edeec08620eda0dc3f15633ffd333d789",
+      username: process.env.CLIST_USER,
+      api_key: process.env.CLIST_API,
       start__lte: startDay,
       end__gte: startDay,
       order_by: "-start",
@@ -1086,8 +1086,8 @@ export async function clist(opt, resource) {
     data = "_Ongoing contests listed below_\n\n";
   } else {
     filter = {
-      username: "sudomaaz",
-      api_key: "cce9467edeec08620eda0dc3f15633ffd333d789",
+      username: process.env.CLIST_USER,
+      api_key: process.env.CLIST_API,
       start__gte: startDay,
       end__lte: endDay,
       order_by: "start",
@@ -1158,7 +1158,7 @@ export async function searchYt(yt) {
 }
 
 export async function search(query) {
-  const SUBSCRIPTION_KEY = "cda91b791adb4a0abd6ff8e2c3d9cccd";
+  const SUBSCRIPTION_KEY = process.env.BING_API;
   const options = {
     method: "GET",
     url: "https://api.bing.microsoft.com/v7.0/search/",
@@ -1222,7 +1222,7 @@ export function detailLog(value) {
 }
 
 export async function image(query) {
-  const SUBSCRIPTION_KEY = "cda91b791adb4a0abd6ff8e2c3d9cccd";
+  const SUBSCRIPTION_KEY = process.env.BING_API;
   const options = {
     method: "GET",
     url: "https://api.bing.microsoft.com/v7.0/images/search",
@@ -1249,7 +1249,7 @@ export async function image(query) {
 
 export async function warningUpdate(name) {
   try {
-    const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
+    const url = `https://${process.env.FIREBASE_URI}/warn/${name}.json`;
     let res = await axios.get(url);
     let data = res.data;
     if (data === null || data === undefined) {
@@ -1265,7 +1265,7 @@ export async function warningUpdate(name) {
           time: Date.now(),
         },
         res = await axios.put(
-          `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`,
+          `https://${process.env.FIREBASE_URI}/warn/${name}.json`,
           firebase
         );
       return res.data;
@@ -1278,7 +1278,7 @@ export async function warningUpdate(name) {
 
 export async function warningDelete(name) {
   try {
-    const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/warn/${name}.json`;
+    const url = `https://${process.env.FIREBASE_URI}/warn/${name}.json`;
     let res = await axios.delete(url);
     return res.data;
   } catch (err) {
@@ -1289,7 +1289,7 @@ export async function warningDelete(name) {
 
 export async function personalMsg(name) {
   try {
-    const url = `https://mycoolbot-41632-default-rtdb.asia-southeast1.firebasedatabase.app/dm/${name}.json`;
+    const url = `https://${process.env.FIREBASE_URI}/dm/${name}.json`;
     let res = await axios.get(url);
     let data = res.data;
     if (data === null || data === undefined) {
