@@ -7,53 +7,21 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", async (req, res) => {
   res.status(200).send("<h1>Welcome</h1>");
 });
 
 app.get("/webhook", async (req, res) => {
-  const data = {
-    url: "https://wa-node.herokuapp.com/webhook",
-    enabled: true,
-  };
-  const headers = {
-    headers: {
-      Authorization: `bearer ${process.env.FORM_TOKEN}`,
-    },
-  };
-  const response = await axios
-    .put(
-      `https://api.typeform.com/forms/${process.env.FORM_ID}/webhooks/wabot`,
-      data,
-      headers
-    )
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send("Some error occured");
-    });
-  res.status(200).json(response);
+  console.log("in get request");
+  console.log(req.body);
 });
 
-app.get("/get", async (req, res) => {
-  const webhook = {
-    url: "https://wa-node.herokuapp.com/webhook",
-    enabled: true,
-  };
-  const headers = {
-    headers: {
-      Authorization: `bearer ${process.env.FORM_TOKEN}`,
-    },
-  };
-  const { data } = await axios
-    .get(
-      `https://api.typeform.com/forms/${process.env.FORM_ID}/webhooks`,
-      headers
-    )
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send("Some error occured");
-    });
-  res.status(200).send(data);
+app.post("/webhook", async (req, res) => {
+  console.log("in post request");
+  console.log(req.body);
 });
 
 app.get("/start", async (req, res) => {
