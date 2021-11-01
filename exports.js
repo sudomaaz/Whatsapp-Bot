@@ -965,7 +965,11 @@ export const memeJson = {
 
 export const self = "12539249233@s.whatsapp.net";
 
-export const tb = "918840081034-1617020123@g.us";
+export const owner = "918840081034@s.whatsapp.net";
+
+export const dismantle = "918840081034-1635676696@g.us";
+
+export const bot = "918840081034-1617020123@g.us";
 
 export const rj = "919168163896-1620757890@g.us";
 

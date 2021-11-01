@@ -40,7 +40,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        //fnc.detailLog(message);
+        // fnc.detailLog(message);
         const fromMe = message?.key?.fromMe;
         const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -719,6 +719,43 @@ async function connectAndRunBot() {
             mimetype: Mimetype.png,
           };
           await conn.sendMessage(mmid, finalMsg, MessageType.image, extra);
+        } else if (mc === "dismantle") {
+          if (message.participant !== fnc.owner) {
+            let finalMsg = "Only Maaz can issue this command.";
+            const extra = {
+              quoted: message,
+            };
+            await conn.sendMessage(
+              mmid,
+              finalMsg,
+              MessageType.extendedText,
+              extra
+            );
+            return;
+          }
+          const groupMetaData = await conn.groupMetadata(mmid);
+          const activeMetaData = await conn.groupMetadata(fnc.dismantle);
+          const admins = await fnc.getAdmins(groupMetaData.participants);
+          const allMembers = await fnc.allMembers(groupMetaData.participants);
+          const activeMembers = await fnc.allMembers(
+            activeMetaData.participants
+          );
+          activeMembers.push(...admins);
+          const difference = allMembers.filter(
+            (e) => !activeMembers.includes(e)
+          );
+          for (let i of difference) {
+            await conn.groupRemove(mmid, [i]);
+          }
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            "```Dismantle completed``` 👋",
+            MessageType.extendedText,
+            extra
+          );
         } else if (mc === "memes") {
           let token = fetchMsg[2];
           if (!token || !token.trim().length) {
