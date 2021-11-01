@@ -733,13 +733,20 @@ async function connectAndRunBot() {
             );
             return;
           }
+          const token = fetchMsg[2];
           const groupMetaData = await conn.groupMetadata(mmid);
           const activeMetaData = await conn.groupMetadata(fnc.dismantle);
           const admins = await fnc.getAdmins(groupMetaData.participants);
           const allMembers = await fnc.allMembers(groupMetaData.participants);
-          const activeMembers = await fnc.allMembers(
-            activeMetaData.participants
-          );
+          let activeMembers = [],
+            finalMsg;
+          if (token !== "all") {
+            activeMembers = await fnc.allMembers(activeMetaData.participants);
+            finalMsg = "```Dismantle completed``` 👋";
+          } else {
+            activeMembers.push(fnc.self);
+            finalMsg = "*Group dismantled*";
+          }
           activeMembers.push(...admins);
           const difference = allMembers.filter(
             (e) => !activeMembers.includes(e)
@@ -752,7 +759,7 @@ async function connectAndRunBot() {
           };
           await conn.sendMessage(
             mmid,
-            "```Dismantle completed``` 👋",
+            finalMsg,
             MessageType.extendedText,
             extra
           );
