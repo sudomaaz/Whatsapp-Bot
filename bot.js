@@ -1382,14 +1382,15 @@ async function connectAndRunBot() {
           const activeMetaData = await conn.groupMetadata(fnc.attd);
           let members = await fnc.allMembers(activeMetaData.participants);
           members = members.filter((e) => e !== fnc.self && e !== fnc.owner);
+          if (members.length === 0) return;
           const add = members[0];
-          if (add.length === 0) return;
-          try {
-            const response = await conn.groupAdd(fnc.cse, [add]);
-            await conn.groupRemove(fnc.attd, [add]);
-          } catch (err) {
-            console.log(err);
-          }
+          const response = await conn.groupAdd(fnc.cse, [add]);
+          await conn.groupRemove(fnc.attd, [add]);
+          const sentMsg = await conn.sendMessage(
+            fnc.attd,
+            "```A member has been added to cse``` 🎉",
+            MessageType.text
+          );
         }
       } else return;
     });
