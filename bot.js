@@ -1378,6 +1378,19 @@ async function connectAndRunBot() {
       } else if (group.action === "remove") {
         const name = group.participants[0].split("@")[0];
         const res = await fnc.warningDelete(name);
+        if (group.jid === fnc.cse) {
+          const activeMetaData = await conn.groupMetadata(fnc.attd);
+          let members = await fnc.allMembers(activeMetaData.participants);
+          members = members.filter((e) => e !== fnc.self && e !== fnc.owner);
+          const add = members[0];
+          if (add.length === 0) return;
+          try {
+            const response = await conn.groupAdd(fnc.cse, [add]);
+            await conn.groupRemove(fnc.attd, [add]);
+          } catch (err) {
+            console.log(err);
+          }
+        }
       } else return;
     });
     /*conn.on("group-update", async (update) => {
