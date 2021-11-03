@@ -132,7 +132,17 @@ async function connectAndRunBot() {
           return;
         }
         const mc = fetchMsg[1]?.toLowerCase();
-        if (mc === "help") {
+        if (mc === "ping") {
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(
+            mmid,
+            "```Pong``` 😎",
+            MessageType.extendedText,
+            extra
+          );
+        } else if (mc === "help") {
           const groupMetaData = await conn.groupMetadata(mmid);
           const gname = groupMetaData?.subject?.trim();
           const gusers = groupMetaData?.participants?.length;
