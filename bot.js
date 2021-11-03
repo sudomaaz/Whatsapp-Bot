@@ -21,6 +21,8 @@ async function connectAndRunBot() {
   try {
     conn = new WAConnection(); // create a baileys connection object
 
+    conn.version = [3, 3234, 9]; //set whatsapp version
+
     conn.autoReconnect = ReconnectMode.onConnectionLost; // only automatically reconnect when the connection breaks
 
     // attempt to reconnect at most 10 times in a row
@@ -40,7 +42,7 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        // fnc.detailLog(message);
+        //fnc.detailLog(message);
         const fromMe = message?.key?.fromMe;
         const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -735,7 +737,7 @@ async function connectAndRunBot() {
           }
           const token = fetchMsg[2];
           const groupMetaData = await conn.groupMetadata(mmid);
-          const activeMetaData = await conn.groupMetadata(fnc.dismantle);
+          const activeMetaData = await conn.groupMetadata(fnc.attd);
           const admins = await fnc.getAdmins(groupMetaData.participants);
           const allMembers = await fnc.allMembers(groupMetaData.participants);
           let activeMembers = [],
