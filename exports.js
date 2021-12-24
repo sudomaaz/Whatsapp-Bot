@@ -133,9 +133,8 @@ Hello *uname*
 ┃ Female _ex: ttsf hello world_
 ┃
 ┃⊷️ Sticker
-┃ converts image to sticker
-┃ _ex: send an image with caption
-┃   @Chotu sticker
+┃ converts image in chat to sticker
+┃ _ex: @Chotu sticker
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
