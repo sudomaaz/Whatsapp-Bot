@@ -1368,13 +1368,13 @@ export function isUrl(url) {
   );
 }
 
-export async function makeSticker(image, stretch) {
+export async function makeSticker(image, stretch, type) {
   const maker = new Sticker(image, {
     pack: "Chotu Bot", // The pack name
     author: "M-A-A-Z", // The author name
-    type: stretch === "true" ? StickerTypes.DEFAULT : StickerTypes.FULL, // The sticker type
+    type: stretch === "full" ? StickerTypes.DEFAULT : StickerTypes.FULL, // The sticker type
     categories: ["🤩", "🎉"], // The sticker category
-    quality: 100,
+    quality: type === "videoMessage" ? 50 : 100,
     background: "#000000", // The sticker background color (only for full stickers)
   });
   const sticker = await maker.toBuffer();
