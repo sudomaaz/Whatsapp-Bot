@@ -42,7 +42,6 @@ async function connectAndRunBot() {
     conn.on("chat-update", async (chatUpdate) => {
       if (chatUpdate.messages && chatUpdate.count) {
         const message = chatUpdate.messages.all()[0];
-        //fnc.detailLog(message);
         const fromMe = message?.key?.fromMe;
         const mmid = message?.key?.remoteJid;
         if (!mmid || fromMe || fnc.isStory(mmid)) return;
@@ -89,6 +88,26 @@ async function connectAndRunBot() {
         }
         fnc.store[mmid].chat.push(message);
         */
+        const messageType = Object.keys(message.message)[0];
+        if (messageType === "imageMessage") {
+          if (
+            !(
+              message?.message?.imageMessage?.contextInfo?.mentionedJid &&
+              message.message.imageMessage.contextInfo.mentionedJid[0] ===
+                fnc.self &&
+              message?.message?.imageMessage?.caption &&
+              message.message.imageMessage.caption.split(" ")[1] === "sticker"
+            )
+          )
+            return;
+          const stretch = message.message.imageMessage.caption.split(" ")[2];
+          const buffer = await conn.downloadMediaMessage(message); // to decrypt & use as a buffer
+          const sticker = await fnc.makeSticker(buffer, stretch);
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
+        }
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
@@ -721,6 +740,7 @@ async function connectAndRunBot() {
             MessageType.extendedText,
             extra
           );
+        } else if (mc === "sticker") {
         } else if (mc === "advice") {
           const advice = await fnc.advice();
           if (!advice) return;

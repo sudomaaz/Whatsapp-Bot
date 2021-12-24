@@ -4,6 +4,10 @@ import yts from "yt-search";
 import fs from "fs";
 import util from "util";
 import textToSpeech from "@google-cloud/text-to-speech";
+import { Sticker, createSticker, StickerTypes } from "wa-sticker-formatter";
+import ffmpegPath from "@ffmpeg-installer/ffmpeg";
+import ffmpeg from "fluent-ffmpeg";
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 const { DateTime } = lxn;
 
@@ -1358,4 +1362,17 @@ export function isUrl(url) {
       "gi"
     )
   );
+}
+
+export async function makeSticker(image, stretch) {
+  const maker = new Sticker(image, {
+    pack: "Chotu Bot", // The pack name
+    author: "M-A-A-Z", // The author name
+    type: stretch === "true" ? StickerTypes.DEFAULT : StickerTypes.FULL, // The sticker type
+    categories: ["🤩", "🎉"], // The sticker category
+    quality: 100,
+    background: "#000000", // The sticker background color (only for full stickers)
+  });
+  const sticker = await maker.toBuffer();
+  return sticker;
 }

@@ -6,14 +6,15 @@
   "type": "module",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.2",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@google-cloud/text-to-speech": "^3.2.1",
     "axios": ">=0.21.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "luxon": "^1.26.0",
+    "wa-sticker-formatter": "^4.2.0",
     "yt-search": "^2.7.6"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
