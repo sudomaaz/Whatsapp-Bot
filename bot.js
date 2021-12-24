@@ -89,7 +89,7 @@ async function connectAndRunBot() {
         }
         fnc.store[mmid].chat.push(message);
         */
-        //  fnc.detailLog(message);
+        // fnc.detailLog(message);
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
@@ -737,8 +737,9 @@ async function connectAndRunBot() {
           const messageT = Object.keys(downloadMedia.message)[0];
           if (messageT === "imageMessage" || messageT === "videoMessage") {
             const stretch = fetchMsg[2];
+            const quality = fetchMsg[3] ? fetchMsg[3] : 100;
             const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
-            const sticker = await fnc.makeSticker(buffer, stretch, messageT);
+            const sticker = await fnc.makeSticker(buffer, stretch, quality);
             const extra = {
               quoted: message,
             };
