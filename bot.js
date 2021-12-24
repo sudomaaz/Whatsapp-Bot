@@ -13,6 +13,7 @@ const {
   ReconnectMode,
   GroupSettingChange,
   WA_DEFAULT_EPHEMERAL,
+  proto,
 } = pkg;
 
 let conn;
@@ -88,26 +89,7 @@ async function connectAndRunBot() {
         }
         fnc.store[mmid].chat.push(message);
         */
-        const messageType = Object.keys(message.message)[0];
-        if (messageType === "imageMessage") {
-          if (
-            !(
-              message?.message?.imageMessage?.contextInfo?.mentionedJid &&
-              message.message.imageMessage.contextInfo.mentionedJid[0] ===
-                fnc.self &&
-              message?.message?.imageMessage?.caption &&
-              message.message.imageMessage.caption.split(" ")[1] === "sticker"
-            )
-          )
-            return;
-          const stretch = message.message.imageMessage.caption.split(" ")[2];
-          const buffer = await conn.downloadMediaMessage(message); // to decrypt & use as a buffer
-          const sticker = await fnc.makeSticker(buffer, stretch);
-          const extra = {
-            quoted: message,
-          };
-          await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
-        }
+        // fnc.detailLog(message);
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
@@ -741,6 +723,24 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "sticker") {
+          const stretch = fetchMsg[2];
+          const downloadMedia = new proto.WebMessageInfo();
+          downloadMedia["message"] = extended.contextInfo.quotedMessage;
+          if (Object.keys(downloadMedia.message)[0] !== "imageMessage") {
+            await conn.sendMessage(
+              mmid,
+              "Please provide a valid image",
+              MessageType.extendedText,
+              { quoted: message }
+            );
+            return;
+          }
+          const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
+          const sticker = await fnc.makeSticker(buffer, stretch);
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
         } else if (mc === "advice") {
           const advice = await fnc.advice();
           if (!advice) return;
