@@ -131,6 +131,11 @@ Hello *uname*
 ┃ converts text to speech
 ┃ Male _ex: ttsm hello world_
 ┃ Female _ex: ttsf hello world_
+┃
+┃⊷️ Sticker
+┃ converts image to sticker
+┃ _ex: send an image with caption
+┃   @Chotu sticker
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
 export const welcomeJson = {
