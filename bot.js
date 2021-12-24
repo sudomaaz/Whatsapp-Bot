@@ -89,7 +89,7 @@ async function connectAndRunBot() {
         }
         fnc.store[mmid].chat.push(message);
         */
-        // fnc.detailLog(message);
+        //fnc.detailLog(message);
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
@@ -723,24 +723,34 @@ async function connectAndRunBot() {
             extra
           );
         } else if (mc === "sticker") {
-          const stretch = fetchMsg[2];
-          const downloadMedia = new proto.WebMessageInfo();
-          downloadMedia["message"] = extended.contextInfo.quotedMessage;
-          if (Object.keys(downloadMedia.message)[0] !== "imageMessage") {
+          if (!extended?.contextInfo?.quotedMessage) {
             await conn.sendMessage(
               mmid,
-              "Please provide a valid image",
+              "Please provide a valid video/image",
               MessageType.extendedText,
               { quoted: message }
             );
             return;
           }
-          const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
-          const sticker = await fnc.makeSticker(buffer, stretch);
-          const extra = {
-            quoted: message,
-          };
-          await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
+          const downloadMedia = new proto.WebMessageInfo();
+          downloadMedia["message"] = extended.contextInfo.quotedMessage;
+          const messageT = Object.keys(downloadMedia.message)[0];
+          if (messageT === "imageMessage" || messageT === "videoMessage") {
+            const stretch = fetchMsg[2];
+            const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
+            const sticker = await fnc.makeSticker(buffer, stretch);
+            const extra = {
+              quoted: message,
+            };
+            await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
+            return;
+          }
+          await conn.sendMessage(
+            mmid,
+            "Please provide a valid video/image",
+            MessageType.extendedText,
+            { quoted: message }
+          );
         } else if (mc === "advice") {
           const advice = await fnc.advice();
           if (!advice) return;

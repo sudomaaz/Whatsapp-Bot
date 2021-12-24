@@ -7,7 +7,7 @@ import textToSpeech from "@google-cloud/text-to-speech";
 import { Sticker, createSticker, StickerTypes } from "wa-sticker-formatter";
 import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 import ffmpeg from "fluent-ffmpeg";
-ffmpeg.setFfmpegPath(ffmpegPath);
+ffmpeg.setFfmpegPath(ffmpegPath.path);
 
 const { DateTime } = lxn;
 
