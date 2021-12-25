@@ -1368,11 +1368,16 @@ export function isUrl(url) {
   );
 }
 
-export async function makeSticker(image, stretch, quality) {
+export async function makeSticker(image, stretch, quality, itype) {
   const maker = new Sticker(image, {
     pack: "Chotu Bot", // The pack name
     author: "M-A-A-Z", // The author name
-    type: stretch === "full" ? StickerTypes.DEFAULT : StickerTypes.FULL, // The sticker type
+    type:
+      itype === "videoMessage"
+        ? StickerTypes.CROPPED
+        : stretch === "full"
+        ? StickerTypes.DEFAULT
+        : StickerTypes.FULL, // The sticker type
     categories: ["🤩", "🎉"], // The sticker category
     quality: parseInt(quality),
     background: "#000000", // The sticker background color (only for full stickers)

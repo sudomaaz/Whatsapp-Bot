@@ -736,10 +736,18 @@ async function connectAndRunBot() {
           downloadMedia["message"] = extended.contextInfo.quotedMessage;
           const messageT = Object.keys(downloadMedia.message)[0];
           if (messageT === "imageMessage" || messageT === "videoMessage") {
-            const stretch = fetchMsg[2];
-            const quality = fetchMsg[3] ? fetchMsg[3] : 100;
+            let stretch = "full",
+              quality = 100;
+            if (isNaN(fetchMsg[2])) stretch = fetchMsg[2];
+            else quality = fetchMsg[2];
+            if (quality > 100 || quality < 1) quality = 50;
             const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
-            const sticker = await fnc.makeSticker(buffer, stretch, quality);
+            const sticker = await fnc.makeSticker(
+              buffer,
+              stretch,
+              quality,
+              messageT
+            );
             const extra = {
               quoted: message,
             };
