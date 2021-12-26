@@ -726,7 +726,7 @@ async function connectAndRunBot() {
           if (!extended?.contextInfo?.quotedMessage) {
             await conn.sendMessage(
               mmid,
-              "Please provide a valid video/image",
+              "Please provide a valid image/video",
               MessageType.extendedText,
               { quoted: message }
             );
@@ -738,9 +738,11 @@ async function connectAndRunBot() {
           if (messageT === "imageMessage" || messageT === "videoMessage") {
             let stretch = "full",
               quality = 100;
-            if (isNaN(fetchMsg[2])) stretch = fetchMsg[2];
-            else quality = fetchMsg[2];
-            if (quality > 100 || quality < 1) quality = 50;
+            if (isNaN(fetchMsg[2])) {
+              stretch = fetchMsg[2];
+              if (fetchMsg[3]) quality = parseInt(fetchMsg[3]);
+            } else quality = parseInt(fetchMsg[2]);
+            if (isNaN(quality) || quality > 100 || quality < 1) quality = 50;
             const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
             const sticker = await fnc.makeSticker(
               buffer,
@@ -756,7 +758,7 @@ async function connectAndRunBot() {
           }
           await conn.sendMessage(
             mmid,
-            "Please provide a valid video/image",
+            "Please provide a valid image/video",
             MessageType.extendedText,
             { quoted: message }
           );

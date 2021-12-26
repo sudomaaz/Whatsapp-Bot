@@ -1373,15 +1373,13 @@ export async function makeSticker(image, stretch, quality, itype) {
     pack: "Chotu Bot", // The pack name
     author: "M-A-A-Z", // The author name
     type:
-      itype === "videoMessage"
-        ? StickerTypes.CROPPED
-        : stretch === "crop"
+      stretch === "crop"
         ? StickerTypes.CROPPED
         : stretch === "full"
         ? StickerTypes.DEFAULT
         : StickerTypes.FULL, // The sticker type
     categories: ["🤩", "🎉"], // The sticker category
-    quality: parseInt(quality),
+    quality: quality,
     background: "#000000", // The sticker background color (only for full stickers)
   });
   const sticker = await maker.toBuffer();
