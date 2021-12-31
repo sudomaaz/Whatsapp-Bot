@@ -7,6 +7,7 @@ import textToSpeech from "@google-cloud/text-to-speech";
 import { Sticker, createSticker, StickerTypes } from "wa-sticker-formatter";
 import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 import ffmpeg from "fluent-ffmpeg";
+import { UltimateTextToImage } from "ultimate-text-to-image";
 ffmpeg.setFfmpegPath(ffmpegPath.path);
 
 const { DateTime } = lxn;
@@ -1384,4 +1385,34 @@ export async function makeSticker(image, stretch, quality, itype) {
   });
   const sticker = await maker.toBuffer();
   return sticker;
+}
+
+export async function textSticker(text) {
+  text = text.substring(0, 1000);
+  try {
+    const textToImage = new UltimateTextToImage(text, {
+      width: 400,
+      maxWidth: 1000,
+      maxHeight: 1000,
+      fontFamily: "Arial",
+      fontColor: "#00FF00",
+      fontSize: 72,
+      minFontSize: 10,
+      lineHeight: 50,
+      autoWrapLineHeightMultiplier: 1.2,
+      margin: 20,
+      marginBottom: 20,
+      align: "center",
+      valign: "middle",
+      borderColor: 0xff000099,
+      borderSize: 2,
+      backgroundColor: "0080FF33",
+      underlineColor: "#00FFFF33",
+      underlineSize: 2,
+    });
+    const buf = textToImage.render().toBuffer("image/jpeg");
+    return buf;
+  } catch (e) {
+    console.log(e);
+  }
 }

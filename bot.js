@@ -735,33 +735,38 @@ async function connectAndRunBot() {
           const downloadMedia = new proto.WebMessageInfo();
           downloadMedia["message"] = extended.contextInfo.quotedMessage;
           const messageT = Object.keys(downloadMedia.message)[0];
-          if (messageT === "imageMessage" || messageT === "videoMessage") {
-            let stretch = "full",
-              quality = 100;
-            if (isNaN(fetchMsg[2])) {
-              stretch = fetchMsg[2];
-              if (fetchMsg[3]) quality = parseInt(fetchMsg[3]);
-            } else quality = parseInt(fetchMsg[2]);
-            if (isNaN(quality) || quality > 100 || quality < 1) quality = 50;
-            const buffer = await conn.downloadMediaMessage(downloadMedia); // to decrypt & use as a buffer
-            const sticker = await fnc.makeSticker(
-              buffer,
-              stretch,
-              quality,
-              messageT
+          let stretch = "full",
+            quality = 100;
+          if (isNaN(fetchMsg[2])) {
+            stretch = fetchMsg[2];
+            if (fetchMsg[3]) quality = parseInt(fetchMsg[3]);
+          } else quality = parseInt(fetchMsg[2]);
+          if (isNaN(quality) || quality > 100 || quality < 1) quality = 50;
+          let buffer;
+          if (messageT === "imageMessage" || messageT === "videoMessage")
+            buffer = await conn.downloadMediaMessage(downloadMedia);
+          // to decrypt & use as a buffer
+          else
+            buffer = await fnc.textSticker(
+              downloadMedia?.message?.conversation || "Error converting"
             );
-            const extra = {
-              quoted: message,
-            };
-            await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
-            return;
-          }
-          await conn.sendMessage(
-            mmid,
-            "Please provide a valid image/video",
-            MessageType.extendedText,
-            { quoted: message }
+          const sticker = await fnc.makeSticker(
+            buffer,
+            stretch,
+            quality,
+            messageT
           );
+          const extra = {
+            quoted: message,
+          };
+          await conn.sendMessage(mmid, sticker, MessageType.sticker, extra);
+          // return;
+          // await conn.sendMessage(
+          //   mmid,
+          //   "Please provide a valid image/video",
+          //   MessageType.extendedText,
+          //   { quoted: message }
+          // );
         } else if (mc === "advice") {
           const advice = await fnc.advice();
           if (!advice) return;
