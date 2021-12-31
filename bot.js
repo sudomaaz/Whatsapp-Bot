@@ -748,7 +748,9 @@ async function connectAndRunBot() {
           // to decrypt & use as a buffer
           else
             buffer = await fnc.textSticker(
-              downloadMedia?.message?.conversation || "Error converting"
+              downloadMedia?.message?.conversation ||
+                downloadMedia?.message?.extendedTextMessage?.text ||
+                "Error converting"
             );
           const sticker = await fnc.makeSticker(
             buffer,
