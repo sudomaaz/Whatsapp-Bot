@@ -976,7 +976,7 @@ export const self = "12539249233@s.whatsapp.net";
 
 export const owner = "918840081034@s.whatsapp.net";
 
-export const attd = "918840081034-1635835078@g.us";
+export const attd = "120363021885632899@g.us";
 
 export const bot = "918840081034-1617020123@g.us";
 

@@ -134,6 +134,7 @@ async function connectAndRunBot() {
         }
         const mc = fetchMsg[1]?.toLowerCase();
         if (mc === "ping") {
+          //  console.log(mmid);
           const extra = {
             quoted: message,
           };
