@@ -134,7 +134,7 @@ Hello *uname*
 ┃ Female _ex: ttsf hello world_
 ┃
 ┃⊷️ Sticker
-┃ converts image in chat to sticker
+┃ converts media/text in chat to sticker
 ┃ _ex: @Chotu sticker
 ┗━━━━━━━━━━━━━━━━━━━━`;
 
