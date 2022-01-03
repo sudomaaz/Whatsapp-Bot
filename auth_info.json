@@ -1,15 +1,7 @@
 {
-<<<<<<< HEAD
-	"clientID": "ScU73Ha6l8FTKTrYetcmxw==",
-	"serverToken": "1@UzTbi//vSxE8OHXSMD3JqxhGvsGzW3i1gbJAOl/3cOYxK8in+1QXIcaedAt0sg0OfzN4yr8oJWCIKA==",
-	"clientToken": "bkZ7qvqfEUhHTNw+a1mNEXuzdA3/YL82eUj4Gq2Q/wo=",
-	"encKey": "9KxIPUlTO6YSRVd91hgZCIWhrNn8kIJWdo0P9ASgEOM=",
-	"macKey": "y+PC6N/fVgcTWcWm7Z1jPqbzAhWMsA68mOi4NEFp5og="
-=======
-	"clientID": "eukK47ei/W+5DK7pForOUQ==",
-	"serverToken": "1@Wwf8Y6flsb40eYpjKB4+CP2TTrZxkpR+AbTSuHdm81AgKWpPvvzcw8EpDc8EL+SbMci0P6m4t9UJQg==",
-	"clientToken": "ll63bhwGqAUzpW0A6AvKuzMSPmpNLmu6uQgih0GRwKA=",
-	"encKey": "COhGGct3wYiwyw852JxRHtkWkAq9rnvK6h0fhi5fXXA=",
-	"macKey": "Sa0l4yPxwIhXjtLNZqqxDtiq1TVezzKaOlOgV31qZxo="
->>>>>>> 4332813ef1ef3f80a063ca3e1993a25846d738d3
+  "clientID": "ScU73Ha6l8FTKTrYetcmxw==",
+  "serverToken": "1@UzTbi//vSxE8OHXSMD3JqxhGvsGzW3i1gbJAOl/3cOYxK8in+1QXIcaedAt0sg0OfzN4yr8oJWCIKA==",
+  "clientToken": "bkZ7qvqfEUhHTNw+a1mNEXuzdA3/YL82eUj4Gq2Q/wo=",
+  "encKey": "9KxIPUlTO6YSRVd91hgZCIWhrNn8kIJWdo0P9ASgEOM=",
+  "macKey": "y+PC6N/fVgcTWcWm7Z1jPqbzAhWMsA68mOi4NEFp5og="
 }
