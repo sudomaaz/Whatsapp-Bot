@@ -1349,7 +1349,8 @@ async function connectAndRunBot() {
             return;
           }
           const name = candidates[0].split("@")[0];
-          const res = await fnc.warningUpdate(name);
+          const fireName = name + mmid.split("@")[0];
+          const res = await fnc.warningUpdate(fireName);
           if (!res.warn) return;
           const extra = {
             caption: `Hello @${name} you have been warned for *${token}*. Your total warn count is *${res.warn}*.Three warnings result in getting blocked.`,
@@ -1425,6 +1426,7 @@ async function connectAndRunBot() {
         );
       } else if (group.action === "remove") {
         const name = group.participants[0].split("@")[0];
+<<<<<<< HEAD
         const res = await fnc.warningDelete(name);
         // if (group.jid === fnc.cse) {
         //   const activeMetaData = await conn.groupMetadata(fnc.attd);
@@ -1440,6 +1442,24 @@ async function connectAndRunBot() {
         //     MessageType.text
         //   );
         // }
+=======
+        const fireName = name + group.jid.split("@")[0];
+        const res = await fnc.warningDelete(fireName);
+        if (group.jid === fnc.cse) {
+          const activeMetaData = await conn.groupMetadata(fnc.attd);
+          let members = await fnc.allMembers(activeMetaData.participants);
+          members = members.filter((e) => e !== fnc.self && e !== fnc.owner);
+          if (members.length === 0) return;
+          const add = members[0];
+          const response = await conn.groupAdd(fnc.cse, [add]);
+          await conn.groupRemove(fnc.attd, [add]);
+          const sentMsg = await conn.sendMessage(
+            fnc.attd,
+            "```A member has been added to cse``` 🎉",
+            MessageType.text
+          );
+        }
+>>>>>>> 4332813ef1ef3f80a063ca3e1993a25846d738d3
       } else return;
     });
     /*conn.on("group-update", async (update) => {
