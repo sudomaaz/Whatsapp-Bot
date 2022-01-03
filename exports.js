@@ -23,7 +23,7 @@ Hello *uname*
    「 *@Chotu* 」
 ‣ Group: *gname*
 ‣ Group users: *gusers Users*
-‣ Official Group: *https://chat.whatsapp.com/C1qr5GHOMorJDIihllwA4V*
+‣ Official Group: *https://chat.whatsapp.com/CRcn6RFc0RKFvR4aNKjYK6*
 ‣ Issue a *help* command to get started`;
 
 export const botText = `────✪ Created by M-A-A-Z ✪────
@@ -40,7 +40,7 @@ Hello *uname*
 ‣ Created: *25th March 2021*
 ‣ Group: *gname*
 ‣ Group users: *gusers Users*
-‣ Official Group: *https://chat.whatsapp.com/C1qr5GHOMorJDIihllwA4V*
+‣ Official Group: *https://chat.whatsapp.com/CRcn6RFc0RKFvR4aNKjYK6*
 ────────────────
 ┏━━━━━━━━━━━━━━━━━━━━
 ┃─────〘 Bot 〙────
