@@ -89,7 +89,7 @@ async function connectAndRunBot() {
         }
         fnc.store[mmid].chat.push(message);
         */
-        //fnc.detailLog(message);
+        fnc.detailLog(message);
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
@@ -1381,7 +1381,7 @@ async function connectAndRunBot() {
     //called when some group join/remove action occurs
     conn.on("group-participants-update", async (group) => {
       if (group.action === "add") {
-        if (group.jid === fnc.attd) return;
+        //if (group.jid === fnc.attd) return;
         const groupMetaData = await conn.groupMetadata(group.jid);
         const gname = groupMetaData.subject.trim();
         const gusers = groupMetaData.participants.length;
@@ -1429,20 +1429,20 @@ async function connectAndRunBot() {
       } else if (group.action === "remove") {
         const name = group.participants[0].split("@")[0];
         const res = await fnc.warningDelete(name);
-        // if (group.jid === fnc.cse) {
-        //   const activeMetaData = await conn.groupMetadata(fnc.attd);
-        //   let members = await fnc.allMembers(activeMetaData.participants);
-        //   members = members.filter((e) => e !== fnc.self && e !== fnc.owner);
-        //   if (members.length === 0) return;
-        //   const add = members[0];
-        //   const response = await conn.groupAdd(fnc.cse, [add]);
-        //   await conn.groupRemove(fnc.attd, [add]);
-        //   const sentMsg = await conn.sendMessage(
-        //     fnc.attd,
-        //     "```A member has been added to cse``` 🎉",
-        //     MessageType.text
-        //   );
-        // }
+        if (group.jid === fnc.cse) {
+          const activeMetaData = await conn.groupMetadata(fnc.attd);
+          let members = await fnc.allMembers(activeMetaData.participants);
+          members = members.filter((e) => e !== fnc.self && e !== fnc.owner);
+          if (members.length === 0) return;
+          const add = members[0];
+          const response = await conn.groupAdd(fnc.cse, [add]);
+          await conn.groupRemove(fnc.attd, [add]);
+          const sentMsg = await conn.sendMessage(
+            fnc.attd,
+            "```A member has been added to cse``` 🎉",
+            MessageType.text
+          );
+        }
       } else return;
     });
     /*conn.on("group-update", async (update) => {
