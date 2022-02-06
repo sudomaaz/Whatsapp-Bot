@@ -89,7 +89,7 @@ async function connectAndRunBot() {
         }
         fnc.store[mmid].chat.push(message);
         */
-        fnc.detailLog(message);
+        //fnc.detailLog(message);
         let extended;
         if (message?.message?.ephemeralMessage)
           extended =
@@ -741,7 +741,10 @@ async function connectAndRunBot() {
           if (isNaN(fetchMsg[2])) {
             stretch = fetchMsg[2];
             if (fetchMsg[3]) quality = parseInt(fetchMsg[3]);
-          } else quality = parseInt(fetchMsg[2]);
+          } else {
+            stretch = undefined;
+            quality = parseInt(fetchMsg[2]);
+          }
           if (isNaN(quality) || quality > 100 || quality < 1) quality = 50;
           let buffer;
           if (messageT === "imageMessage" || messageT === "videoMessage")
