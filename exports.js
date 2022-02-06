@@ -1381,7 +1381,6 @@ export async function makeSticker(image, stretch, quality, itype) {
         : StickerTypes.FULL, // The sticker type
     categories: ["🤩", "🎉"], // The sticker category
     quality: quality,
-    background: "#ffff", // The sticker background color (only for full stickers)
   });
   const sticker = await maker.toBuffer();
   return sticker;
