@@ -972,7 +972,7 @@ export const memeJson = {
   ],
 };
 
-export const self = "12044103830@s.whatsapp.net";
+export const self = "32460262431@s.whatsapp.net";
 
 export const owner = "918840081034@s.whatsapp.net";
 
