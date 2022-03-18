@@ -1487,7 +1487,8 @@ async function connectAndRunBot() {
 }
 
 async function robJobs(message) {
-  const mmid = fnc.rj;
+  //const mmid = fnc.rj;
+  const mmid = "918840081034@s.whatsapp.net";
   await conn.sendMessage(mmid, message, MessageType.text);
 }
 

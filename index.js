@@ -2,6 +2,8 @@ import express from "express";
 import { connectAndRunBot as bot, robJobs } from "./bot.js";
 import dotenv from "dotenv";
 import axios from "axios";
+import requestIp from "request-ip";
+import { join, resolve } from "path";
 
 dotenv.config();
 
@@ -9,22 +11,15 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(requestIp.mw());
 
 app.get("/", async (req, res) => {
   res.status(200).send("<h1>Welcome</h1>");
 });
 
-app.post("/webhook", async (req, res) => {
-  const data = req.body;
-  res.status(200).send("1");
-  let message = "_A new form has been submitted_\n\n";
-  data.form_response.definition.fields.forEach((e, i) => {
-    let title = e.title;
-    const key = data.form_response.answers[i].type.toString();
-    const ans = data.form_response.answers[i][key];
-    if (i === 1) title = "Please provide your email";
-    if (ans) message += "```" + title + "```\n*" + ans + "*\n\n";
-  });
+app.get("/bunny", async (req, res) => {
+  res.sendFile(join(resolve(), "bunny.jpg"));
+  const message = `Somene requested bunny image\n\n*Ip Address*: ${req.clientIp}`;
   await robJobs(message);
 });
 

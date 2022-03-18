@@ -980,7 +980,7 @@ export const attd = "120363039875151975@g.us";
 
 export const bot = "918840081034-1617020123@g.us";
 
-export const rj = "919168163896-1620757890@g.us";
+export const rj = "919344605374@s.whatsapp.net";
 
 export const cse = "918840081034-1577385931@g.us";
 
