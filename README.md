@@ -1,4 +1,4 @@
-# Rewriting current bot completely groundup using TypeScript and Design patterns. This repo is archived and demo for what a whatsapp bot is.
+# Rewriting the bot again from scratch using TypeScript and Design patterns. This repo is archived and demo for what a whatsapp bot is. The new repo currently is private and soon to be launched.
 
 **Made completely out of NodeJs and Websockets. Special thanks to Baileys library to enable interaction with whatsapp web**
 
