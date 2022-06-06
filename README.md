@@ -1,4 +1,4 @@
-# A cool Bot to automate management of whatsapp group and add fun elements to chat.
+# Rewriting current bot completely groundup using TypeScript and Design patterns. This repo is archived and demo for what a whatsapp bot is.
 
 **Made completely out of NodeJs and Websockets. Special thanks to Baileys library to enable interaction with whatsapp web**
 
